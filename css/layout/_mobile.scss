@@ -4,6 +4,14 @@ body {
   font-family: 'Roboto', sans-serif;
   padding: 0 1rem;
 
+  h2 {
+    font-size: 2rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
   nav {
     height: 80px;
     display: flex;
@@ -11,7 +19,11 @@ body {
     justify-content: space-between;
     align-items: center;
     // margin: 0 1rem;
-    border-bottom: 1px solid black;
+    position: sticky;
+    top: 0;
+    left: 0;
+    // width: 100vw;
+
     .gottfrid-logo {
       font-weight: 900;
       text-transform: uppercase;
@@ -21,6 +33,101 @@ body {
         display: block;
         color: $color-green-main;
         font-size: 1rem;
+      }
+    }
+  }
+
+  main {
+    .shop-section {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 80px);
+      header {
+        display: grid;
+        grid-template-columns: 150px 1fr 1fr;
+        align-items: center;
+      }
+      select {
+        padding: 0.3rem;
+      }
+      .gnome-list-container {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0;
+        .gnome-list-item {
+          display: grid;
+          grid-template-columns: 130px 1fr;
+          grid-template-rows: 50px 50px 30px 30px;
+          gap: 2px 10px;
+          margin: 1rem 0;
+          border-bottom: 1px solid $color-green-main;
+
+          figure {
+            grid-row: span 5;
+            margin: 0;
+            img {
+              border-radius: 10px;
+            }
+          }
+          h4 {
+            font-size: 1.2rem;
+            margin: 0;
+          }
+
+          .amount-to-order {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 100px 50px 1fr;
+            align-items: center;
+            button {
+              grid-row: span 2;
+            }
+          }
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .order-form-section {
+      min-height: calc(100vh - 80px);
+      form {
+        display: flex;
+        flex-direction: column;
+        .form-input-bar {
+          display: flex;
+          flex-direction: column;
+          margin: 0.7rem 0;
+          gap: 0.5rem;
+          input[type='text'],
+          input[type='number'],
+          input[type='tel'],
+          input[type='email'] {
+            padding: 0.5rem;
+            border-radius: 10px;
+          }
+        }
+
+        .card-payment-container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          gap: 0 20px;
+          :nth-child(1) {
+            grid-column: 1 / span 2;
+          }
+        }
+        .checkbox-container {
+          display: flex;
+          flex-direction: column;
+          margin: 2rem 0;
+        }
+
+        .form-buttons-container {
+          display: flex;
+          justify-content: space-around;
+        }
       }
     }
   }

@@ -1,4 +1,18 @@
 body {
   background-color: $color-light;
   color: $color-black;
+
+  nav {
+    background-color: $color-light;
+    border-bottom: 1px solid $color-green-main;
+  }
+}
+
+.btn-circle {
+  background-color: $color-black;
+  color: $color-light;
+}
+.btn-circle:hover {
+  background-color: $color-darkgrey;
+  color: $color-light;
 }

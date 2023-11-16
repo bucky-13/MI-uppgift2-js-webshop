@@ -16,8 +16,8 @@
 
     <nav>
         <h1 class="gottfrid-logo">Gottfrids <span class="gnomes-span">Garden Gnomes</span></h1>
-        <figure><img src="images/icons/Shopping-cart.svg"> </figure>
-        <p><span>0</span> kr</p>
+        <figure><img class="nav-cart" src="images/icons/Shopping-cart.svg"> </figure>
+        <p class="nav-cart-price"><span id="navCartSum">0</span> kr</p>
         <!-- <div class="nav-cart-container hidden"> -->
 
         </div>
@@ -26,24 +26,47 @@
     </nav>
     <main>
         <section class="shop-section" id="shop">
-            <h2>Shop</h2>
-            <div>
-                <div>Sort by A-Z</div>
-                <div>Filter</div>
-            </div>
+            <header>
+                <h2>Shop</h2>
 
-            <div class="gnome-list-object">
-                <figure><img src="images/gnomes/gnomes-fullsize/armor-axe1.jpg" width="100" height="100"></figure>
-                <h4>Armored Gnome with Axe</h4>
-                <p>149kr / st</p>
-                <div class="abount-to-order">
-                    <p>0st</p>
-                    <button class="btn-circle btn-small">-</button>
-                    <button class="btn-circle btn-small">+</button>
-
+                <div>
+                    <label for="sort-select">Sort by:</label>
+                    <select name="filter" id="sort-select">
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                        <option value="price-ascending">Price Ascending</option>
+                        <option value="price-descending">Price Descending</option>
+                        <option value="star-rating">
+                            <Star Rating>
+                        </option>
+                    </select>
                 </div>
-                <p><span>0</span> kr</p>
-                <figure class="star-rating">star rating</figure>
+                <div>Filter</div>
+
+
+            </header>
+            <div class="gnome-list-container" id="gnomeListContainer">
+                <div class="gnome-list-item">
+                    <figure><img src="images/gnomes/gnomes-fullsize/armor-axe1.jpg" width="120" height="160"></figure>
+                    <h4>Armored Gnome with Axe</h4>
+
+                    <div class="amount-to-order">
+                        <p>149kr / st</p>
+
+                        <button class="btn-circle btn-small">-</button>
+                        <button class="btn-circle btn-small">+</button>
+                        <p>0 st</p>
+
+                    </div>
+                    <p><span>0</span> kr</p>
+                    <figure class="star-rating">
+                        <img src="images/icons/star-filled.png" width="24px">
+                        <img src="images/icons/star-filled.png" width="24px">
+                        <img src="images/icons/star-filled.png" width="24px">
+                        <img src="images/icons/star-half.png" width="24px">
+                        <img src="images/icons/star-empty.png" width="24px">
+                    </figure>
+                </div>
             </div>
         </section>
         <section class="gnome-details-section" id="gnomeDetailsSection"></section>
@@ -65,41 +88,41 @@
             </div>
 
         </section>
-        <section class="order-form" id="orderForm">
+        <section class="order-form-section" id="orderForm">
             <form>
 
                 <h2>Customer Information:</h2>
-                <label>
+                <label class="form-input-bar">
                     <span>First Name:</span>
                     <input class="user-input" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
-                <label>
+                <label class="form-input-bar">
                     <span>Last Name:</span>
                     <input class="user-input" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
-                <label>
+                <label class="form-input-bar">
                     <span>Address:</span>
                     <input class="user-input" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
-                <label>
+                <label class="form-input-bar">
                     <span>Post number:</span>
                     <input class="user-input" type="number">
                     <div class="form-error-msg hidden">error</div>
                 </label>
-                <label>
+                <label class="form-input-bar">
                     <span>City:</span>
                     <input class="user-input" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
-                <label>
+                <label class="form-input-bar">
                     <span>Phone nr:</span>
                     <input class="user-input" type="tel">
                     <div class="form-error-msg hidden">error</div>
                 </label>
-                <label>
+                <label class="form-input-bar">
                     <span>Email:</span>
                     <input class="user-input" type="email">
                     <div class="form-error-msg hidden">error</div>
@@ -110,22 +133,53 @@
                     <input class="user-input" id="paymentInvoice" type="radio" name="paymentMethod">
                     <span>Invoice</span>
                 </label>
+
                 <label>
                     <input class="user-input" id="paymentCard" type="radio" name="paymentMethod">
                     <span>Card</span>
                 </label>
-                <label>
-                    <input type="checkbox" id="agreePersonalInfo" class="user-input">
-                    <span>I agree to share personal information</span>
-                    <div class="form-error-msg hidden">error</div>
-                </label>
-                <label>
-                    <input type="checkbox" id="agreeNewsletter" class="user-input" checked>
-                    <span>I want to recieve your newsletter</span>
-                </label>
-                <div>
+
+                <div id="paymentInvoiceActive" class="hidden">
+                    <label class="form-input-bar">
+                        <span>Personal number:</span>
+                        <input class="user-input" type="number">
+                        <div class="form-error-msg hidden">error</div>
+                    </label>
+                </div>
+                <div class="hidden">
+                    <div id="paymentCardActive" class=" card-payment-container">
+                        <label class="form-input-bar">
+                            <span>Card number:</span>
+                            <input class="user-input" type="number">
+                            <div class="form-error-msg hidden">error</div>
+                        </label>
+                        <label class="form-input-bar">
+                            <span>DD/YY:</span>
+                            <input class="user-input" type="number">
+                            <div class="form-error-msg hidden">error</div>
+                        </label>
+                        <label class="form-input-bar">
+                            <span>CVC:</span>
+                            <input class="user-input" type="number">
+                            <div class="form-error-msg hidden">error</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <label>
+                        <input type="checkbox" id="agreePersonalInfo" class="user-input">
+                        <span>I agree to share personal information</span>
+                        <div class="form-error-msg hidden">error</div>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="agreeNewsletter" class="user-input" checked>
+                        <span>I want to recieve your newsletter</span>
+                    </label>
+                </div>
+                <div class="form-buttons-container">
                     <input type="reset" value="Reset Form" class="btn-rectangle btn-red">
-                    <input type="submit" value="Place Order" class="btn-rectangle btn-red">
+                    <input type="submit" value="Place Order" class="btn-rectangle btn-green">
                 </div>
             </form>
         </section>

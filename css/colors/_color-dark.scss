@@ -1,4 +1,21 @@
 body {
   color: $color-light;
   background-color: $color-black;
+
+  nav {
+    background-color: $color-black;
+    .nav-cart {
+      fill: $color-light;
+      filter: brightness(100);
+    }
+  }
+}
+
+.btn-circle {
+  background-color: $color-light;
+  color: $color-black;
+}
+.btn-circle:hover {
+  background-color: $color-lightgrey;
+  color: $color-black;
 }
