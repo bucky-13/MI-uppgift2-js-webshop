@@ -5,7 +5,9 @@ const gnomes = [
     amount: 0,
     rating: 4,
     category: 'knight',
-    img0: 'images/gnomes/knight-axe-thumb.webp',
+    img0: 'images/gnomes/knight-axe0.webp',
+    img1: 'images/gnomes/knight-axe1.webp',
+    img2: 'images/gnomes/knight-axe2.webp',
   },
 ];
 
