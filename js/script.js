@@ -101,9 +101,11 @@ const gnomes = [
   },
 ];
 
-//Query Selector for Shop List Page
+//Query Selectors for HTML nodes that are in index.html on page load
 
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
+const navCartCounter = document.querySelector('#navCartCounter');
+const navCartSum = document.querySelector('#navCartSum');
 
 //Generate Gnome List on page load
 for (let i = 0; i < gnomes.length; i++) {
@@ -161,6 +163,7 @@ function generateGnomeListContainer(i) {
   //adds evenListener for Buttons so we don't have to do this every time again.
   addPlusBtnList();
   addMinusBtnList();
+  updateNavShoppingCart();
 }
 
 //Function to add amount to an item in the Shop List.
@@ -186,4 +189,25 @@ function minusAmountList(e) {
       generateGnomeListContainer(i);
     }
   }
+}
+
+//Function to update the Shopping Cart in the Nav
+
+function updateNavShoppingCart() {
+  let itemsCounter = 0;
+  let totalPrice = 0;
+  for (let i = 0; i < gnomes.length; i++) {
+    if (gnomes[i].amount > 0) {
+      itemsCounter = itemsCounter + gnomes[i].amount;
+    }
+    gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
+    totalPrice = totalPrice + gnomeItemPriceTotal;
+  }
+  if (itemsCounter > 0) {
+    navCartCounter.classList.remove('hidden');
+    navCartCounter.textContent = itemsCounter;
+  } else if (itemsCounter <= 0) {
+    navCartCounter.classList.add('hidden');
+  }
+  navCartSum.textContent = totalPrice;
 }
