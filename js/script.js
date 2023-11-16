@@ -101,7 +101,7 @@ const gnomes = [
   },
 ];
 
-//Query Selectors
+//Query Selector for Shop List Page
 
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
 
@@ -109,6 +109,29 @@ const gnomeListContainer = document.querySelector('#gnomeListContainer');
 for (let i = 0; i < gnomes.length; i++) {
   generateGnomeListContainer(i);
 }
+
+//Functions to listen at the +/- buttons in Shop List that gets called every time the page renders to avoid repeating this code.
+function addPlusBtnList() {
+  const plusBtnList = Array.from(document.querySelectorAll('.plusBtnList'));
+
+  //Watching for clicks on + buttons on the Shop Section (Gnome List)
+
+  for (let i = 0; i < plusBtnList.length; i++) {
+    plusBtnList[i].addEventListener('click', plusAmountList);
+  }
+}
+
+function addMinusBtnList() {
+  const minusBtnList = Array.from(document.querySelectorAll('.minusBtnList'));
+
+  //Watching for clicks on + buttons on the Shop Section (Gnome List)
+
+  for (let i = 0; i < minusBtnList.length; i++) {
+    minusBtnList[i].addEventListener('click', minusAmountList);
+  }
+}
+
+//Query Selectors Buttons
 
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
@@ -121,11 +144,11 @@ function generateGnomeListContainer(i) {
 
     <div class="amount-to-order">
         <p>${gnomes[i].price} kr / st</p>
-        <button class="btn-circle btn-small">-</button>
-        <button class="btn-circle btn-small">+</button>
-        <p>${gnomes[i].amount} st</p>
+        <button class="btn-circle btn-small minusBtnList" id="btnListMinus${i}">-</button>
+        <button class="btn-circle btn-small plusBtnList" id="btnListPlus${i}">+</button>
+        <p id="amountList${i}">${gnomes[i].amount} st</p>
     </div>
-    <p><span>0</span> kr</p>
+    <p>${gnomes[i].amount * gnomes[i].price} kr</p>
         <figure class="star-rating">
             <img src="images/icons/star-filled.png" width="24px">
             <img src="images/icons/star-filled.png" width="24px">
@@ -134,4 +157,33 @@ function generateGnomeListContainer(i) {
             <img src="images/icons/star-empty.png" width="24px">
         </figure>
 </div>`;
+
+  //adds evenListener for Buttons so we don't have to do this every time again.
+  addPlusBtnList();
+  addMinusBtnList();
+}
+
+//Function to add amount to an item in the Shop List.
+
+function plusAmountList(e) {
+  const index = e.target.id.replace('btnListPlus', '');
+  gnomes[index].amount++;
+  gnomeListContainer.innerHTML = '';
+
+  //Re-rendendering the Shop List section
+  for (let i = 0; i < gnomes.length; i++) {
+    generateGnomeListContainer(i);
+  }
+}
+function minusAmountList(e) {
+  const index = e.target.id.replace('btnListMinus', '');
+  if (gnomes[index].amount > 0) {
+    gnomes[index].amount--;
+    gnomeListContainer.innerHTML = '';
+
+    //Re-rendendering the Shop List section
+    for (let i = 0; i < gnomes.length; i++) {
+      generateGnomeListContainer(i);
+    }
+  }
 }
