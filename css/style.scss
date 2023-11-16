@@ -1,6 +1,4 @@
-@import 'color-light';
-@import 'color-dark';
-@import 'mobile';
-body {
-  background-color: black;
-}
+@import 'configs/configs';
+@import 'colors/colors';
+@import 'layout/layout';
+@import 'components/components';

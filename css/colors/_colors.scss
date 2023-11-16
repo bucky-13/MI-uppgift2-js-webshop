@@ -1,0 +1,4 @@
+@import 'color-light';
+@media (prefers-color-scheme: dark) {
+  @import 'color-dark';
+}
