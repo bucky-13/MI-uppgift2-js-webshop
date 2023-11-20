@@ -8,8 +8,23 @@ body {
     font-size: 2rem;
   }
 
-  .hidden {
+  // .test {
+  //   background-color: red;
+  //   border: 1pc solid blue;
+  // }
+
+  .hidden,
+  .gnome-details-section.hidden,
+  .gnome-list-container.hidden {
     display: none;
+  }
+
+  .page-active {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100vw;
   }
 
   nav {
@@ -22,6 +37,7 @@ body {
     top: 0;
     left: 0;
     border-bottom: 1px solid $color-primary;
+    z-index: 2;
 
     .gottfrid-logo {
       font-weight: 900;
@@ -54,6 +70,7 @@ body {
   }
 
   main {
+    position: relative;
     .shop-section {
       display: flex;
       flex-direction: column;
@@ -65,6 +82,9 @@ body {
       }
       select {
         padding: 0.3rem;
+      }
+      .gnome-list-container.hidden {
+        display: none;
       }
       .gnome-list-container {
         display: flex;

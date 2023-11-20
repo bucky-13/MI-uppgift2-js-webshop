@@ -106,11 +106,17 @@ const gnomes = [
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
 const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
+const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 
 //Generate Gnome List on page load
-for (let i = 0; i < gnomes.length; i++) {
-  generateGnomeListContainer(i);
+function gnomeListContainerGenerator() {
+  for (let i = 0; i < gnomes.length; i++) {
+    generateGnomeListContainer(i);
+    console.log('bajs');
+  }
 }
+
+gnomeListContainerGenerator();
 
 //Functions to listen at the +/- buttons in Shop List that gets called every time the page renders to avoid repeating this code.
 function addPlusBtnList() {
@@ -133,7 +139,17 @@ function addMinusBtnList() {
   }
 }
 
-//Query Selectors Buttons
+function addGnomeDetailsList() {
+  const gnomeDetailsLinkList = Array.from(
+    document.querySelectorAll('.gnomeDetailsLinkList')
+  );
+
+  for (let i = 0; i < gnomeDetailsLinkList.length; i++) {
+    gnomeDetailsLinkList[i].addEventListener('click', openGnomeDetailsPage);
+  }
+}
+
+//Query Selectors Shop page Buttons
 
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
@@ -142,7 +158,9 @@ function generateGnomeListContainer(i) {
     <figure>
     <img src="${gnomes[i].img0}" width="120" height="160">
     </figure>
-    <h4>${gnomes[i].name}</h4>
+    <h4 class="gnomeDetailsLinkList" id="gnomeDetailsLink${i}">${
+    gnomes[i].name
+  }</h4>
 
     <div class="amount-to-order">
         <p>${gnomes[i].price} kr / st</p>
@@ -164,6 +182,7 @@ function generateGnomeListContainer(i) {
   addPlusBtnList();
   addMinusBtnList();
   updateNavShoppingCart();
+  addGnomeDetailsList();
 }
 
 //Function to add amount to an item in the Shop List.
@@ -210,4 +229,65 @@ function updateNavShoppingCart() {
     navCartCounter.classList.add('hidden');
   }
   navCartSum.textContent = totalPrice;
+}
+
+//Function to open the pages for Individual Gnomes
+
+function openGnomeDetailsPage(e) {
+  i = e.target.id.replace('gnomeDetailsLink', '');
+  gnomeListContainer.classList.add('hidden');
+  gnomeDetailsSection.classList.remove('hidden');
+  gnomeDetailsSection.classList.add('page-active');
+  gnomeDetailsSection.innerHTML = `
+              <button class="btn-large btn-circle btn-close" id="closePageBtn">X</button>
+            <div>
+                <figure>
+                    <img src="${
+                      gnomes[i].img1
+                    }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
+                        width="500">
+                </figure>
+                <figure class="img-thumb-container">
+                    <img src="${
+                      gnomes[i].img0
+                    }" width="200" height="200" id="thumbnail1">
+                    <img src="${
+                      gnomes[i].img2
+                    }" width="200" height="200" id="thumbnail2">
+                </figure>
+            </div>
+            <h2>${gnomes[i].name}</h2>
+            <p class="item-price">${gnomes[i].price} kr/st</p>
+            <div class="gnome-buttons-container">
+                <button class="btn-circle btn-large">-</button>
+                <h4>${gnomes[i].amount}</h4>
+                <button class="btn-circle btn-large">+</button>
+            </div>
+
+            <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
+  `;
+
+  listenClosePage(gnomeDetailsSection);
+}
+
+//Event listener to close an opened page
+function listenClosePage(section) {
+  const closeBtn = document.querySelector('#closePageBtn');
+  console.log(closeBtn);
+  console.log(gnomeDetailsSection);
+
+  //FIX THE EVENT LISTENER ITS NOT WORKING
+  closeBtn.addEventListener('click', function () {
+    closePage(section);
+  });
+}
+
+//Function to close the current page
+function closePage(section) {
+  console.log(section);
+  section.classList.remove('page-active');
+  section.classList.add('hidden');
+  section.innerHTML = '';
+  gnomeListContainer.classList.remove('hidden');
+  gnomeListContainerGenerator();
 }
