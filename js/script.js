@@ -8,6 +8,7 @@ const gnomes = [
     img0: 'images/gnomes/knight-axe0.webp',
     img1: 'images/gnomes/knight-axe1.webp',
     img2: 'images/gnomes/knight-axe2.webp',
+    imgLarge: 'images/gnomes/knight-axe1.webp',
   },
   {
     name: 'Sword Wielding Knight Gnome',
@@ -18,6 +19,7 @@ const gnomes = [
     img0: 'images/gnomes/knight-sword0.webp',
     img1: 'images/gnomes/knight-sword1.webp',
     img2: 'images/gnomes/knight-sword2.webp',
+    imgLarge: 'images/gnomes/knight-sword1.webp',
   },
   {
     name: 'Weapon Wielding Knight Gnome',
@@ -28,6 +30,7 @@ const gnomes = [
     img0: 'images/gnomes/knight-weapon0.webp',
     img1: 'images/gnomes/knight-weapon1.webp',
     img2: 'images/gnomes/knight-weapon2.webp',
+    imgLarge: 'images/gnomes/knight-weapon1.webp',
   },
   {
     name: 'Biker Gnome',
@@ -38,6 +41,7 @@ const gnomes = [
     img0: 'images/gnomes/biker0.webp',
     img1: 'images/gnomes/biker1.webp',
     img2: 'images/gnomes/biker2.webp',
+    imgLarge: 'images/gnomes/biker1.webp',
   },
   {
     name: 'Gandalf the Gnome',
@@ -48,6 +52,7 @@ const gnomes = [
     img0: 'images/gnomes/gandalf0.webp',
     img1: 'images/gnomes/gandalf1.webp',
     img2: 'images/gnomes/gandalf2.webp',
+    imgLarge: 'images/gnomes/gandalf1.webp',
   },
   {
     name: 'Go Away Gnome',
@@ -58,6 +63,7 @@ const gnomes = [
     img0: 'images/gnomes/goaway0.webp',
     img1: 'images/gnomes/goaway1.webp',
     img2: 'images/gnomes/goaway2.webp',
+    imgLarge: 'images/gnomes/goaway1.webp',
   },
   {
     name: 'Rainbow Gnome',
@@ -68,6 +74,7 @@ const gnomes = [
     img0: 'images/gnomes/rainbow0.webp',
     img1: 'images/gnomes/rainbow1.webp',
     img2: 'images/gnomes/rainbow2.webp',
+    imgLarge: 'images/gnomes/rainbow1.webp',
   },
   {
     name: 'Rocking Chair Gnome',
@@ -78,6 +85,7 @@ const gnomes = [
     img0: 'images/gnomes/rocking-chair0.webp',
     img1: 'images/gnomes/rocking-chair1.webp',
     img2: 'images/gnomes/rocking-chair2.webp',
+    imgLarge: 'images/gnomes/rocking-chair1.webp',
   },
   {
     name: 'Sleeping Gnome',
@@ -88,6 +96,7 @@ const gnomes = [
     img0: 'images/gnomes/sleeping0.webp',
     img1: 'images/gnomes/sleeping1.webp',
     img2: 'images/gnomes/sleeping2.webp',
+    imgLarge: 'images/gnomes/sleeping1.webp',
   },
   {
     name: 'Welcoming Gnome',
@@ -98,6 +107,7 @@ const gnomes = [
     img0: 'images/gnomes/welcome0.webp',
     img1: 'images/gnomes/welcome1.webp',
     img2: 'images/gnomes/welcome2.webp',
+    imgLarge: 'images/gnomes/welcome1.webp',
   },
 ];
 
@@ -219,17 +229,17 @@ function openGnomeDetailsPage(i) {
             <div>
                 <figure>
                     <img src="${
-                      gnomes[i].img1
+                      gnomes[i].imgLarge
                     }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
                         width="500">
                 </figure>
                 <figure class="img-thumb-container">
                     <img src="${
-                      gnomes[i].img0
-                    }" width="200" height="200" id="thumbnail1">
+                      gnomes[i].img1
+                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail">
                     <img src="${
                       gnomes[i].img2
-                    }" width="200" height="200" id="thumbnail2">
+                    }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail">
                 </figure>
             </div>
             <h2>${gnomes[i].name}</h2>
@@ -242,13 +252,14 @@ function openGnomeDetailsPage(i) {
 
             <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
   `;
-  updateNavShoppingCart();
 
   //Arguments added so the plus/minus function can be reused for the shopping cart section later on and maybe merged with the main list plus/minus functions,
   // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might simply this and just have separate plus/minus functions instead this if stuff gets too complicated later on
   addPlusBtn(i, openGnomeDetailsPage);
   addMinusBtn(i, openGnomeDetailsPage);
+  updateNavShoppingCart();
   listenClosePage(gnomeDetailsSection);
+  detailsThumbnailListener();
 }
 
 //Event listener to close an opened page
@@ -258,6 +269,35 @@ function listenClosePage(section) {
   closeBtn.addEventListener('click', function () {
     closePage(section);
   });
+}
+
+//Event listener for image thumbnails
+function detailsThumbnailListener() {
+  const thumbnails = Array.from(
+    document.querySelectorAll('.imgDetailsThumbnail')
+  );
+
+  for (let i = 0; i < thumbnails.length; i++) {
+    thumbnails[i].addEventListener('click', viewThumbnail);
+  }
+}
+
+//Changes large image on Gnome Details Section depending on which thumbnail you click
+//TODO: get rid of the if statement and get the imgIndex to work in the same way as "i" does in the function so scaling with more images is easier to do.
+function viewThumbnail(e) {
+  const indexes = e.target.id.replace('thumbnail-', '');
+  const i = Number(indexes[0]);
+  const gnomeNameIndex = gnomes[i];
+  const imgIndex = Number(indexes[2]);
+  if (imgIndex === 1) {
+    gnomeNameIndex.imgLarge = gnomeNameIndex.img1;
+  } else if (imgIndex === 2) {
+    gnomeNameIndex.imgLarge = gnomeNameIndex.img2;
+  }
+
+  console.log(gnomeNameIndex.imgLarge);
+  openGnomeDetailsPage(i);
+  // console.log(imgIndex);
 }
 
 //Functions to listen at the +/- buttons in Details Page that gets called every time the page renders.
