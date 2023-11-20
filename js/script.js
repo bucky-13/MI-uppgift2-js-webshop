@@ -108,6 +108,7 @@ const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 
+//*************START of all functions for GNOME LIST SECTION */
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
   for (let i = 0; i < gnomes.length; i++) {
@@ -179,7 +180,7 @@ function generateGnomeListContainer(i) {
         </figure>
 </div>`;
 
-  //adds evenListener for Buttons so we don't have to do this every time again.
+  //adds evenListeners for buttons, shopping cart & opening the gnome Details section.
   addPlusBtnList();
   addMinusBtnList();
   updateNavShoppingCart();
@@ -211,27 +212,9 @@ function minusAmountList(e) {
   }
 }
 
-//Function to update the Shopping Cart in the Nav
+//*************END of all functions for GNOME LIST SECTION */
 
-function updateNavShoppingCart() {
-  let itemsCounter = 0;
-  let totalPrice = 0;
-  for (let i = 0; i < gnomes.length; i++) {
-    if (gnomes[i].amount > 0) {
-      itemsCounter = itemsCounter + gnomes[i].amount;
-    }
-    gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
-    totalPrice = totalPrice + gnomeItemPriceTotal;
-  }
-  if (itemsCounter > 0) {
-    navCartCounter.classList.remove('hidden');
-    navCartCounter.textContent = itemsCounter;
-  } else if (itemsCounter <= 0) {
-    navCartCounter.classList.add('hidden');
-  }
-  navCartSum.textContent = totalPrice;
-}
-
+//*************START of all functions for GNOME DETAILS SECTION */
 //Function to open the pages for Individual Gnomes
 
 function openGnomeDetailsPage(i) {
@@ -292,6 +275,8 @@ function addMinusBtn(i) {
   minusBtnDetails.addEventListener('click', minusAmountDetails);
 }
 
+//Functions to update values after clicking +/- buttons
+
 function plusAmountDetails(e) {
   const i = e.target.id.replace('btnDetailsPlus', '');
   gnomes[i].amount++;
@@ -321,4 +306,27 @@ function closePage(section) {
   for (let i = 0; i < gnomes.length; i++) {
     generateGnomeListContainer(i);
   }
+}
+
+//*************END of all functions for GNOME DETAILS SECTION */
+
+//Function to update the Shopping Cart in the Nav
+
+function updateNavShoppingCart() {
+  let itemsCounter = 0;
+  let totalPrice = 0;
+  for (let i = 0; i < gnomes.length; i++) {
+    if (gnomes[i].amount > 0) {
+      itemsCounter = itemsCounter + gnomes[i].amount;
+    }
+    gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
+    totalPrice = totalPrice + gnomeItemPriceTotal;
+  }
+  if (itemsCounter > 0) {
+    navCartCounter.classList.remove('hidden');
+    navCartCounter.textContent = itemsCounter;
+  } else if (itemsCounter <= 0) {
+    navCartCounter.classList.add('hidden');
+  }
+  navCartSum.textContent = totalPrice;
 }
