@@ -111,6 +111,7 @@ const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 //*************START of all functions for GNOME LIST SECTION */
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
+  gnomeListContainer.innerHTML = '';
   for (let i = 0; i < gnomes.length; i++) {
     generateGnomeListContainer(i);
   }
@@ -119,7 +120,7 @@ function gnomeListContainerGenerator() {
 gnomeListContainerGenerator();
 
 //Functions to listen at the +/- buttons in Shop List that gets called every time the page renders to avoid repeating this code.
-function addPlusBtnList() {
+function addPlusBtnListener() {
   const plusBtnList = Array.from(document.querySelectorAll('.plusBtnList'));
 
   //Watching for clicks on + buttons on the Shop Section (Gnome List)
@@ -129,7 +130,7 @@ function addPlusBtnList() {
   }
 }
 
-function addMinusBtnList() {
+function addMinusBtnListener() {
   const minusBtnList = Array.from(document.querySelectorAll('.minusBtnList'));
 
   //Watching for clicks on + buttons on the Shop Section (Gnome List)
@@ -139,7 +140,7 @@ function addMinusBtnList() {
   }
 }
 
-function addGnomeDetailsList() {
+function addGnomeDetailsListener() {
   const gnomeDetailsLinkList = Array.from(
     document.querySelectorAll('.gnomeDetailsLinkList')
   );
@@ -181,10 +182,10 @@ function generateGnomeListContainer(i) {
 </div>`;
 
   //adds evenListeners for buttons, shopping cart & opening the gnome Details section.
-  addPlusBtnList();
-  addMinusBtnList();
+  addPlusBtnListener();
+  addMinusBtnListener();
   updateNavShoppingCart();
-  addGnomeDetailsList(i);
+  addGnomeDetailsListener(i);
 }
 
 //Function to add amount to an item in the Shop List.
@@ -192,23 +193,15 @@ function generateGnomeListContainer(i) {
 function plusAmountList(e) {
   const index = e.target.id.replace('btnListPlus', '');
   gnomes[index].amount++;
-  gnomeListContainer.innerHTML = '';
 
-  //Re-rendendering the Shop List section
-  for (let i = 0; i < gnomes.length; i++) {
-    generateGnomeListContainer(i);
-  }
+  gnomeListContainerGenerator();
 }
 function minusAmountList(e) {
   const index = e.target.id.replace('btnListMinus', '');
   if (gnomes[index].amount > 0) {
     gnomes[index].amount--;
-    gnomeListContainer.innerHTML = '';
 
-    //Re-rendendering the Shop List section
-    for (let i = 0; i < gnomes.length; i++) {
-      generateGnomeListContainer(i);
-    }
+    gnomeListContainerGenerator();
   }
 }
 
@@ -250,8 +243,11 @@ function openGnomeDetailsPage(i) {
             <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
   `;
   updateNavShoppingCart();
-  addPlusBtn(i);
-  addMinusBtn(i);
+
+  //Arguments added so the plus/minus function can be reused for the shopping cart section later on and maybe merged with the main list plus/minus functions,
+  // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might simply this and just have separate plus/minus functions instead this if stuff gets too complicated later on
+  addPlusBtn(i, openGnomeDetailsPage);
+  addMinusBtn(i, openGnomeDetailsPage);
   listenClosePage(gnomeDetailsSection);
 }
 
@@ -266,49 +262,46 @@ function listenClosePage(section) {
 
 //Functions to listen at the +/- buttons in Details Page that gets called every time the page renders.
 
-function addPlusBtn(i) {
+function addPlusBtn(i, activeSection) {
   const plusBtnDetails = document.querySelector(`#btnDetailsPlus${i}`);
-  plusBtnDetails.addEventListener('click', plusAmountDetails);
+  plusBtnDetails.addEventListener('click', function () {
+    plusAmountDetails(i, activeSection);
+  });
 }
-function addMinusBtn(i) {
+function addMinusBtn(i, activeSection) {
   const minusBtnDetails = document.querySelector(`#btnDetailsMinus${i}`);
-  minusBtnDetails.addEventListener('click', minusAmountDetails);
+  minusBtnDetails.addEventListener('click', function () {
+    minusAmountDetails(i, activeSection);
+  });
 }
 
 //Functions to update values after clicking +/- buttons
 
-function plusAmountDetails(e) {
-  const i = e.target.id.replace('btnDetailsPlus', '');
+function plusAmountDetails(i, activeSection) {
   gnomes[i].amount++;
-  gnomeDetailsSection.innerHTML = '';
 
   // Re-rendendering the Shop List section
-  openGnomeDetailsPage(i);
+  activeSection(i);
 }
-function minusAmountDetails(e) {
-  const i = e.target.id.replace('btnDetailsMinus', '');
+function minusAmountDetails(i, activeSection) {
   if (gnomes[i].amount > 0) {
     gnomes[i].amount--;
-    gnomeDetailsSection.innerHTML = '';
 
     // Re-rendendering the Shop List section
-    openGnomeDetailsPage(i);
-  }
-}
-
-//Function to close the detailed page page
-function closePage(section) {
-  section.classList.remove('page-active');
-  section.classList.add('hidden');
-  section.innerHTML = '';
-  gnomeListContainer.innerHTML = '';
-  gnomeListContainer.classList.remove('hidden');
-  for (let i = 0; i < gnomes.length; i++) {
-    generateGnomeListContainer(i);
+    activeSection(i);
   }
 }
 
 //*************END of all functions for GNOME DETAILS SECTION */
+
+//Function to currently opened page
+function closePage(section) {
+  section.classList.remove('page-active');
+  section.classList.add('hidden');
+  gnomeListContainer.classList.remove('hidden');
+
+  gnomeListContainerGenerator();
+}
 
 //Function to update the Shopping Cart in the Nav
 
