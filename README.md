@@ -4,7 +4,7 @@ add filters to Shop list
 
 add sorting to Shop list
 
-Create indivdual Gnome item pages
+~~ Create indivdual Gnome item pages ~~
 
 add shopping cart page
 
@@ -24,13 +24,13 @@ maybe add a hamburger/nav menu since it feels empty without one
 
 check accessibility
 
-shopping cart is one issue
-
 add meta tags and all that stuff
 
 add moar comments to avoid confusion
 
 do a proper readme file
+
+refactor some clunky functions
 
 listen to nice music (important)
 
