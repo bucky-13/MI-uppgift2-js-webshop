@@ -112,7 +112,6 @@ const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 function gnomeListContainerGenerator() {
   for (let i = 0; i < gnomes.length; i++) {
     generateGnomeListContainer(i);
-    console.log('bajs');
   }
 }
 
@@ -145,7 +144,9 @@ function addGnomeDetailsList() {
   );
 
   for (let i = 0; i < gnomeDetailsLinkList.length; i++) {
-    gnomeDetailsLinkList[i].addEventListener('click', openGnomeDetailsPage);
+    gnomeDetailsLinkList[i].addEventListener('click', () => {
+      openGnomeDetailsPage(i);
+    });
   }
 }
 
@@ -182,7 +183,7 @@ function generateGnomeListContainer(i) {
   addPlusBtnList();
   addMinusBtnList();
   updateNavShoppingCart();
-  addGnomeDetailsList();
+  addGnomeDetailsList(i);
 }
 
 //Function to add amount to an item in the Shop List.
@@ -233,8 +234,7 @@ function updateNavShoppingCart() {
 
 //Function to open the pages for Individual Gnomes
 
-function openGnomeDetailsPage(e) {
-  i = e.target.id.replace('gnomeDetailsLink', '');
+function openGnomeDetailsPage(i) {
   gnomeListContainer.classList.add('hidden');
   gnomeDetailsSection.classList.remove('hidden');
   gnomeDetailsSection.classList.add('page-active');
@@ -259,35 +259,66 @@ function openGnomeDetailsPage(e) {
             <h2>${gnomes[i].name}</h2>
             <p class="item-price">${gnomes[i].price} kr/st</p>
             <div class="gnome-buttons-container">
-                <button class="btn-circle btn-large">-</button>
+                <button class="btn-circle btn-large" id="btnDetailsMinus${i}">-</button>
                 <h4>${gnomes[i].amount}</h4>
-                <button class="btn-circle btn-large">+</button>
+                <button class="btn-circle btn-large" id="btnDetailsPlus${i}">+</button>
             </div>
 
             <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
   `;
-
+  updateNavShoppingCart();
+  addPlusBtn(i);
+  addMinusBtn(i);
   listenClosePage(gnomeDetailsSection);
 }
 
 //Event listener to close an opened page
 function listenClosePage(section) {
   const closeBtn = document.querySelector('#closePageBtn');
-  console.log(closeBtn);
-  console.log(gnomeDetailsSection);
 
-  //FIX THE EVENT LISTENER ITS NOT WORKING
   closeBtn.addEventListener('click', function () {
     closePage(section);
   });
 }
 
-//Function to close the current page
+//Functions to listen at the +/- buttons in Details Page that gets called every time the page renders.
+
+function addPlusBtn(i) {
+  const plusBtnDetails = document.querySelector(`#btnDetailsPlus${i}`);
+  plusBtnDetails.addEventListener('click', plusAmountDetails);
+}
+function addMinusBtn(i) {
+  const minusBtnDetails = document.querySelector(`#btnDetailsMinus${i}`);
+  minusBtnDetails.addEventListener('click', minusAmountDetails);
+}
+
+function plusAmountDetails(e) {
+  const i = e.target.id.replace('btnDetailsPlus', '');
+  gnomes[i].amount++;
+  gnomeDetailsSection.innerHTML = '';
+
+  // Re-rendendering the Shop List section
+  openGnomeDetailsPage(i);
+}
+function minusAmountDetails(e) {
+  const i = e.target.id.replace('btnDetailsMinus', '');
+  if (gnomes[i].amount > 0) {
+    gnomes[i].amount--;
+    gnomeDetailsSection.innerHTML = '';
+
+    // Re-rendendering the Shop List section
+    openGnomeDetailsPage(i);
+  }
+}
+
+//Function to close the detailed page page
 function closePage(section) {
-  console.log(section);
   section.classList.remove('page-active');
   section.classList.add('hidden');
   section.innerHTML = '';
+  gnomeListContainer.innerHTML = '';
   gnomeListContainer.classList.remove('hidden');
-  gnomeListContainerGenerator();
+  for (let i = 0; i < gnomes.length; i++) {
+    generateGnomeListContainer(i);
+  }
 }
