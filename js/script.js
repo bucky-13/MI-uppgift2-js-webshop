@@ -1,4 +1,4 @@
-const gnomes = [
+const gnomesDatabase = [
   {
     name: 'Axe Wielding Knight Gnome',
     price: 120,
@@ -111,9 +111,16 @@ const gnomes = [
   },
 ];
 
+//gnomes array that can be altered for page filtering etc
+let gnomes = gnomesDatabase;
+
+// filtered gnome categories
+const knightGnomes = gnomes.filter((gnomes) => gnomes.category === 'Knights');
+const chillGnomes = gnomes.filter((gnomes) => gnomes.category === 'Chill');
+const naughtyGnomes = gnomes.filter((gnomes) => gnomes.category === 'Naughty');
+
 //Array to use when applying filters to the gnome array.
 let filteredGnomesArray = gnomes;
-console.table(filteredGnomesArray);
 
 //Query Selectors for HTML nodes that are in index.html on page load
 
@@ -121,7 +128,12 @@ const gnomeListContainer = document.querySelector('#gnomeListContainer');
 const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
+
+//querySelectors for the Shop filter section and filters
+const shopFilterContainer = document.querySelector('#shopFilterContainer');
+const toggleFilterBtn = document.querySelector('#toggleFilterBtn');
 const gnomeSortSelect = document.querySelector('#gnomeSortSelect');
+categoryFilterRadios = document.querySelectorAll('[name="gnomeCategories"]');
 
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
@@ -140,7 +152,6 @@ function closePage(section) {
   section.classList.remove('page-active');
   section.classList.add('hidden');
   gnomeListContainer.classList.remove('hidden');
-
   gnomeListContainerGenerator();
 }
 
@@ -206,6 +217,13 @@ function gnomeSortListener() {
   gnomeSortSelect.addEventListener('change', sortGnomes);
 }
 
+function gnomeFilterListener() {
+  toggleFilterBtn.addEventListener('click', toggleShopFilterContainer);
+}
+
+for (let i = 0; i < categoryFilterRadios.length; i++) {
+  categoryFilterRadios[i].addEventListener('click', updateFilterRadios);
+}
 //FUNCTIONS for GNOME LIST SECTION
 
 //Filter functions for the gnomes List
@@ -230,7 +248,45 @@ function sortGnomes(e) {
     gnomes.sort((prod1, prod2) => prod1.rating - prod2.rating);
   }
   gnomeListContainerGenerator();
-  // console.log(sortValue);
+}
+
+//Function to add amount to an item in the Shop List.
+
+function plusAmountList(e) {
+  const index = e.target.id.replace('btnListPlus', '');
+  gnomes[index].amount++;
+
+  gnomeListContainerGenerator();
+}
+function minusAmountList(e) {
+  const index = e.target.id.replace('btnListMinus', '');
+  if (gnomes[index].amount > 0) {
+    gnomes[index].amount--;
+
+    gnomeListContainerGenerator();
+  }
+}
+
+function toggleShopFilterContainer() {
+  shopFilterContainer.classList.toggle('hidden');
+  shopFilterContainer.classList.toggle('shop-filter-container');
+}
+
+function updateFilterRadios(e) {
+  const selectedCategory = e.currentTarget.value;
+
+  if (selectedCategory === 'all') {
+    gnomes = gnomesDatabase;
+  } else {
+    filteredGnomes = [];
+    for (let i = 0; i < gnomesDatabase.length; i++) {
+      if (selectedCategory === gnomesDatabase[i].category.toLowerCase()) {
+        filteredGnomes.push(gnomesDatabase[i]);
+      }
+    }
+    gnomes = filteredGnomes;
+  }
+  gnomeListContainerGenerator();
 }
 
 //Function for generating HTML in Gnome List
@@ -264,24 +320,9 @@ function generateGnomeListContainer(i) {
   updateNavShoppingCart();
   addGnomeDetailsListener(i);
   gnomeSortListener();
+  gnomeFilterListener();
 }
 
-//Function to add amount to an item in the Shop List.
-
-function plusAmountList(e) {
-  const index = e.target.id.replace('btnListPlus', '');
-  gnomes[index].amount++;
-
-  gnomeListContainerGenerator();
-}
-function minusAmountList(e) {
-  const index = e.target.id.replace('btnListMinus', '');
-  if (gnomes[index].amount > 0) {
-    gnomes[index].amount--;
-
-    gnomeListContainerGenerator();
-  }
-}
 //*************END of all functions for GNOME LIST SECTION */
 
 //*************START of all functions for GNOME DETAILS SECTION */
@@ -319,9 +360,7 @@ function viewThumbnail(e) {
     gnomeNameIndex.imgLarge = gnomeNameIndex.img2;
   }
 
-  console.log(gnomeNameIndex.imgLarge);
   openGnomeDetailsPage(i);
-  // console.log(imgIndex);
 }
 
 //Functions to listen at the +/- buttons in Details Page that gets called every time the page renders.

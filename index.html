@@ -48,7 +48,7 @@
                     </select>
                 </div>
                 <div>
-                    <button class="invisible-btn filter-btn">
+                    <button class="invisible-btn filter-btn" id="toggleFilterBtn">
                         <p>Filter</p>
                         <svg class="filter-btn-svg" width="40" height="40" viewBox="0 0 48 48" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -62,24 +62,24 @@
                     </button>
                 </div>
             </header>
-            <div id="shopFilterContainer" class="shop-filter-container">
+            <div id="shopFilterContainer" class="hidden">
                 <div id="shopFilterRadio" class="shop-filter-radio">
                     <h3>Category:</h3>
                     <label>
                         <span>All:</span>
-                        <input type="radio" id="allCategories" name="gnomeCategories" value="all" checked>
+                        <input type="radio" id="all" name="gnomeCategories" value="all" checked>
                     </label>
                     <label>
                         <span>Knights:</span>
-                        <input type="radio" id="allCategories" name="gnomeCategories" value="knights">
+                        <input type="radio" id="knight" name="gnomeCategories" value="knights">
                     </label>
                     <label>
                         <span>Chill:</span>
-                        <input type="radio" id="allCategories" name="gnomeCategories" value="chill">
+                        <input type="radio" id="chill" name="gnomeCategories" value="chill">
                     </label>
                     <label>
                         <span>Naughty:</span>
-                        <input type="radio" id="allCategories" name="gnomeCategories" value="naughty">
+                        <input type="radio" id="naughty" name="gnomeCategories" value="naughty">
                     </label>
 
                 </div>
