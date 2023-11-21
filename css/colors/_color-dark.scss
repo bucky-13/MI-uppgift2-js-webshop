@@ -15,3 +15,9 @@ body {
   background-color: $color-light;
   color: $color-black;
 }
+
+.filter-btn-svg {
+  path {
+    fill: $color-light;
+  }
+}

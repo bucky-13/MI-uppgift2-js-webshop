@@ -79,10 +79,56 @@ body {
         display: grid;
         grid-template-columns: 150px 1fr 1fr;
         align-items: center;
+
+        label,
+        p {
+          font-size: 1.3rem;
+        }
+        .shop-select-container:hover {
+          label {
+            color: $color-primary;
+          }
+          select {
+            border: 1px solid $color-primary;
+          }
+        }
+
+        select {
+          padding: 0.3rem;
+        }
+        .filter-btn {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .filter-btn:hover {
+          p {
+            color: $color-primary;
+          }
+          .filter-btn-svg {
+            path {
+              fill: $color-primary;
+            }
+          }
+        }
       }
-      select {
-        padding: 0.3rem;
+      .shop-filter-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        .shop-filter-radio {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+
+          h3 {
+            grid-column: 1 / span 2;
+          }
+        }
       }
+
       .gnome-list-container.hidden {
         display: none;
       }
