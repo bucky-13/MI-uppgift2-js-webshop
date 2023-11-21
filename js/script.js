@@ -45,7 +45,7 @@ const gnomes = [
   },
   {
     name: 'Gandalf the Gnome',
-    price: 200,
+    price: 400,
     amount: 0,
     rating: 5,
     category: 'Chill',
@@ -56,7 +56,7 @@ const gnomes = [
   },
   {
     name: 'Go Away Gnome',
-    price: 100,
+    price: 80,
     amount: 0,
     rating: 3,
     category: 'Naughty',
@@ -67,7 +67,7 @@ const gnomes = [
   },
   {
     name: 'Rainbow Gnome',
-    price: 150,
+    price: 250,
     amount: 0,
     rating: 4.5,
     category: 'Chill',
@@ -78,7 +78,7 @@ const gnomes = [
   },
   {
     name: 'Rocking Chair Gnome',
-    price: 140,
+    price: 190,
     amount: 0,
     rating: 4,
     category: 'Chill',
@@ -111,14 +111,18 @@ const gnomes = [
   },
 ];
 
+//Array to use when applying filters to the gnome array.
+let filteredGnomesArray = gnomes;
+console.table(filteredGnomesArray);
+
 //Query Selectors for HTML nodes that are in index.html on page load
 
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
 const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
+const gnomeSortSelect = document.querySelector('#gnomeSortSelect');
 
-//*************START of all functions for GNOME LIST SECTION */
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
   gnomeListContainer.innerHTML = '';
@@ -128,7 +132,9 @@ function gnomeListContainerGenerator() {
 }
 
 gnomeListContainerGenerator();
+
 //*************START of all functions for MULTIPLE SECTIONS */
+
 //Function to close currently opened page
 function closePage(section) {
   section.classList.remove('page-active');
@@ -161,7 +167,9 @@ function updateNavShoppingCart() {
 
 //*************END of all functions for MULTIPLE SECTIONS */
 
-//Functions to listen at the +/- buttons in Shop List that gets called every time the page renders to avoid repeating this code.
+//*************START of all functions for GNOME LIST SECTION */
+
+//EVENT LISTENERS for GNOME LIST SECTION
 function addPlusBtnListener() {
   const plusBtnList = Array.from(document.querySelectorAll('.plusBtnList'));
 
@@ -194,6 +202,37 @@ function addGnomeDetailsListener() {
   }
 }
 
+function gnomeSortListener() {
+  gnomeSortSelect.addEventListener('change', sortGnomes);
+}
+
+//FUNCTIONS for GNOME LIST SECTION
+
+//Filter functions for the gnomes List
+
+/* Might be worth  using a duplicate 2nd array for gnomes that adds all gnome value changes so the original array isn't changed. But that will include changes to amount, img for details page etc, so maaaybe later. Not really needed for this page, but useful to consider for future projects. For now, use a 2nd array when filtering at least. */
+
+function sortGnomes(e) {
+  sortValue = e.target.value;
+  if (sortValue === 'a-z') {
+    gnomes.sort((prod1, prod2) => {
+      return prod1.name === prod2.name ? 0 : prod1.name < prod2.name ? -1 : 1;
+    });
+  } else if (sortValue === 'z-a') {
+    gnomes.sort((prod1, prod2) => {
+      return prod1.name === prod2.name ? 0 : prod1.name > prod2.name ? -1 : 1;
+    });
+  } else if (sortValue === 'price-ascending') {
+    gnomes.sort((prod1, prod2) => prod1.price - prod2.price);
+  } else if (sortValue === 'price-descending') {
+    gnomes.sort((prod1, prod2) => prod2.price - prod1.price);
+  } else if (sortValue === 'star-rating') {
+    gnomes.sort((prod1, prod2) => prod1.rating - prod2.rating);
+  }
+  gnomeListContainerGenerator();
+  // console.log(sortValue);
+}
+
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
   //TODO: Fix the star rating to display star images, and no text inside a figure tag
@@ -224,6 +263,7 @@ function generateGnomeListContainer(i) {
   addMinusBtnListener();
   updateNavShoppingCart();
   addGnomeDetailsListener(i);
+  gnomeSortListener();
 }
 
 //Function to add amount to an item in the Shop List.
