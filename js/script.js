@@ -128,6 +128,38 @@ function gnomeListContainerGenerator() {
 }
 
 gnomeListContainerGenerator();
+//*************START of all functions for MULTIPLE SECTIONS */
+//Function to close currently opened page
+function closePage(section) {
+  section.classList.remove('page-active');
+  section.classList.add('hidden');
+  gnomeListContainer.classList.remove('hidden');
+
+  gnomeListContainerGenerator();
+}
+
+//Function to update the Shopping Cart in the Nav
+
+function updateNavShoppingCart() {
+  let itemsCounter = 0;
+  let totalPrice = 0;
+  for (let i = 0; i < gnomes.length; i++) {
+    if (gnomes[i].amount > 0) {
+      itemsCounter = itemsCounter + gnomes[i].amount;
+    }
+    gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
+    totalPrice = totalPrice + gnomeItemPriceTotal;
+  }
+  if (itemsCounter > 0) {
+    navCartCounter.classList.remove('hidden');
+    navCartCounter.textContent = itemsCounter;
+  } else if (itemsCounter <= 0) {
+    navCartCounter.classList.add('hidden');
+  }
+  navCartSum.textContent = totalPrice;
+}
+
+//*************END of all functions for MULTIPLE SECTIONS */
 
 //Functions to listen at the +/- buttons in Shop List that gets called every time the page renders to avoid repeating this code.
 function addPlusBtnListener() {
@@ -162,10 +194,9 @@ function addGnomeDetailsListener() {
   }
 }
 
-//Query Selectors Shop page Buttons
-
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
+  //TODO: Fix the star rating to display star images, and no text inside a figure tag
   gnomeListContainer.innerHTML += `
 <div class="gnome-list-item">
     <figure>
@@ -184,10 +215,7 @@ function generateGnomeListContainer(i) {
     <p>${gnomes[i].amount * gnomes[i].price} kr</p>
         <figure class="star-rating">
             <img src="images/icons/star-filled.png" width="24px">
-            <img src="images/icons/star-filled.png" width="24px">
-            <img src="images/icons/star-filled.png" width="24px">
-            <img src="images/icons/star-half.png" width="24px">
-            <img src="images/icons/star-empty.png" width="24px">
+            ${gnomes[i].rating}
         </figure>
 </div>`;
 
@@ -214,53 +242,9 @@ function minusAmountList(e) {
     gnomeListContainerGenerator();
   }
 }
-
 //*************END of all functions for GNOME LIST SECTION */
 
 //*************START of all functions for GNOME DETAILS SECTION */
-//Function to open the pages for Individual Gnomes
-
-function openGnomeDetailsPage(i) {
-  gnomeListContainer.classList.add('hidden');
-  gnomeDetailsSection.classList.remove('hidden');
-  gnomeDetailsSection.classList.add('page-active');
-  gnomeDetailsSection.innerHTML = `
-              <button class="btn-large btn-circle btn-close" id="closePageBtn">X</button>
-            <div>
-                <figure>
-                    <img src="${
-                      gnomes[i].imgLarge
-                    }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
-                        width="500">
-                </figure>
-                <figure class="img-thumb-container">
-                    <img src="${
-                      gnomes[i].img1
-                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail">
-                    <img src="${
-                      gnomes[i].img2
-                    }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail">
-                </figure>
-            </div>
-            <h2>${gnomes[i].name}</h2>
-            <p class="item-price">${gnomes[i].price} kr/st</p>
-            <div class="gnome-buttons-container">
-                <button class="btn-circle btn-large" id="btnDetailsMinus${i}">-</button>
-                <h4>${gnomes[i].amount}</h4>
-                <button class="btn-circle btn-large" id="btnDetailsPlus${i}">+</button>
-            </div>
-
-            <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
-  `;
-
-  //Arguments added so the plus/minus function can be reused for the shopping cart section later on and maybe merged with the main list plus/minus functions,
-  // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might simply this and just have separate plus/minus functions instead this if stuff gets too complicated later on
-  addPlusBtn(i, openGnomeDetailsPage);
-  addMinusBtn(i, openGnomeDetailsPage);
-  updateNavShoppingCart();
-  listenClosePage(gnomeDetailsSection);
-  detailsThumbnailListener();
-}
 
 //Event listener to close an opened page
 function listenClosePage(section) {
@@ -332,34 +316,47 @@ function minusAmountDetails(i, activeSection) {
   }
 }
 
+//Function to open the pages for Individual Gnomes
+function openGnomeDetailsPage(i) {
+  gnomeListContainer.classList.add('hidden');
+  gnomeDetailsSection.classList.remove('hidden');
+  gnomeDetailsSection.classList.add('page-active');
+  gnomeDetailsSection.innerHTML = `
+              <button class="btn-large btn-circle btn-close" id="closePageBtn">X</button>
+            <div>
+                <figure>
+                    <img src="${
+                      gnomes[i].imgLarge
+                    }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
+                        width="500">
+                </figure>
+                <figure class="img-thumb-container">
+                    <img src="${
+                      gnomes[i].img1
+                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail">
+                    <img src="${
+                      gnomes[i].img2
+                    }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail">
+                </figure>
+            </div>
+            <h2>${gnomes[i].name}</h2>
+            <p class="item-price">${gnomes[i].price} kr/st</p>
+            <div class="gnome-buttons-container">
+                <button class="btn-circle btn-large" id="btnDetailsMinus${i}">-</button>
+                <h4>${gnomes[i].amount}</h4>
+                <button class="btn-circle btn-large" id="btnDetailsPlus${i}">+</button>
+            </div>
+
+            <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
+  `;
+
+  //Arguments added so the plus/minus function can be reused for the shopping cart section later on and maybe merged with the main list plus/minus functions,
+  // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might simply this and just have separate plus/minus functions instead this if stuff gets too complicated later on
+  addPlusBtn(i, openGnomeDetailsPage);
+  addMinusBtn(i, openGnomeDetailsPage);
+  updateNavShoppingCart();
+  listenClosePage(gnomeDetailsSection);
+  detailsThumbnailListener();
+}
+
 //*************END of all functions for GNOME DETAILS SECTION */
-
-//Function to currently opened page
-function closePage(section) {
-  section.classList.remove('page-active');
-  section.classList.add('hidden');
-  gnomeListContainer.classList.remove('hidden');
-
-  gnomeListContainerGenerator();
-}
-
-//Function to update the Shopping Cart in the Nav
-
-function updateNavShoppingCart() {
-  let itemsCounter = 0;
-  let totalPrice = 0;
-  for (let i = 0; i < gnomes.length; i++) {
-    if (gnomes[i].amount > 0) {
-      itemsCounter = itemsCounter + gnomes[i].amount;
-    }
-    gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
-    totalPrice = totalPrice + gnomeItemPriceTotal;
-  }
-  if (itemsCounter > 0) {
-    navCartCounter.classList.remove('hidden');
-    navCartCounter.textContent = itemsCounter;
-  } else if (itemsCounter <= 0) {
-    navCartCounter.classList.add('hidden');
-  }
-  navCartSum.textContent = totalPrice;
-}
