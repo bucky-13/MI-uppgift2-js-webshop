@@ -2,7 +2,7 @@
 
 add filters to Shop list
 
-add sorting to Shop list
+~~add sorting to Shop list~~
 
 ~~ Create indivdual Gnome item pages ~~
 
@@ -16,7 +16,7 @@ add tablet and desktop versions of the site in css
 
 add a manual color theme toggler
 
-check possibly replacing png icons with svg icons
+check replacing png icons with svg icons
 
 fix the star ratings
 

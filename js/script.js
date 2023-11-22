@@ -112,7 +112,8 @@ const gnomesDatabase = [
 ];
 
 //gnomes array that can be altered for page filtering etc
-let gnomes = gnomesDatabase;
+let gnomes = [...gnomesDatabase];
+let gnomesFiltered = [...gnomesDatabase];
 
 // filtered gnome categories
 const knightGnomes = gnomes.filter((gnomes) => gnomes.category === 'Knights');
@@ -133,7 +134,11 @@ const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 const shopFilterContainer = document.querySelector('#shopFilterContainer');
 const toggleFilterBtn = document.querySelector('#toggleFilterBtn');
 const gnomeSortSelect = document.querySelector('#gnomeSortSelect');
-categoryFilterRadios = document.querySelectorAll('[name="gnomeCategories"]');
+const categoryFilterRadios = document.querySelectorAll(
+  '[name="gnomeCategories"]'
+);
+const maxPriceSlider = document.querySelector('#maxPriceSlider');
+const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
 
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
@@ -224,6 +229,11 @@ function gnomeFilterListener() {
 for (let i = 0; i < categoryFilterRadios.length; i++) {
   categoryFilterRadios[i].addEventListener('click', updateFilterRadios);
 }
+
+function gnomePriceSliderListeners() {
+  maxPriceSlider.addEventListener('input', updatePriceSliderFilter);
+}
+
 //FUNCTIONS for GNOME LIST SECTION
 
 //Filter functions for the gnomes List
@@ -276,16 +286,24 @@ function updateFilterRadios(e) {
   const selectedCategory = e.currentTarget.value;
 
   if (selectedCategory === 'all') {
-    gnomes = gnomesDatabase;
+    gnomesFiltered = [...gnomesDatabase];
   } else {
-    filteredGnomes = [];
+    gnomesFiltered = [];
     for (let i = 0; i < gnomesDatabase.length; i++) {
       if (selectedCategory === gnomesDatabase[i].category.toLowerCase()) {
-        filteredGnomes.push(gnomesDatabase[i]);
+        gnomesFiltered.push(gnomesDatabase[i]);
       }
     }
-    gnomes = filteredGnomes;
   }
+  updatePriceSliderFilter();
+}
+
+function updatePriceSliderFilter() {
+  let value = maxPriceSlider.value;
+  maxPriceDisplay.textContent = value;
+
+  gnomes = gnomesFiltered.filter((gnome) => gnome.price <= value);
+  // gnomes = gnomesPriceFiltered;
   gnomeListContainerGenerator();
 }
 
@@ -321,6 +339,7 @@ function generateGnomeListContainer(i) {
   addGnomeDetailsListener(i);
   gnomeSortListener();
   gnomeFilterListener();
+  gnomePriceSliderListeners();
 }
 
 //*************END of all functions for GNOME LIST SECTION */
