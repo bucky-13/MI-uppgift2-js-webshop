@@ -30,7 +30,7 @@
 
     </nav>
     <main>
-        <section class="shop-section" id="shop">
+        <section class="shop-section hidden" id="shop">
             <header>
                 <h2>Shop</h2>
 
@@ -98,60 +98,14 @@
 
             </div>
             <div class="gnome-list-container" id="gnomeListContainer">
-                <!-- <div class="gnome-list-item">
-                    <figure><img src="images/gnomes/knight-axe0.webp" width="120" height="160"></figure>
-                    <h4>Armored Gnome with Axe</h4>
 
-                    <div class="amount-to-order">
-                        <p>149kr / st</p>
-
-                        <button class="btn-circle btn-small">-</button>
-                        <button class="btn-circle btn-small">+</button>
-                        <p>0 st</p>
-
-                    </div>
-                    <p><span>0</span> kr</p>
-                    <figure class="star-rating">
-                        <img src="images/icons/star-filled.png" width="24px">
-                        <img src="images/icons/star-filled.png" width="24px">
-                        <img src="images/icons/star-filled.png" width="24px">
-                        <img src="images/icons/star-half.png" width="24px">
-                        <img src="images/icons/star-empty.png" width="24px">
-                    </figure>
-                </div> -->
             </div>
         </section>
 
         <section class="gnome-details-section hidden" id="gnomeDetailsSection">
-
-            <!-- <button class="btn-large btn-circle btn-close">X</button>
-            <div>
-                <figure>
-                    <img src="images/gnomes/gandalf1.webp" id="gnomeDisplayImg" class="gnome-display-img" height="500"
-                        width="500">
-                </figure>
-                <figure class="img-thumb-container">
-                    <img src="images/gnomes/gandalf0.webp" width="200" height="200" id="thumbnail1">
-                    <img src="images/gnomes/gandalf2.webp" width="200" height="200" id="thumbnail2">
-                </figure>
-            </div>
-            <h2>I AM GNOME NAME</h2>
-            <p class="item-price">X kr/st</p>
-            <div class="gnome-buttons-container">
-                <button class="btn-circle btn-large">-</button>
-                <h4>0</h4>
-                <button class="btn-circle btn-large">+</button>
-            </div>
-
-            <h3>Totalt: 0 kr</h3> -->
-
-
-
-
-
         </section>
 
-        <section class="shopping-cart hidden" id="shoppingCart">
+        <section class="shopping-cart-section" id="shoppingCart">
             <div class="shopping-cart-heading">
                 <h2>Shopping Cart</h2>
                 <button class="btn-large btn-circle">X</button>
@@ -161,11 +115,40 @@
                 </div>
             </div>
 
-            <div class="shopping-cart-gnomes" id="ShoppingCartGnomes"></div>
-            <div id="sumTotal">
-                <p>Total Sum</p>
-                <p id="CartSumTotalDisplay"></p>
-                <button class="btn-rectangle btn-green" id="goToCheckout">Go to Checkout</button>
+            <div class="shopping-cart-gnomes-container" id="ShoppingCartGnomes">
+
+                <div class="shopping-cart-gnome-grid">
+                    <img src="images/gnomes/gandalf0.webp" width="160" height="200" alt="yes." class="hidden">
+                    <h3>Gandalf the Gnome</h3>
+                    <button class="btn-circle btn-small btnRemoveItem" id="btnCartClose1">X</button>
+
+                    <h4>Amount:</h4>
+                    <h4>Unit price:</h4>
+                    <h4>Subtotal:</h4>
+                    <div class="gnome-cart-buttons-container">
+                        <button class="btn-circle btn-small" id="btnDetailsMinus${i}">-</button>
+                        <h4>2</h4>
+                        <button class="btn-circle btn-small" id="btnDetailsPlus${i}">+</button>
+                    </div>
+                    <div>
+                        <p id="oldCartUnitPrice" class="hidden">500kr</p>
+                        <p id="cartUnitPrice">400 kr</p>
+                    </div>
+                    <div>
+                        <p id="oldCartUnitSum" class="hidden">800kr</p>
+                        <p id="cartUnitSum">800kr</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="sumTotal" class="cartTotalGrid">
+                <p>Use Code:</p>
+                <p>-100 kr</p>
+                <h4>Total Sum</h4>
+                <p id="CartSumTotalDisplay">400 kr</p>
+                <div class="go-checkout-btn-container"><button class="btn-rectangle btn-green" id="goToCheckout">Go to
+                        Checkout</button></div>
             </div>
 
         </section>

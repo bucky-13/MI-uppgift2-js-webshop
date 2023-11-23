@@ -15,7 +15,8 @@ body {
 
   .hidden,
   .gnome-details-section.hidden,
-  .gnome-list-container.hidden {
+  .gnome-list-container.hidden,
+  .shop-section.hidden {
     display: none;
   }
 
@@ -235,6 +236,77 @@ body {
       }
     }
 
+    .shopping-cart-section {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      h4 {
+        font-size: 1.4rem;
+      }
+      .shopping-cart-heading {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        h2 {
+          line-height: 0;
+        }
+        button {
+          justify-self: end;
+          margin-right: 1rem;
+        }
+        p {
+          line-height: 0.5rem;
+        }
+      }
+      .shopping-cart-gnomes-container {
+        margin-top: 1rem;
+        :nth-child(1) {
+          border-top: 1px solid $color-primary;
+        }
+      }
+      .shopping-cart-gnome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 4rem 3rem 4rem;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid $color-primary;
+
+        .btnRemoveItem {
+          justify-self: end;
+          margin-right: 1rem;
+        }
+
+        h3 {
+          font-size: 1.6rem;
+          grid-column: 1 / span 2;
+          color: $color-primary;
+        }
+        .gnome-cart-buttons-container {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          h4 {
+            margin: 0 0.5rem;
+            padding: 0.4rem 0.7rem;
+            border: 2px solid $color-black;
+            border-radius: 12px;
+          }
+        }
+      }
+      .cartTotalGrid {
+        margin-top: 3rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 2rem 3rem 4rem;
+        align-items: center;
+
+        .go-checkout-btn-container {
+          grid-column: 2;
+          // width: 50%;
+        }
+      }
+    }
     .order-form-section {
       min-height: calc(100vh - 80px);
       form {
