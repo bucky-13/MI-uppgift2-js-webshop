@@ -1,12 +1,12 @@
 #TODO:
 
-add filters to Shop list
+~~add filters to Shop list~~
 
 ~~add sorting to Shop list~~
 
 ~~ Create indivdual Gnome item pages ~~
 
-add shopping cart page
+~~add shopping cart page~~
 
 add form functionality
 

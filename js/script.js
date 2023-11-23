@@ -274,6 +274,7 @@ const cartSumTotalContainer = document.querySelector('#cartSumTotalContainer');
 const shoppingCartGnomes = document.querySelector('#shoppingCartGnomes');
 const closeCartSectionBtn = document.querySelector('#closeCartSectionBtn');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
+const orderFormSection = document.querySelector('#orderFormSection');
 
 //querySelectors for the Shop filter section and filters
 const shopFilterContainer = document.querySelector('#shopFilterContainer');
@@ -334,6 +335,26 @@ function cartMinusBtnListener() {
     });
   }
 }
+
+function removeCartItem(i) {
+  gnomes[i].amount = 0;
+  openCartSection();
+}
+
+function removeItemCartListener() {
+  const cartRemoveList = Array.from(
+    document.querySelectorAll('.btnRemoveItem')
+  );
+  let cartIndex = [];
+
+  for (let i = 0; i < cartRemoveList.length; i++) {
+    cartIndex[i] = cartRemoveList[i].id.replace('btnRemoveItem', '');
+    cartRemoveList[i].addEventListener('click', function () {
+      removeCartItem(cartIndex[i]);
+    });
+  }
+}
+
 function toggleCartSection() {
   if (shoppingCartSection.classList.contains('hidden')) {
     openCartSection();
@@ -344,20 +365,29 @@ function toggleCartSection() {
 
 function closeCartSection() {
   shoppingCartSection.classList.add('hidden');
-  console.log(visibleSection);
-  console.log(shopSection);
   if (visibleSection === shopSection) {
-    console.log('bajs');
     gnomeListContainerGenerator();
   } else {
     visibleSection.classList.remove('hidden');
   }
 }
 
+function openCheckoutSection() {
+  shoppingCartSection.classList.add('hidden');
+  orderFormSection.classList.remove('hidden');
+}
+
+function goCheckoutListener() {
+  const goCheckoutBtn = document.querySelector('#goToCheckout');
+
+  goCheckoutBtn.addEventListener('click', openCheckoutSection);
+}
+
 //Function for opening the shopping cart section
 function openCartSection() {
   shoppingCartSection.classList.remove('hidden');
   visibleSection.classList.add('hidden');
+  updateNavShoppingCart();
   if (!shoppingCartSection.classList.contains('hidden')) {
     if (totalPrice > 0) {
       cartSumTotalContainer.innerHTML = `
@@ -366,10 +396,11 @@ function openCartSection() {
         <h4>Total Sum</h4>
         <p id="CartSumTotalDisplay">${totalPrice} kr</p>
         <div class="go-checkout-btn-container">
-          <button class="btn-rectangle btn-green id="goToCheckout">Go to Checkout</button>
+          <button class="btn-rectangle btn-green" id="goToCheckout">Go to Checkout</button>
          </div>
           `;
       shoppingCartGnomes.innerHTML = '';
+      goCheckoutListener();
       for (i = 0; i < gnomes.length; i++) {
         if (gnomes[i].amount > 0) {
           shoppingCartGnomes.innerHTML += `
@@ -378,7 +409,7 @@ function openCartSection() {
             gnomes[i].img0.alt
           }" class="hidden">
               <h3>${gnomes[i].name}</h3>
-              <button class="btn-circle btn-small btnRemoveItem" id="btnCartClose1">X</button>
+              <button class="btn-circle btn-small btnRemoveItem" id="btnRemoveItem${i}">X</button>
 
               <h4>Amount:</h4>
               <h4>Unit price:</h4>
@@ -402,11 +433,11 @@ function openCartSection() {
       }
       cartPlusBtnListener();
       cartMinusBtnListener();
+      removeItemCartListener();
     } else {
       shoppingCartGnomes.innerHTML = `
       <h3>The gnomes have not yet found their way to your currently empty cart</h3>`;
     }
-    updateNavShoppingCart();
   }
 }
 
