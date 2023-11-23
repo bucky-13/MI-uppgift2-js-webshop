@@ -17,7 +17,8 @@
     <nav>
         <h1 class="gottfrid-logo">Gottfrids <span class="gnomes-span">Garden Gnomes</span></h1>
 
-        <figure><img class="nav-cart" src="images/icons/Shopping-cart.svg">
+        <figure id="navCartIcons">
+            <img class="nav-cart" src="images/icons/Shopping-cart.svg">
             <div id="navCartCounter" class="cart-counter hidden">0</div>
         </figure>
         <p class="nav-cart-price"><span id="navCartSum">0</span> kr</p>
@@ -30,7 +31,7 @@
 
     </nav>
     <main>
-        <section class="shop-section hidden" id="shop">
+        <section class="shop-section" id="shopSection">
             <header>
                 <h2>Shop</h2>
 
@@ -105,7 +106,7 @@
         <section class="gnome-details-section hidden" id="gnomeDetailsSection">
         </section>
 
-        <section class="shopping-cart-section" id="shoppingCart">
+        <section class="shopping-cart-section hidden" id="shoppingCartSection">
             <div class="shopping-cart-heading">
                 <h2>Shopping Cart</h2>
                 <button class="btn-large btn-circle">X</button>
@@ -142,7 +143,7 @@
 
             </div>
 
-            <div id="sumTotal" class="cartTotalGrid">
+            <div id="cartSumTotalContainer" class="cartTotalGrid">
                 <p>Use Code:</p>
                 <p>-100 kr</p>
                 <h4>Total Sum</h4>

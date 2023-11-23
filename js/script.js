@@ -255,7 +255,6 @@ const gnomesDatabase = [
 //gnomes array that updates amounts etc
 let gnomes = [...gnomesDatabase];
 let gnomishShoppingCart = [];
-
 let itemsCounter = 0;
 
 // filtered gnome categories
@@ -266,8 +265,11 @@ const naughtyGnomes = gnomes.filter((gnomes) => gnomes.category === 'Naughty');
 //Query Selectors for HTML nodes that are in index.html on page load
 
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
+const shopSection = document.querySelector('#shopSection');
 const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
+const navCartIcons = document.querySelector('#navCartIcons');
+const shoppingCartSection = document.querySelector('#shoppingCartSection');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 
 //querySelectors for the Shop filter section and filters
@@ -280,8 +282,10 @@ const categoryFilterRadios = document.querySelectorAll(
 const maxPriceSlider = document.querySelector('#maxPriceSlider');
 const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
 
+let visibleSection = shopSection;
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
+  visibleSection = shopSection;
   gnomeListContainer.innerHTML = '';
   for (let i = 0; i < gnomes.length; i++) {
     //if statement to make sure only items that passed the filter check are displayed. All items pass at page load
@@ -295,16 +299,28 @@ gnomeListContainerGenerator();
 
 //*************START of all functions for MULTIPLE SECTIONS */
 
+//Event listener for the shopping cart icon:
+navCartIcons.addEventListener('click', openCartSection);
+
+//Function for opening the shopping cart section
+function openCartSection() {
+  shoppingCartSection.classList.toggle('hidden');
+  visibleSection.classList.toggle('hidden');
+  if (!shoppingCartSection.classList.contains('hidden')) {
+    console.log('I AM OPENING!');
+  }
+}
+
 //Function to close currently opened page
 function closePage(section) {
   section.classList.remove('page-active');
   section.classList.add('hidden');
-  gnomeListContainer.classList.remove('hidden');
+  shopSection.classList.remove('hidden');
   gnomeListContainerGenerator();
 }
 
 //Function to update the Shopping Cart in the Nav
-//Can't use the gnomes awway for this, need another one because of course.....
+
 function updateNavShoppingCart() {
   itemsCounter = 0;
   let totalPrice = 0;
@@ -330,9 +346,8 @@ function updateNavShoppingCart() {
 //FIX, no need for if AND else
 function updateShoppingCartArray() {
   gnomishShoppingCart = [];
-  if (itemsCounter === 0) {
-    return;
-  } else {
+
+  if (itemsCounter > 0) {
     gnomishShoppingCart = gnomes.filter((g) => g.amount > 0);
   }
 }
@@ -580,7 +595,8 @@ function minusAmountDetails(i, activeSection) {
 
 //Function to open the pages for Individual Gnomes
 function openGnomeDetailsPage(i) {
-  gnomeListContainer.classList.add('hidden');
+  visibleSection = gnomeDetailsSection;
+  shopSection.classList.add('hidden');
   gnomeDetailsSection.classList.remove('hidden');
   gnomeDetailsSection.classList.add('page-active');
   gnomeDetailsSection.innerHTML = `
