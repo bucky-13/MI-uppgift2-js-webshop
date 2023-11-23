@@ -9,6 +9,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/knight-axe1.webp',
     img2: 'images/gnomes/knight-axe2.webp',
     imgLarge: 'images/gnomes/knight-axe1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Sword Wielding Knight Gnome',
@@ -20,6 +22,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/knight-sword1.webp',
     img2: 'images/gnomes/knight-sword2.webp',
     imgLarge: 'images/gnomes/knight-sword1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Weapon Wielding Knight Gnome',
@@ -31,6 +35,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/knight-weapon1.webp',
     img2: 'images/gnomes/knight-weapon2.webp',
     imgLarge: 'images/gnomes/knight-weapon1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Biker Gnome',
@@ -42,6 +48,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/biker1.webp',
     img2: 'images/gnomes/biker2.webp',
     imgLarge: 'images/gnomes/biker1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Gandalf the Gnome',
@@ -53,6 +61,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/gandalf1.webp',
     img2: 'images/gnomes/gandalf2.webp',
     imgLarge: 'images/gnomes/gandalf1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Go Away Gnome',
@@ -64,6 +74,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/goaway1.webp',
     img2: 'images/gnomes/goaway2.webp',
     imgLarge: 'images/gnomes/goaway1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Rainbow Gnome',
@@ -75,6 +87,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/rainbow1.webp',
     img2: 'images/gnomes/rainbow2.webp',
     imgLarge: 'images/gnomes/rainbow1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Rocking Chair Gnome',
@@ -86,6 +100,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/rocking-chair1.webp',
     img2: 'images/gnomes/rocking-chair2.webp',
     imgLarge: 'images/gnomes/rocking-chair1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Sleeping Gnome',
@@ -97,6 +113,8 @@ const gnomesDatabase = [
     img1: 'images/gnomes/sleeping1.webp',
     img2: 'images/gnomes/sleeping2.webp',
     imgLarge: 'images/gnomes/sleeping1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
   {
     name: 'Welcoming Gnome',
@@ -108,20 +126,21 @@ const gnomesDatabase = [
     img1: 'images/gnomes/welcome1.webp',
     img2: 'images/gnomes/welcome2.webp',
     imgLarge: 'images/gnomes/welcome1.webp',
+    filterCategory: true,
+    filterPrice: true,
   },
 ];
 
-//gnomes array that can be altered for page filtering etc
+//gnomes array that updates amounts etc
 let gnomes = [...gnomesDatabase];
-let gnomesFiltered = [...gnomesDatabase];
+let gnomishShoppingCart = [];
+
+let itemsCounter = 0;
 
 // filtered gnome categories
 const knightGnomes = gnomes.filter((gnomes) => gnomes.category === 'Knights');
 const chillGnomes = gnomes.filter((gnomes) => gnomes.category === 'Chill');
 const naughtyGnomes = gnomes.filter((gnomes) => gnomes.category === 'Naughty');
-
-//Array to use when applying filters to the gnome array.
-let filteredGnomesArray = gnomes;
 
 //Query Selectors for HTML nodes that are in index.html on page load
 
@@ -144,7 +163,10 @@ const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
 function gnomeListContainerGenerator() {
   gnomeListContainer.innerHTML = '';
   for (let i = 0; i < gnomes.length; i++) {
-    generateGnomeListContainer(i);
+    //if statement to make sure only items that passed the filter check are displayed. All items pass at page load
+    if (gnomes[i].filterCategory === true && gnomes[i].filterPrice === true) {
+      generateGnomeListContainer(i);
+    }
   }
 }
 
@@ -161,9 +183,9 @@ function closePage(section) {
 }
 
 //Function to update the Shopping Cart in the Nav
-
+//Can't use the gnomes awway for this, need another one because of course.....
 function updateNavShoppingCart() {
-  let itemsCounter = 0;
+  itemsCounter = 0;
   let totalPrice = 0;
   for (let i = 0; i < gnomes.length; i++) {
     if (gnomes[i].amount > 0) {
@@ -179,6 +201,19 @@ function updateNavShoppingCart() {
     navCartCounter.classList.add('hidden');
   }
   navCartSum.textContent = totalPrice;
+  updateShoppingCartArray();
+}
+
+// Function to update gnomishShopping Cart array with all products that are currently ordered.
+
+//FIX, no need for if AND else
+function updateShoppingCartArray() {
+  gnomishShoppingCart = [];
+  if (itemsCounter === 0) {
+    return;
+  } else {
+    gnomishShoppingCart = gnomes.filter((g) => g.amount > 0);
+  }
 }
 
 //*************END of all functions for MULTIPLE SECTIONS */
@@ -285,13 +320,14 @@ function toggleShopFilterContainer() {
 function updateFilterRadios(e) {
   const selectedCategory = e.currentTarget.value;
 
-  if (selectedCategory === 'all') {
-    gnomesFiltered = [...gnomesDatabase];
-  } else {
-    gnomesFiltered = [];
-    for (let i = 0; i < gnomesDatabase.length; i++) {
-      if (selectedCategory === gnomesDatabase[i].category.toLowerCase()) {
-        gnomesFiltered.push(gnomesDatabase[i]);
+  for (i = 0; i < gnomes.length; i++) {
+    if (selectedCategory === 'all') {
+      gnomes[i].filterCategory = true;
+    } else {
+      if (selectedCategory === gnomes[i].category.toLowerCase()) {
+        gnomes[i].filterCategory = true;
+      } else {
+        gnomes[i].filterCategory = false;
       }
     }
   }
@@ -302,8 +338,13 @@ function updatePriceSliderFilter() {
   let value = maxPriceSlider.value;
   maxPriceDisplay.textContent = value;
 
-  gnomes = gnomesFiltered.filter((gnome) => gnome.price <= value);
-  // gnomes = gnomesPriceFiltered;
+  for (i = 0; i < gnomes.length; i++) {
+    if (gnomes[i].price <= value) {
+      gnomes[i].filterPrice = true;
+    } else {
+      gnomes[i].filterPrice = false;
+    }
+  }
   gnomeListContainerGenerator();
 }
 
