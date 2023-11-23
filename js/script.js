@@ -5,10 +5,23 @@ const gnomesDatabase = [
     amount: 0,
     rating: 4.5,
     category: 'Knights',
-    img0: 'images/gnomes/knight-axe0.webp',
-    img1: 'images/gnomes/knight-axe1.webp',
-    img2: 'images/gnomes/knight-axe2.webp',
-    imgLarge: 'images/gnomes/knight-axe1.webp',
+
+    img0: {
+      url: 'images/gnomes/knight-axe0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/knight-axe1.webp',
+      alt: 'I am a glorious gnome 1!',
+    },
+    img2: {
+      url: 'images/gnomes/knight-axe2.webp',
+      alt: 'I am a glorious gnome 2!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/knight-axe1.webp',
+      alt: 'I am a glorious LARGE gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -18,10 +31,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 4,
     category: 'Knights',
-    img0: 'images/gnomes/knight-sword0.webp',
-    img1: 'images/gnomes/knight-sword1.webp',
-    img2: 'images/gnomes/knight-sword2.webp',
-    imgLarge: 'images/gnomes/knight-sword1.webp',
+    img0: {
+      url: 'images/gnomes/knight-sword0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/knight-sword1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/knight-sword2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/knight-sword1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -31,10 +56,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 4,
     category: 'Knights',
-    img0: 'images/gnomes/knight-weapon0.webp',
-    img1: 'images/gnomes/knight-weapon1.webp',
-    img2: 'images/gnomes/knight-weapon2.webp',
-    imgLarge: 'images/gnomes/knight-weapon1.webp',
+    img0: {
+      url: 'images/gnomes/knight-weapon0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/knight-weapon1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/knight-weapon2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/knight-weapon1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -44,10 +81,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 4,
     category: 'Naughty',
-    img0: 'images/gnomes/biker0.webp',
-    img1: 'images/gnomes/biker1.webp',
-    img2: 'images/gnomes/biker2.webp',
-    imgLarge: 'images/gnomes/biker1.webp',
+    img0: {
+      url: 'images/gnomes/biker0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/biker1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/biker2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/biker1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -57,10 +106,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 5,
     category: 'Chill',
-    img0: 'images/gnomes/gandalf0.webp',
-    img1: 'images/gnomes/gandalf1.webp',
-    img2: 'images/gnomes/gandalf2.webp',
-    imgLarge: 'images/gnomes/gandalf1.webp',
+    img0: {
+      url: 'images/gnomes/gandalf0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/gandalf1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/gandalf2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/gandalf1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -70,10 +131,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 3,
     category: 'Naughty',
-    img0: 'images/gnomes/goaway0.webp',
-    img1: 'images/gnomes/goaway1.webp',
-    img2: 'images/gnomes/goaway2.webp',
-    imgLarge: 'images/gnomes/goaway1.webp',
+    img0: {
+      url: 'images/gnomes/goaway0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/goaway1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/goaway2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/goaway1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -83,10 +156,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 4.5,
     category: 'Chill',
-    img0: 'images/gnomes/rainbow0.webp',
-    img1: 'images/gnomes/rainbow1.webp',
-    img2: 'images/gnomes/rainbow2.webp',
-    imgLarge: 'images/gnomes/rainbow1.webp',
+    img0: {
+      url: 'images/gnomes/rainbow0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/rainbow1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/rainbow2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/rainbow1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -96,10 +181,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 4,
     category: 'Chill',
-    img0: 'images/gnomes/rocking-chair0.webp',
-    img1: 'images/gnomes/rocking-chair1.webp',
-    img2: 'images/gnomes/rocking-chair2.webp',
-    imgLarge: 'images/gnomes/rocking-chair1.webp',
+    img0: {
+      url: 'images/gnomes/rocking-chair0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/rocking-chair1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/rocking-chair2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/rocking-chair1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -109,10 +206,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 3.5,
     category: 'Chill',
-    img0: 'images/gnomes/sleeping0.webp',
-    img1: 'images/gnomes/sleeping1.webp',
-    img2: 'images/gnomes/sleeping2.webp',
-    imgLarge: 'images/gnomes/sleeping1.webp',
+    img0: {
+      url: 'images/gnomes/sleeping0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/sleeping1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/sleeping2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/sleeping1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -122,10 +231,22 @@ const gnomesDatabase = [
     amount: 0,
     rating: 5,
     category: 'Chill',
-    img0: 'images/gnomes/welcome0.webp',
-    img1: 'images/gnomes/welcome1.webp',
-    img2: 'images/gnomes/welcome2.webp',
-    imgLarge: 'images/gnomes/welcome1.webp',
+    img0: {
+      url: 'images/gnomes/welcome0.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img1: {
+      url: 'images/gnomes/welcome1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    img2: {
+      url: 'images/gnomes/welcome2.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
+    imgLarge: {
+      url: 'images/gnomes/welcome1.webp',
+      alt: 'I am a glorious tiny gnome!',
+    },
     filterCategory: true,
     filterPrice: true,
   },
@@ -354,7 +475,9 @@ function generateGnomeListContainer(i) {
   gnomeListContainer.innerHTML += `
 <div class="gnome-list-item">
     <figure>
-    <img src="${gnomes[i].img0}" width="120" height="160">
+    <img src="${gnomes[i].img0.url}" width="120" height="160" alt="${
+    gnomes[i].img0.alt
+  }">
     </figure>
     <h4 class="gnomeDetailsLinkList" id="gnomeDetailsLink${i}">${
     gnomes[i].name
@@ -465,17 +588,21 @@ function openGnomeDetailsPage(i) {
             <div>
                 <figure>
                     <img src="${
-                      gnomes[i].imgLarge
+                      gnomes[i].imgLarge.url
                     }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
-                        width="500">
+                        width="500" alt="${gnomes[i].imgLarge.alt}">
                 </figure>
                 <figure class="img-thumb-container">
                     <img src="${
-                      gnomes[i].img1
-                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail">
+                      gnomes[i].img1.url
+                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail" alt="${
+    gnomes[i].img1.alt
+  }">
                     <img src="${
-                      gnomes[i].img2
-                    }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail">
+                      gnomes[i].img2.url
+                    }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail" alt="${
+    gnomes[i].img2.alt
+  }">
                 </figure>
             </div>
             <h2>${gnomes[i].name}</h2>
