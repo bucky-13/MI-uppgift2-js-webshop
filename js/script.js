@@ -270,6 +270,9 @@ const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
 const navCartIcons = document.querySelector('#navCartIcons');
 const shoppingCartSection = document.querySelector('#shoppingCartSection');
+const cartSumTotalContainer = document.querySelector('#cartSumTotalContainer');
+const shoppingCartGnomes = document.querySelector('#shoppingCartGnomes');
+const closeCartSectionBtn = document.querySelector('#closeCartSectionBtn');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
 
 //querySelectors for the Shop filter section and filters
@@ -282,10 +285,13 @@ const categoryFilterRadios = document.querySelectorAll(
 const maxPriceSlider = document.querySelector('#maxPriceSlider');
 const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
 
+let totalPrice = 0;
+
 let visibleSection = shopSection;
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
   visibleSection = shopSection;
+  shopSection.classList.remove('hidden');
   gnomeListContainer.innerHTML = '';
   for (let i = 0; i < gnomes.length; i++) {
     //if statement to make sure only items that passed the filter check are displayed. All items pass at page load
@@ -300,14 +306,107 @@ gnomeListContainerGenerator();
 //*************START of all functions for MULTIPLE SECTIONS */
 
 //Event listener for the shopping cart icon:
-navCartIcons.addEventListener('click', openCartSection);
+navCartIcons.addEventListener('click', toggleCartSection);
+
+closeCartSectionBtn.addEventListener('click', closeCartSection);
+
+function cartPlusBtnListener() {
+  const cartPlusBtnList = Array.from(document.querySelectorAll('.btnCartPlus'));
+  let gnomeIndexNo = [];
+
+  for (let i = 0; i < cartPlusBtnList.length; i++) {
+    gnomeIndexNo[i] = cartPlusBtnList[i].id.replace('btnCartPlus', '');
+    cartPlusBtnList[i].addEventListener('click', function () {
+      plusAmountDetails(gnomeIndexNo[i], openCartSection);
+    });
+  }
+}
+function cartMinusBtnListener() {
+  const cartMinusBtnList = Array.from(
+    document.querySelectorAll('.btnCartMinus')
+  );
+  let gnomeIndexNo = [];
+
+  for (let i = 0; i < cartMinusBtnList.length; i++) {
+    gnomeIndexNo[i] = cartMinusBtnList[i].id.replace('btnCartMinus', '');
+    cartMinusBtnList[i].addEventListener('click', function () {
+      minusAmountDetails(gnomeIndexNo[i], openCartSection);
+    });
+  }
+}
+function toggleCartSection() {
+  if (shoppingCartSection.classList.contains('hidden')) {
+    openCartSection();
+  } else {
+    closeCartSection();
+  }
+}
+
+function closeCartSection() {
+  shoppingCartSection.classList.add('hidden');
+  console.log(visibleSection);
+  console.log(shopSection);
+  if (visibleSection === shopSection) {
+    console.log('bajs');
+    gnomeListContainerGenerator();
+  } else {
+    visibleSection.classList.remove('hidden');
+  }
+}
 
 //Function for opening the shopping cart section
 function openCartSection() {
-  shoppingCartSection.classList.toggle('hidden');
-  visibleSection.classList.toggle('hidden');
+  shoppingCartSection.classList.remove('hidden');
+  visibleSection.classList.add('hidden');
   if (!shoppingCartSection.classList.contains('hidden')) {
-    console.log('I AM OPENING!');
+    if (totalPrice > 0) {
+      cartSumTotalContainer.innerHTML = `
+        <p>Use Code:</p>
+        <p>-100 kr</p>
+        <h4>Total Sum</h4>
+        <p id="CartSumTotalDisplay">${totalPrice} kr</p>
+        <div class="go-checkout-btn-container">
+          <button class="btn-rectangle btn-green id="goToCheckout">Go to Checkout</button>
+         </div>
+          `;
+      shoppingCartGnomes.innerHTML = '';
+      for (i = 0; i < gnomes.length; i++) {
+        if (gnomes[i].amount > 0) {
+          shoppingCartGnomes.innerHTML += `
+            <div class="shopping-cart-gnome-grid">
+              <img src="${gnomes[i].img0.url}" width="160" height="200" alt="${
+            gnomes[i].img0.alt
+          }" class="hidden">
+              <h3>${gnomes[i].name}</h3>
+              <button class="btn-circle btn-small btnRemoveItem" id="btnCartClose1">X</button>
+
+              <h4>Amount:</h4>
+              <h4>Unit price:</h4>
+              <h4>Subtotal:</h4>
+              <div class="gnome-cart-buttons-container">
+                  <button class="btn-circle btn-small btnCartMinus" id="btnCartMinus${i}">-</button>
+                  <h4>${gnomes[i].amount}</h4>
+                  <button class="btn-circle btn-small btnCartPlus" id="btnCartPlus${i}">+</button>
+              </div>
+              <div>
+                <p id="oldCartUnitPrice" class="hidden">500kr</p>
+                <p id="cartUnitPrice">${gnomes[i].price} kr</p>
+              </div>
+              <div>
+                <p id="oldCartUnitSum" class="hidden">800kr</p>
+                <p id="cartUnitSum">${gnomes[i].price * gnomes[i].amount} kr</p>
+              </div>
+          </div>
+        `;
+        }
+      }
+      cartPlusBtnListener();
+      cartMinusBtnListener();
+    } else {
+      shoppingCartGnomes.innerHTML = `
+      <h3>The gnomes have not yet found their way to your currently empty cart</h3>`;
+    }
+    updateNavShoppingCart();
   }
 }
 
@@ -323,7 +422,7 @@ function closePage(section) {
 
 function updateNavShoppingCart() {
   itemsCounter = 0;
-  let totalPrice = 0;
+  totalPrice = 0;
   for (let i = 0; i < gnomes.length; i++) {
     if (gnomes[i].amount > 0) {
       itemsCounter = itemsCounter + gnomes[i].amount;

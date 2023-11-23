@@ -108,48 +108,22 @@
 
         <section class="shopping-cart-section hidden" id="shoppingCartSection">
             <div class="shopping-cart-heading">
-                <h2>Shopping Cart</h2>
-                <button class="btn-large btn-circle">X</button>
+                <h2>Cart</h2>
+                <button class="btn-large btn-circle" id="closeCartSectionBtn">X</button>
                 <div>
                     <p>Kundsupport:</p>
                     <p>08-634 30 30</p>
                 </div>
             </div>
 
-            <div class="shopping-cart-gnomes-container" id="ShoppingCartGnomes">
+            <div class="shopping-cart-gnomes-container" id="shoppingCartGnomes">
 
-                <div class="shopping-cart-gnome-grid">
-                    <img src="images/gnomes/gandalf0.webp" width="160" height="200" alt="yes." class="hidden">
-                    <h3>Gandalf the Gnome</h3>
-                    <button class="btn-circle btn-small btnRemoveItem" id="btnCartClose1">X</button>
 
-                    <h4>Amount:</h4>
-                    <h4>Unit price:</h4>
-                    <h4>Subtotal:</h4>
-                    <div class="gnome-cart-buttons-container">
-                        <button class="btn-circle btn-small" id="btnDetailsMinus${i}">-</button>
-                        <h4>2</h4>
-                        <button class="btn-circle btn-small" id="btnDetailsPlus${i}">+</button>
-                    </div>
-                    <div>
-                        <p id="oldCartUnitPrice" class="hidden">500kr</p>
-                        <p id="cartUnitPrice">400 kr</p>
-                    </div>
-                    <div>
-                        <p id="oldCartUnitSum" class="hidden">800kr</p>
-                        <p id="cartUnitSum">800kr</p>
-                    </div>
-                </div>
 
             </div>
 
             <div id="cartSumTotalContainer" class="cartTotalGrid">
-                <p>Use Code:</p>
-                <p>-100 kr</p>
-                <h4>Total Sum</h4>
-                <p id="CartSumTotalDisplay">400 kr</p>
-                <div class="go-checkout-btn-container"><button class="btn-rectangle btn-green" id="goToCheckout">Go to
-                        Checkout</button></div>
+
             </div>
 
         </section>
@@ -248,11 +222,7 @@
                 </div>
             </form>
         </section>
-
     </main>
-
-
-
     <script src="js/script.js"></script>
 </body>
 
