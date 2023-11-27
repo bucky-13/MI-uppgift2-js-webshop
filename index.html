@@ -133,37 +133,37 @@
                 <h2>Customer Information:</h2>
                 <label class="form-input-bar">
                     <span>First Name:</span>
-                    <input class="user-input" type="text">
+                    <input id="inputFirstName" class="user-input required" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
                 <label class="form-input-bar">
                     <span>Last Name:</span>
-                    <input class="user-input" type="text">
+                    <input id="inputLastName" class="user-input required" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
                 <label class="form-input-bar">
                     <span>Address:</span>
-                    <input class="user-input" type="text">
+                    <input id="inputAddress" class="user-input required" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
                 <label class="form-input-bar">
                     <span>Post number:</span>
-                    <input class="user-input" type="number">
+                    <input id="inputPostNum" class="user-input required" type="number">
                     <div class="form-error-msg hidden">error</div>
                 </label>
                 <label class="form-input-bar">
                     <span>City:</span>
-                    <input class="user-input" type="text">
+                    <input id="inputCity" class="user-input required" type="text">
                     <div class="form-error-msg hidden">error</div>
                 </label>
                 <label class="form-input-bar">
                     <span>Phone nr:</span>
-                    <input class="user-input" type="tel">
+                    <input id="inputPhone" class="user-input required" type="tel">
                     <div class="form-error-msg hidden">error</div>
                 </label>
                 <label class="form-input-bar">
                     <span>Email:</span>
-                    <input class="user-input" type="email">
+                    <input id="inputEmail" class="user-input required" type="email">
                     <div class="form-error-msg hidden">error</div>
                 </label>
 
@@ -181,7 +181,7 @@
                 <div id="paymentInvoiceActive" class="hidden">
                     <label class="form-input-bar">
                         <span>Personal number:</span>
-                        <input class="user-input" type="number">
+                        <input id="inputPersonalNum" class="user-input invoiceInput" type="number">
                         <div class="form-error-msg hidden">error</div>
                     </label>
                 </div>
@@ -189,17 +189,22 @@
                     <div class=" card-payment-container">
                         <label class="form-input-bar">
                             <span>Card number:</span>
-                            <input class="user-input" type="number">
+                            <input class="user-input cardInput" type="number" id="inputCardNum">
                             <div class="form-error-msg hidden">error</div>
                         </label>
                         <label class="form-input-bar">
-                            <span>DD/YY:</span>
-                            <input class="user-input" type="number">
+                            <span>DD:</span>
+                            <input class="user-input cardInput" type="number" id="inputDD">
+                            <div class="form-error-msg hidden">error</div>
+                        </label>
+                        <label class="form-input-bar">
+                            <span>YY:</span>
+                            <input class="user-input cardInput" type="number" id="inputYY">
                             <div class="form-error-msg hidden">error</div>
                         </label>
                         <label class="form-input-bar">
                             <span>CVC:</span>
-                            <input class="user-input" type="number">
+                            <input class="user-input cardInput" type="number" id="inputCVC">
                             <div class="form-error-msg hidden">error</div>
                         </label>
                     </div>
@@ -207,7 +212,7 @@
 
                 <div class="checkbox-container">
                     <label>
-                        <input type="checkbox" id="agreePersonalInfo" class="user-input">
+                        <input type="checkbox" id="inputAgreePersonalInfo" class="user-input required">
                         <span>I agree to share personal information</span>
                         <div class="form-error-msg hidden">error</div>
                     </label>

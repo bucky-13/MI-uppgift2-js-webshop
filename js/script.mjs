@@ -1,4 +1,5 @@
 import gnomesDatabase from './database.mjs';
+import formValidation from './formValidation.mjs';
 
 //gnomes array that updates amounts etc
 let gnomes = [...gnomesDatabase];
@@ -40,6 +41,8 @@ const paymentInvoiceActive = document.querySelector('#paymentInvoiceActive');
 const paymentCardActive = document.querySelector('#paymentCardActive');
 const submitOrderBtn = document.querySelector('#submitOrderBtn');
 const formErrorMsg = document.querySelectorAll('.form-error-msg');
+const cardInput = document.querySelectorAll('.cardInput');
+const invoiceInput = document.querySelector('.invoiceInput');
 
 let date = new Date();
 let day = date.getDay();
@@ -206,26 +209,36 @@ function invoiceChecker() {
   }
 }
 
-function toggleCardDetails() {
-  paymentCardActive.classList.remove('hidden');
-  paymentInvoiceActive.classList.add('hidden');
-}
-function toggleInvoiceDetails() {
-  paymentInvoiceActive.classList.remove('hidden');
-  paymentCardActive.classList.add('add');
-}
-
 function openCheckoutSection() {
   visibleSection = orderFormSection;
   invoiceChecker();
+  formValidation();
   shoppingCartSection.classList.add('hidden');
   orderFormSection.classList.remove('hidden');
 }
 
+function toggleCardDetails() {
+  paymentCardActive.classList.remove('hidden');
+  paymentInvoiceActive.classList.add('hidden');
+  invoiceInput.classList.remove('required');
+  for (let i = 0; i < cardInput.length; i++) {
+    cardInput[i].classList.add('required');
+  }
+  formValidation();
+}
+function toggleInvoiceDetails() {
+  paymentInvoiceActive.classList.remove('hidden');
+  paymentCardActive.classList.add('hidden');
+  invoiceInput.classList.add('required');
+  for (let i = 0; i < cardInput.length; i++) {
+    cardInput[i].classList.remove('required');
+  }
+  formValidation();
+}
 //Event listeners for the Order Form Section
 
-paymentCard.addEventListener('click', toggleCardDetails);
-paymentInvoice.addEventListener('click', toggleInvoiceDetails);
+paymentCard.addEventListener('change', toggleCardDetails);
+paymentInvoice.addEventListener('change', toggleInvoiceDetails);
 
 function goCheckoutListener() {
   const goCheckoutBtn = document.querySelector('#goToCheckout');
