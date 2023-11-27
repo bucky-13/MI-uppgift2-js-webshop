@@ -33,12 +33,12 @@ let date = new Date();
 let day = date.getDay();
 let hour = date.getHours();
 let mins = date.getMinutes();
-console.log(day);
-console.log(hour);
-console.log(mins);
+// console.log(day);
+// console.log(hour);
+// console.log(mins);
 let gnomeSumTotal = 0;
 let totalPrice = 0;
-let shippingCost = 0;
+let shippingCost = 25;
 
 let visibleSection = shopSection;
 //Generate Gnome List on page load
@@ -183,11 +183,21 @@ function unitDiscount10Plus() {
   }
 }
 
+function moreThan15GnomesTotal() {
+  if (itemsCounter >= 15) {
+    shippingCost = 0;
+  } else {
+    let shippingCostExtra = totalPrice * 0.1;
+    shippingCost = 25 + shippingCostExtra;
+  }
+}
 //Function for opening the shopping cart section
 function openCartSection() {
   shoppingCartSection.classList.remove('hidden');
   visibleSection.classList.add('hidden');
   updateNavShoppingCart();
+  generateDateVariables();
+  moreThan15GnomesTotal();
   if (!shoppingCartSection.classList.contains('hidden')) {
     if (gnomeSumTotal > 0) {
       cartSumTotalContainer.innerHTML = `
@@ -205,9 +215,10 @@ function openCartSection() {
           <button class="btn-rectangle btn-green" id="goToCheckout">Go to Checkout</button>
          </div>
           `;
-      generateDateVariables();
+
       shoppingCartGnomes.innerHTML = '';
       goCheckoutListener();
+
       for (let i = 0; i < gnomes.length; i++) {
         if (gnomes[i].amount > 0) {
           shoppingCartGnomes.innerHTML += `
