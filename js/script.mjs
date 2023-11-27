@@ -1,266 +1,9 @@
-const gnomesDatabase = [
-  {
-    name: 'Axe Wielding Knight Gnome',
-    price: 120,
-    amount: 0,
-    rating: 4.5,
-    category: 'Knights',
-
-    img0: {
-      url: 'images/gnomes/knight-axe0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/knight-axe1.webp',
-      alt: 'I am a glorious gnome 1!',
-    },
-    img2: {
-      url: 'images/gnomes/knight-axe2.webp',
-      alt: 'I am a glorious gnome 2!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/knight-axe1.webp',
-      alt: 'I am a glorious LARGE gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Sword Wielding Knight Gnome',
-    price: 120,
-    amount: 0,
-    rating: 4,
-    category: 'Knights',
-    img0: {
-      url: 'images/gnomes/knight-sword0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/knight-sword1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/knight-sword2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/knight-sword1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Weapon Wielding Knight Gnome',
-    price: 120,
-    amount: 0,
-    rating: 4,
-    category: 'Knights',
-    img0: {
-      url: 'images/gnomes/knight-weapon0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/knight-weapon1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/knight-weapon2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/knight-weapon1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Biker Gnome',
-    price: 130,
-    amount: 0,
-    rating: 4,
-    category: 'Naughty',
-    img0: {
-      url: 'images/gnomes/biker0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/biker1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/biker2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/biker1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Gandalf the Gnome',
-    price: 400,
-    amount: 0,
-    rating: 5,
-    category: 'Chill',
-    img0: {
-      url: 'images/gnomes/gandalf0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/gandalf1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/gandalf2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/gandalf1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Go Away Gnome',
-    price: 80,
-    amount: 0,
-    rating: 3,
-    category: 'Naughty',
-    img0: {
-      url: 'images/gnomes/goaway0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/goaway1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/goaway2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/goaway1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Rainbow Gnome',
-    price: 250,
-    amount: 0,
-    rating: 4.5,
-    category: 'Chill',
-    img0: {
-      url: 'images/gnomes/rainbow0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/rainbow1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/rainbow2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/rainbow1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Rocking Chair Gnome',
-    price: 190,
-    amount: 0,
-    rating: 4,
-    category: 'Chill',
-    img0: {
-      url: 'images/gnomes/rocking-chair0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/rocking-chair1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/rocking-chair2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/rocking-chair1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Sleeping Gnome',
-    price: 110,
-    amount: 0,
-    rating: 3.5,
-    category: 'Chill',
-    img0: {
-      url: 'images/gnomes/sleeping0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/sleeping1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/sleeping2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/sleeping1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-  {
-    name: 'Welcoming Gnome',
-    price: 170,
-    amount: 0,
-    rating: 5,
-    category: 'Chill',
-    img0: {
-      url: 'images/gnomes/welcome0.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img1: {
-      url: 'images/gnomes/welcome1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    img2: {
-      url: 'images/gnomes/welcome2.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    imgLarge: {
-      url: 'images/gnomes/welcome1.webp',
-      alt: 'I am a glorious tiny gnome!',
-    },
-    filterCategory: true,
-    filterPrice: true,
-  },
-];
+import gnomesDatabase from './database.mjs';
 
 //gnomes array that updates amounts etc
 let gnomes = [...gnomesDatabase];
 let gnomishShoppingCart = [];
 let itemsCounter = 0;
-
-// filtered gnome categories
-const knightGnomes = gnomes.filter((gnomes) => gnomes.category === 'Knights');
-const chillGnomes = gnomes.filter((gnomes) => gnomes.category === 'Chill');
-const naughtyGnomes = gnomes.filter((gnomes) => gnomes.category === 'Naughty');
 
 //Query Selectors for HTML nodes that are in index.html on page load
 
@@ -401,7 +144,7 @@ function openCartSection() {
           `;
       shoppingCartGnomes.innerHTML = '';
       goCheckoutListener();
-      for (i = 0; i < gnomes.length; i++) {
+      for (let i = 0; i < gnomes.length; i++) {
         if (gnomes[i].amount > 0) {
           shoppingCartGnomes.innerHTML += `
             <div class="shopping-cart-gnome-grid">
@@ -458,7 +201,7 @@ function updateNavShoppingCart() {
     if (gnomes[i].amount > 0) {
       itemsCounter = itemsCounter + gnomes[i].amount;
     }
-    gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
+    let gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
     totalPrice = totalPrice + gnomeItemPriceTotal;
   }
   if (itemsCounter > 0) {
@@ -473,7 +216,6 @@ function updateNavShoppingCart() {
 
 // Function to update gnomishShopping Cart array with all products that are currently ordered.
 
-//FIX, no need for if AND else
 function updateShoppingCartArray() {
   gnomishShoppingCart = [];
 
@@ -586,7 +328,8 @@ function toggleShopFilterContainer() {
 function updateFilterRadios(e) {
   const selectedCategory = e.currentTarget.value;
 
-  for (i = 0; i < gnomes.length; i++) {
+  for (let i = 0; i < gnomes.length; i++) {
+    console.log(i);
     if (selectedCategory === 'all') {
       gnomes[i].filterCategory = true;
     } else {
@@ -604,7 +347,7 @@ function updatePriceSliderFilter() {
   let value = maxPriceSlider.value;
   maxPriceDisplay.textContent = value;
 
-  for (i = 0; i < gnomes.length; i++) {
+  for (let i = 0; i < gnomes.length; i++) {
     if (gnomes[i].price <= value) {
       gnomes[i].filterPrice = true;
     } else {
