@@ -35,3 +35,5 @@ refactor some clunky functions
 listen to nice music (important)
 
 update the TODO list...
+
+Om kunden har beställt för totalt mer än 800 kr ska det inte gå att välja faktura som betalsätt. - Add this when doing functionality for the checkout section

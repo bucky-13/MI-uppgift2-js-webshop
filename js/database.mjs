@@ -1,7 +1,8 @@
 const gnomesDatabase = [
   {
     name: 'Axe Wielding Knight Gnome',
-    price: 120,
+    basePrice: 100,
+    price: 100,
     amount: 0,
     rating: 4.5,
     category: 'Knights',
@@ -28,6 +29,7 @@ const gnomesDatabase = [
   {
     name: 'Sword Wielding Knight Gnome',
     price: 120,
+    basePrice: 120,
     amount: 0,
     rating: 4,
     category: 'Knights',
@@ -53,6 +55,7 @@ const gnomesDatabase = [
   {
     name: 'Weapon Wielding Knight Gnome',
     price: 120,
+    basePrice: 120,
     amount: 0,
     rating: 4,
     category: 'Knights',
@@ -77,6 +80,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Biker Gnome',
+    basePrice: 130,
     price: 130,
     amount: 0,
     rating: 4,
@@ -102,6 +106,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Gandalf the Gnome',
+    basePrice: 400,
     price: 400,
     amount: 0,
     rating: 5,
@@ -127,6 +132,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Go Away Gnome',
+    basePrice: 80,
     price: 80,
     amount: 0,
     rating: 3,
@@ -152,6 +158,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Rainbow Gnome',
+    basePrice: 250,
     price: 250,
     amount: 0,
     rating: 4.5,
@@ -177,6 +184,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Rocking Chair Gnome',
+    basePrice: 190,
     price: 190,
     amount: 0,
     rating: 4,
@@ -202,6 +210,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Sleeping Gnome',
+    basePrice: 110,
     price: 110,
     amount: 0,
     rating: 3.5,
@@ -227,6 +236,7 @@ const gnomesDatabase = [
   },
   {
     name: 'Welcoming Gnome',
+    basePrice: 170,
     price: 170,
     amount: 0,
     rating: 5,

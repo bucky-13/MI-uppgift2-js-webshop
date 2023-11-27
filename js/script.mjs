@@ -29,7 +29,16 @@ const categoryFilterRadios = document.querySelectorAll(
 const maxPriceSlider = document.querySelector('#maxPriceSlider');
 const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
 
+let date = new Date();
+let day = date.getDay();
+let hour = date.getHours();
+let mins = date.getMinutes();
+console.log(day);
+console.log(hour);
+console.log(mins);
+let gnomeSumTotal = 0;
 let totalPrice = 0;
+let shippingCost = 0;
 
 let visibleSection = shopSection;
 //Generate Gnome List on page load
@@ -40,6 +49,7 @@ function gnomeListContainerGenerator() {
   for (let i = 0; i < gnomes.length; i++) {
     //if statement to make sure only items that passed the filter check are displayed. All items pass at page load
     if (gnomes[i].filterCategory === true && gnomes[i].filterPrice === true) {
+      generateDateVariables();
       generateGnomeListContainer(i);
     }
   }
@@ -126,22 +136,76 @@ function goCheckoutListener() {
   goCheckoutBtn.addEventListener('click', openCheckoutSection);
 }
 
+// Functions for dates and prices:
+
+function mondayPrices(d, h) {
+  if (d === 1 && h < 10) {
+    totalPrice = Math.round(gnomeSumTotal * 0.9);
+    const mDiscount = document.querySelectorAll('.mondayDiscount');
+    // console.log(mDiscount.target);
+    for (let i = 0; i < mDiscount.length; i++) {
+      mDiscount[i].classList.remove('hidden');
+    }
+  } else {
+    totalPrice = gnomeSumTotal;
+  }
+}
+
+function fridayPrices(d, h) {
+  if (d > 5 && h > 14) {
+    if (d < 1 && h < 3) {
+      gnomes[i].price = gnomes[i].basePrice * 1.15;
+    }
+  }
+}
+
+function generateDateVariables() {
+  date = new Date();
+  let day = date.getDay();
+  let hour = date.getHours();
+  let mins = date.getMinutes();
+
+  mondayPrices(day, hour);
+  fridayPrices(day, hour);
+}
+
+generateDateVariables();
+
+// Functions for large orders etc:
+
+function unitDiscount10Plus() {
+  for (let i = 0; i < gnomes.length; i++) {
+    if (gnomes[i].amount >= 10) {
+      gnomes[i].price = gnomes[i].basePrice * 0.9;
+    } else if (gnomes[i].amount < 10) {
+      gnomes[i].price = gnomes[i].basePrice;
+    }
+  }
+}
+
 //Function for opening the shopping cart section
 function openCartSection() {
   shoppingCartSection.classList.remove('hidden');
   visibleSection.classList.add('hidden');
   updateNavShoppingCart();
   if (!shoppingCartSection.classList.contains('hidden')) {
-    if (totalPrice > 0) {
+    if (gnomeSumTotal > 0) {
       cartSumTotalContainer.innerHTML = `
+        <p>Items total:</p>
+        <p>${gnomeSumTotal} kr</p>
         <p>Use Code:</p>
-        <p>-100 kr</p>
+        <p>0 kr</p>
+        <p class="mondayDiscount hidden">Monday Discount: -10% on the entire order!</p>
+        <p class="mondayDiscount hidden">-10%</p>
+        <p>Shipping:</p>
+        <p>${shippingCost} kr</p>
         <h4>Total Sum</h4>
-        <p id="CartSumTotalDisplay">${totalPrice} kr</p>
+        <p id="CartSumTotalDisplay">${totalPrice + shippingCost} kr</p>
         <div class="go-checkout-btn-container">
           <button class="btn-rectangle btn-green" id="goToCheckout">Go to Checkout</button>
          </div>
           `;
+      generateDateVariables();
       shoppingCartGnomes.innerHTML = '';
       goCheckoutListener();
       for (let i = 0; i < gnomes.length; i++) {
@@ -196,13 +260,13 @@ function closePage(section) {
 
 function updateNavShoppingCart() {
   itemsCounter = 0;
-  totalPrice = 0;
+  gnomeSumTotal = 0;
   for (let i = 0; i < gnomes.length; i++) {
     if (gnomes[i].amount > 0) {
       itemsCounter = itemsCounter + gnomes[i].amount;
     }
     let gnomeItemPriceTotal = gnomes[i].amount * gnomes[i].price;
-    totalPrice = totalPrice + gnomeItemPriceTotal;
+    gnomeSumTotal = gnomeSumTotal + gnomeItemPriceTotal;
   }
   if (itemsCounter > 0) {
     navCartCounter.classList.remove('hidden');
@@ -210,7 +274,7 @@ function updateNavShoppingCart() {
   } else if (itemsCounter <= 0) {
     navCartCounter.classList.add('hidden');
   }
-  navCartSum.textContent = totalPrice;
+  navCartSum.textContent = gnomeSumTotal;
   updateShoppingCartArray();
 }
 
@@ -308,14 +372,14 @@ function sortGnomes(e) {
 function plusAmountList(e) {
   const index = e.target.id.replace('btnListPlus', '');
   gnomes[index].amount++;
-
+  unitDiscount10Plus();
   gnomeListContainerGenerator();
 }
 function minusAmountList(e) {
   const index = e.target.id.replace('btnListMinus', '');
   if (gnomes[index].amount > 0) {
     gnomes[index].amount--;
-
+    unitDiscount10Plus();
     gnomeListContainerGenerator();
   }
 }
@@ -453,6 +517,7 @@ function addMinusBtn(i, activeSection) {
 
 function plusAmountDetails(i, activeSection) {
   gnomes[i].amount++;
+  unitDiscount10Plus();
 
   // Re-rendendering the Shop List section
   activeSection(i);
@@ -460,6 +525,7 @@ function plusAmountDetails(i, activeSection) {
 function minusAmountDetails(i, activeSection) {
   if (gnomes[i].amount > 0) {
     gnomes[i].amount--;
+    unitDiscount10Plus();
 
     // Re-rendendering the Shop List section
     activeSection(i);
