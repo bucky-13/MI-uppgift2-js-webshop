@@ -17,7 +17,6 @@ const cartSumTotalContainer = document.querySelector('#cartSumTotalContainer');
 const shoppingCartGnomes = document.querySelector('#shoppingCartGnomes');
 const closeCartSectionBtn = document.querySelector('#closeCartSectionBtn');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
-const orderFormSection = document.querySelector('#orderFormSection');
 
 //querySelectors for the Shop filter section and filters
 const shopFilterContainer = document.querySelector('#shopFilterContainer');
@@ -28,6 +27,19 @@ const categoryFilterRadios = document.querySelectorAll(
 );
 const maxPriceSlider = document.querySelector('#maxPriceSlider');
 const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
+
+// Query Selectors for the Order Form Section
+const orderFormSection = document.querySelector('#orderFormSection');
+
+const paymentInvoice = document.querySelector('#paymentInvoice');
+const paymentInvoiceContainer = document.querySelector(
+  '#paymentInvoiceContainer'
+);
+const paymentCard = document.querySelector('#paymentCard');
+const paymentInvoiceActive = document.querySelector('#paymentInvoiceActive');
+const paymentCardActive = document.querySelector('#paymentCardActive');
+const submitOrderBtn = document.querySelector('#submitOrderBtn');
+const formErrorMsg = document.querySelectorAll('.form-error-msg');
 
 let date = new Date();
 let day = date.getDay();
@@ -125,17 +137,6 @@ function closeCartSection() {
   }
 }
 
-function openCheckoutSection() {
-  shoppingCartSection.classList.add('hidden');
-  orderFormSection.classList.remove('hidden');
-}
-
-function goCheckoutListener() {
-  const goCheckoutBtn = document.querySelector('#goToCheckout');
-
-  goCheckoutBtn.addEventListener('click', openCheckoutSection);
-}
-
 // Functions for dates and prices:
 
 function mondayPrices(d, h) {
@@ -191,6 +192,47 @@ function moreThan15GnomesTotal() {
     shippingCost = 25 + shippingCostExtra;
   }
 }
+
+//********************Functions for the Order Form Section
+// Order Form and Checkout are the same thing, one of them should be renamed to avoid confusion.
+
+function invoiceChecker() {
+  if (totalPrice > 800) {
+    paymentInvoiceContainer.classList.add('hidden');
+    paymentCard.checked = true;
+  } else {
+    paymentInvoiceContainer.classList.remove('hidden');
+    paymentCard.checked = false;
+  }
+}
+
+function toggleCardDetails() {
+  paymentCardActive.classList.remove('hidden');
+  paymentInvoiceActive.classList.add('hidden');
+}
+function toggleInvoiceDetails() {
+  paymentInvoiceActive.classList.remove('hidden');
+  paymentCardActive.classList.add('add');
+}
+
+function openCheckoutSection() {
+  visibleSection = orderFormSection;
+  invoiceChecker();
+  shoppingCartSection.classList.add('hidden');
+  orderFormSection.classList.remove('hidden');
+}
+
+//Event listeners for the Order Form Section
+
+paymentCard.addEventListener('click', toggleCardDetails);
+paymentInvoice.addEventListener('click', toggleInvoiceDetails);
+
+function goCheckoutListener() {
+  const goCheckoutBtn = document.querySelector('#goToCheckout');
+
+  goCheckoutBtn.addEventListener('click', openCheckoutSection);
+}
+
 //Function for opening the shopping cart section
 function openCartSection() {
   shoppingCartSection.classList.remove('hidden');

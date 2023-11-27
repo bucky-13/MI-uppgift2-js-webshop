@@ -168,8 +168,8 @@
                 </label>
 
                 <h4>Method of Payment:</h4>
-                <label>
-                    <input class="user-input" id="paymentInvoice" type="radio" name="paymentMethod">
+                <label id="paymentInvoiceContainer">
+                    <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
                     <span>Invoice</span>
                 </label>
 
@@ -185,8 +185,8 @@
                         <div class="form-error-msg hidden">error</div>
                     </label>
                 </div>
-                <div class="hidden">
-                    <div id="paymentCardActive" class=" card-payment-container">
+                <div class="hidden" id="paymentCardActive">
+                    <div class=" card-payment-container">
                         <label class="form-input-bar">
                             <span>Card number:</span>
                             <input class="user-input" type="number">
@@ -218,7 +218,7 @@
                 </div>
                 <div class="form-buttons-container">
                     <input type="reset" value="Reset Form" class="btn-rectangle btn-red">
-                    <input type="submit" value="Place Order" class="btn-rectangle btn-green">
+                    <input type="submit" value="Place Order" class="btn-rectangle btn-green" id="submitOrderBtn">
                 </div>
             </form>
         </section>
