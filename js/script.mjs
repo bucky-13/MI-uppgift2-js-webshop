@@ -224,16 +224,10 @@ function updatedSubmitOrderBtnListener(e) {
     );
     totalPrice = 0;
     shippingCost = 25;
-    console.table(gnomes);
     gnomes = [...gnomesDatabase];
-    console.table(gnomes);
-    console.table(gnomesDatabase);
-    console.log(totalPrice);
-    console.log(shippingCost);
+
     updateNavShoppingCart();
     visibleSection = shopSection;
-
-    // console.log('I AM NOT DISABLED');
   } else {
     //Letting this one stay here, at least for now. If I implement the changes to only validate the form on submit this will be needed.
     console.log('DISABLED');
