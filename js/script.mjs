@@ -221,19 +221,19 @@ function toggleCardDetails() {
   paymentCardActive.classList.remove('hidden');
   paymentInvoiceActive.classList.add('hidden');
   invoiceInput.classList.remove('required');
+  formValidation();
   for (let i = 0; i < cardInput.length; i++) {
     cardInput[i].classList.add('required');
   }
-  formValidation();
 }
 function toggleInvoiceDetails() {
   paymentInvoiceActive.classList.remove('hidden');
   paymentCardActive.classList.add('hidden');
   invoiceInput.classList.add('required');
+  formValidation();
   for (let i = 0; i < cardInput.length; i++) {
     cardInput[i].classList.remove('required');
   }
-  formValidation();
 }
 //Event listeners for the Order Form Section
 
