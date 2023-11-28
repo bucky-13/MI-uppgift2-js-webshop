@@ -17,7 +17,8 @@ body {
   .gnome-details-section.hidden,
   .gnome-list-container.hidden,
   .shopping-cart-section.hidden,
-  .shop-section.hidden {
+  .shop-section.hidden,
+  .confirmation-section.hidden {
     display: none;
   }
 
@@ -345,6 +346,56 @@ body {
         .form-buttons-container {
           display: flex;
           justify-content: space-around;
+        }
+      }
+    }
+
+    .confirmation-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 80px);
+      h2 {
+        color: $color-primary;
+      }
+      .delivery-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .ordered-items-list {
+        border-top: 1px solid $color-primary;
+        width: 100%;
+        .ordered-item {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(3, 40px);
+          gap: 15px;
+          border-bottom: 1px solid $color-primary;
+
+          padding: 1rem 0;
+          img {
+            grid-row: 1 / span 3;
+          }
+          h3 {
+            grid-column: 2 / span 3;
+          }
+          p {
+            line-height: 0;
+          }
+        }
+      }
+      .confirmation-sum {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 40px);
+        gap: 15px;
+        width: 100%;
+
+        p {
+          grid-column: 4 / span 1;
         }
       }
     }
