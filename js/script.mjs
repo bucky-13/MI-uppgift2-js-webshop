@@ -1,5 +1,6 @@
 import gnomesDatabase from './database.mjs';
-import formValidation from './formValidation.mjs';
+import formEventListener from './formValidation.mjs';
+import displayConfirmationSection from './displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
 let gnomes = [...gnomesDatabase];
@@ -45,12 +46,7 @@ const cardInput = document.querySelectorAll('.cardInput');
 const invoiceInput = document.querySelector('.invoiceInput');
 
 let date = new Date();
-let day = date.getDay();
-let hour = date.getHours();
-let mins = date.getMinutes();
-// console.log(day);
-// console.log(hour);
-// console.log(mins);
+
 let gnomeSumTotal = 0;
 let totalPrice = 0;
 let shippingCost = 25;
@@ -196,6 +192,24 @@ function moreThan15GnomesTotal() {
   }
 }
 
+//Event listener for active submit button on Order For Section
+//This is a kind of hacky solution but it does seem to work.
+
+submitOrderBtn.addEventListener('click', updatedSubmitOrderBtnListener);
+
+function updatedSubmitOrderBtnListener(e) {
+  e.preventDefault();
+  let updatedSubmitOrderBtn = document.querySelector('#submitOrderBtn');
+  if (!updatedSubmitOrderBtn.hasAttribute('disabled')) {
+    orderFormSection.classList.add('hidden');
+    displayConfirmationSection(gnomes, totalPrice, shippingCost, gnomeSumTotal);
+    // console.log('I AM NOT DISABLED');
+  } else {
+    //Letting this one stay here, at least for now. If I implement the changes to only validate the form on submit this will be useful.
+    console.log('DISABLED');
+  }
+}
+
 //********************Functions for the Order Form Section
 // Order Form and Checkout are the same thing, one of them should be renamed to avoid confusion.
 
@@ -212,7 +226,7 @@ function invoiceChecker() {
 function openCheckoutSection() {
   visibleSection = orderFormSection;
   invoiceChecker();
-  formValidation();
+  formEventListener();
   shoppingCartSection.classList.add('hidden');
   orderFormSection.classList.remove('hidden');
 }
@@ -221,7 +235,7 @@ function toggleCardDetails() {
   paymentCardActive.classList.remove('hidden');
   paymentInvoiceActive.classList.add('hidden');
   invoiceInput.classList.remove('required');
-  formValidation();
+  formEventListener();
   for (let i = 0; i < cardInput.length; i++) {
     cardInput[i].classList.add('required');
   }
@@ -230,7 +244,7 @@ function toggleInvoiceDetails() {
   paymentInvoiceActive.classList.remove('hidden');
   paymentCardActive.classList.add('hidden');
   invoiceInput.classList.add('required');
-  formValidation();
+  formEventListener();
   for (let i = 0; i < cardInput.length; i++) {
     cardInput[i].classList.remove('required');
   }

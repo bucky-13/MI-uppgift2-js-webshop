@@ -51,7 +51,7 @@ function isCardNumValid() {
 }
 
 //Validation function, to be updated to provide visual feedback, console logs are placeholders for that. Consider changing it to only trigger on submit instead to avoid visual feedback being annoying while filling in the form. Or add visual feedback only once submitting with another function. could add class "error" on submit that gets removed if a field passes in this checker.
-function formValidation(e) {
+function formValidation() {
   submitOrderBtn.setAttribute('disabled', '');
 
   //Standard inputs which are always required.
@@ -130,6 +130,8 @@ function formValidation(e) {
 
   //Activating the Submit button if ALL the required checks are passed.
   submitOrderBtn.removeAttribute('disabled');
+  let confirmBtnActive = document.querySelector('#submitOrderBtn');
+  console.log(confirmBtnActive.hasAttribute('disabled'));
   console.log('success');
 }
 

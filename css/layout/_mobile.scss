@@ -394,7 +394,10 @@ body {
         gap: 15px;
         width: 100%;
 
-        p {
+        p:nth-child(odd) {
+          grid-column: 2 / span 1;
+        }
+        p:nth-child(even) {
           grid-column: 4 / span 1;
         }
       }
