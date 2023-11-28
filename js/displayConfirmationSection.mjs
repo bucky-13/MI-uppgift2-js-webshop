@@ -1,11 +1,6 @@
 const confirmationSection = document.querySelector('#confirmationSection');
 
-function displayConfirmationSection(
-  gnomes,
-  totalPrice,
-  shippingCost,
-  gnomeSumTotal
-) {
+function displayConfirmationSection(gnomes, totalPrice, shippingCost) {
   confirmationSection.classList.remove('hidden');
   confirmationSection.innerHTML = `
     <h2>Order successful!</h2>
@@ -18,7 +13,7 @@ function displayConfirmationSection(
     </div>
     <div id="confirmationSum" class="confirmation-sum">
     <p>Items total</p> 
-    <p>${gnomeSumTotal} kr</p>
+    <p>${totalPrice} kr</p>
     <p>Shipping Cost</p> 
     <p>${shippingCost} kr</p>
     <p>Total Sum:</p>

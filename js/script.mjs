@@ -3,10 +3,12 @@ import formEventListener from './formValidation.mjs';
 import displayConfirmationSection from './displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
-let gnomes = [...gnomesDatabase];
+// let gnomes = [...gnomesDatabase];
+let gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
 let gnomishShoppingCart = [];
 let itemsCounter = 0;
 
+console.log(gnomes === gnomesDatabase);
 //Query Selectors for HTML nodes that are in index.html on page load
 
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
@@ -202,10 +204,38 @@ function updatedSubmitOrderBtnListener(e) {
   let updatedSubmitOrderBtn = document.querySelector('#submitOrderBtn');
   if (!updatedSubmitOrderBtn.hasAttribute('disabled')) {
     orderFormSection.classList.add('hidden');
-    displayConfirmationSection(gnomes, totalPrice, shippingCost, gnomeSumTotal);
+    //adding all information needed to a new array for the confirmation page
+
+    const totalPriceConfirmed = totalPrice;
+    const shippingCostConfirmed = shippingCost;
+    let orderedGnomes = [];
+    for (let i = 0; i < gnomes.length; i++) {
+      if (gnomes[i].amount > 0) {
+        orderedGnomes.push(gnomes[i]);
+      }
+    }
+
+    //emptying all information for the order that was just shipped
+
+    displayConfirmationSection(
+      orderedGnomes,
+      totalPriceConfirmed,
+      shippingCostConfirmed
+    );
+    totalPrice = 0;
+    shippingCost = 25;
+    console.table(gnomes);
+    gnomes = [...gnomesDatabase];
+    console.table(gnomes);
+    console.table(gnomesDatabase);
+    console.log(totalPrice);
+    console.log(shippingCost);
+    updateNavShoppingCart();
+    visibleSection = shopSection;
+
     // console.log('I AM NOT DISABLED');
   } else {
-    //Letting this one stay here, at least for now. If I implement the changes to only validate the form on submit this will be useful.
+    //Letting this one stay here, at least for now. If I implement the changes to only validate the form on submit this will be needed.
     console.log('DISABLED');
   }
 }
@@ -256,7 +286,6 @@ paymentInvoice.addEventListener('change', toggleInvoiceDetails);
 
 function goCheckoutListener() {
   const goCheckoutBtn = document.querySelector('#goToCheckout');
-
   goCheckoutBtn.addEventListener('click', openCheckoutSection);
 }
 
