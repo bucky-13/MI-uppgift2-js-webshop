@@ -15,7 +15,7 @@
 <body>
 
     <nav>
-        <h1 class="gottfrid-logo">Gottfrids <span class="gnomes-span">Garden Gnomes</span></h1>
+        <h1 class="gottfrid-logo" id="gottfridLogo">Gottfrids <span class="gnomes-span">Garden Gnomes</span></h1>
 
         <figure id="navCartIcons">
             <img class="nav-cart" src="images/icons/Shopping-cart.svg">
@@ -129,9 +129,12 @@
 
         </section>
         <section class="order-form-section hidden" id="orderFormSection">
-            <form>
+            <form id="customerInfoForm">
 
                 <h2>Customer Information:</h2>
+                <div class="too-slow-info hidden" id="tooSlowInfo">
+                    <h3>You've taken too much time to fill in the form, please be faster than 15 minutes next time.</h3>
+                </div>
                 <label class="form-input-bar">
                     <span>First Name:</span>
                     <input id="inputFirstName" class="user-input required" type="text">

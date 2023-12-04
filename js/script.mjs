@@ -1,5 +1,6 @@
 import gnomesDatabase from './database.mjs';
 import formEventListener from './formValidation.mjs';
+import formTimer from './formTimer.mjs';
 import displayConfirmationSection from './displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
@@ -8,11 +9,11 @@ let gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
 let gnomishShoppingCart = [];
 let itemsCounter = 0;
 
-console.log(gnomes === gnomesDatabase);
 //Query Selectors for HTML nodes that are in index.html on page load
 
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
 const shopSection = document.querySelector('#shopSection');
+const gottfridLogo = document.querySelector('#gottfridLogo');
 const navCartCounter = document.querySelector('#navCartCounter');
 const navCartSum = document.querySelector('#navCartSum');
 const navCartIcons = document.querySelector('#navCartIcons');
@@ -102,10 +103,18 @@ function cartMinusBtnListener() {
   }
 }
 
+function openGnomeList() {
+  visibleSection.classList.add('hidden');
+  shoppingCartSection.classList.add('hidden');
+  gnomeListContainerGenerator();
+}
+
 function removeCartItem(i) {
   gnomes[i].amount = 0;
   openCartSection();
 }
+
+gottfridLogo.addEventListener('click', openGnomeList);
 
 function removeItemCartListener() {
   const cartRemoveList = Array.from(
@@ -133,6 +142,9 @@ function closeCartSection() {
   shoppingCartSection.classList.add('hidden');
   if (visibleSection === shopSection) {
     gnomeListContainerGenerator();
+  } else if (visibleSection === orderFormSection) {
+    visibleSection.classList.remove('hidden');
+    formTimer();
   } else {
     visibleSection.classList.remove('hidden');
   }
@@ -250,6 +262,7 @@ function invoiceChecker() {
 function openCheckoutSection() {
   visibleSection = orderFormSection;
   invoiceChecker();
+  formTimer();
   formEventListener();
   shoppingCartSection.classList.add('hidden');
   orderFormSection.classList.remove('hidden');

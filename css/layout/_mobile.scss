@@ -46,6 +46,7 @@ body {
       font-weight: 900;
       text-transform: uppercase;
       font-size: 1.55rem;
+      cursor: pointer;
       .gnomes-span {
         margin-top: -0.3rem;
         margin-left: 0.1rem;
@@ -56,6 +57,7 @@ body {
     }
     figure {
       position: relative;
+      cursor: pointer;
       .cart-counter {
         background-color: $color-primary;
         position: absolute;
@@ -314,6 +316,10 @@ body {
       form {
         display: flex;
         flex-direction: column;
+
+        .too-slow-info {
+          color: red;
+        }
         .form-input-bar {
           display: flex;
           flex-direction: column;
