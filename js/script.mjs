@@ -201,14 +201,26 @@ function fridayPrices(d, h) {
   }
 }
 
+//function to enable the fancy Christmas theme for the website.
+function christmasTheme(d, m) {
+  if (d === 24 && m === 12) {
+    document.body.classList.add('christmas');
+  } else {
+    if (document.body.classList.contains('christmas')) {
+      document.body.classList.remove('christmas');
+    }
+  }
+}
+
 function generateDateVariables() {
   date = new Date();
   let day = date.getDay();
   let hour = date.getHours();
-  let mins = date.getMinutes();
+  let month = date.getMonth();
 
   mondayPrices(day, hour);
   fridayPrices(day, hour);
+  christmasTheme(day, month);
 }
 
 generateDateVariables();
@@ -328,15 +340,17 @@ function openCartSection() {
     if (gnomeSumTotal > 0) {
       cartSumTotalContainer.innerHTML = `
         <p>Items total:</p>
-        <p>${gnomeSumTotal} kr</p>
+        <p class="price-display">${gnomeSumTotal} kr</p>
         <p>Use Code:</p>
         <p>0 kr</p>
         <p class="mondayDiscount hidden">Monday Discount: -10% on the entire order!</p>
         <p class="mondayDiscount hidden">-10%</p>
         <p>Shipping:</p>
-        <p>${shippingCost} kr</p>
+        <p class="price-display">${shippingCost} kr</p>
         <h4>Total Sum</h4>
-        <p id="CartSumTotalDisplay">${totalPrice + shippingCost} kr</p>
+        <p id="CartSumTotalDisplay" class="price-display">${
+          totalPrice + shippingCost
+        } kr</p>
         <div class="go-checkout-btn-container">
           <button class="btn-rectangle btn-green" id="goToCheckout">Go to Checkout</button>
          </div>
@@ -356,7 +370,7 @@ function openCartSection() {
               <button class="btn-circle btn-small btnRemoveItem" id="btnRemoveItem${i}">X</button>
 
               <h4>Amount:</h4>
-              <h4>Unit price:</h4>
+              <h4 >Unit price:</h4>
               <h4>Subtotal:</h4>
               <div class="gnome-cart-buttons-container">
                   <button class="btn-circle btn-small btnCartMinus" id="btnCartMinus${i}">-</button>
@@ -365,11 +379,15 @@ function openCartSection() {
               </div>
               <div>
                 <p id="oldCartUnitPrice" class="hidden">500kr</p>
-                <p id="cartUnitPrice">${gnomes[i].price} kr</p>
+                <p id="cartUnitPrice" class="price-display">${
+                  gnomes[i].price
+                } kr</p>
               </div>
               <div>
                 <p id="oldCartUnitSum" class="hidden">800kr</p>
-                <p id="cartUnitSum">${gnomes[i].price * gnomes[i].amount} kr</p>
+                <p id="cartUnitSum" class="price-display">${
+                  gnomes[i].price * gnomes[i].amount
+                } kr</p>
               </div>
           </div>
         `;
@@ -574,12 +592,12 @@ function generateGnomeListContainer(i) {
   }</h4>
 
     <div class="amount-to-order">
-        <p>${gnomes[i].price} kr / st</p>
+        <p class="price-display">${gnomes[i].price} kr / st</p>
         <button class="btn-circle btn-small minusBtnList" id="btnListMinus${i}">-</button>
         <button class="btn-circle btn-small plusBtnList" id="btnListPlus${i}">+</button>
         <p id="amountList${i}">${gnomes[i].amount} st</p>
     </div>
-    <p>${gnomes[i].amount * gnomes[i].price} kr</p>
+    <p class="price-display">${gnomes[i].amount * gnomes[i].price} kr</p>
         <figure class="star-rating">
             <img src="images/icons/star-filled.png" width="24px">
             ${gnomes[i].rating}
@@ -699,14 +717,16 @@ function openGnomeDetailsPage(i) {
                 </figure>
             </div>
             <h2>${gnomes[i].name}</h2>
-            <p class="item-price">${gnomes[i].price} kr/st</p>
+            <p class="item-price price-display">${gnomes[i].price} kr/st</p>
             <div class="gnome-buttons-container">
                 <button class="btn-circle btn-large" id="btnDetailsMinus${i}">-</button>
                 <h4>${gnomes[i].amount}</h4>
                 <button class="btn-circle btn-large" id="btnDetailsPlus${i}">+</button>
             </div>
 
-            <h3>Totalt: ${gnomes[i].amount * gnomes[i].price} kr</h3>
+            <h3 class="price-display">Total: ${
+              gnomes[i].amount * gnomes[i].price
+            } kr</h3>
   `;
 
   //Arguments added so the plus/minus function can be reused for the shopping cart section later on and maybe merged with the main list plus/minus functions,

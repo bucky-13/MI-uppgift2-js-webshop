@@ -11,6 +11,21 @@ body {
   }
 }
 
+body.christmas {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    url(/images/gnomes/christmas-gnome.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+
+  .price-display {
+    color: red;
+  }
+}
+
 .btn-circle {
   background-color: $color-black;
   color: $color-light;

@@ -13,11 +13,11 @@ function displayConfirmationSection(gnomes, totalPrice, shippingCost) {
     </div>
     <div id="confirmationSum" class="confirmation-sum">
     <p>Items total</p> 
-    <p>${totalPrice} kr</p>
+    <p class="price-display">${totalPrice} kr</p>
     <p>Shipping Cost</p> 
-    <p>${shippingCost} kr</p>
+    <p class="price-display">${shippingCost} kr</p>
     <p>Total Sum:</p>
-    <p>${totalPrice + shippingCost} kr</p>
+    <p class="price-display">${totalPrice + shippingCost} kr</p>
     </div>
     `;
   const orderedItemsList = document.querySelector('#orderedItemsList');
@@ -33,8 +33,10 @@ function displayConfirmationSection(gnomes, totalPrice, shippingCost) {
                     <p>Price piece:</p>
                     <p>Price total:</p>
                     <p>${gnomes[i].amount} st</p>
-                    <p>${gnomes[i].price} kr</p>
-                    <p>${gnomes[i].price * gnomes[i].amount} kr</p>
+                    <p class="price-display">${gnomes[i].price} kr</p>
+                    <p class="price-display">${
+                      gnomes[i].price * gnomes[i].amount
+                    } kr</p>
                 </div>
           `;
     }
