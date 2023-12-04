@@ -136,42 +136,67 @@
                     <h3>You've taken too much time to fill in the form, please be faster than 15 minutes next time.</h3>
                 </div>
                 <label class="form-input-bar">
-                    <span>First Name:</span>
+                    <div>
+                        <span>First Name: </span>
+                        <span class="form-error-msg hidden">* Invalid Name</span>
+                    </div>
                     <input id="inputFirstName" class="user-input required" type="text">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
                 <label class="form-input-bar">
-                    <span>Last Name:</span>
+                    <div>
+                        <span>Last Name: </span>
+                        <span class="form-error-msg hidden">* Invalid Name</span>
+                    </div>
+
                     <input id="inputLastName" class="user-input required" type="text">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
                 <label class="form-input-bar">
-                    <span>Address:</span>
+                    <div>
+                        <span>Address: </span>
+                        <span class="form-error-msg hidden">* Invalid Address</span>
+                    </div>
+
                     <input id="inputAddress" class="user-input required" type="text">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
                 <label class="form-input-bar">
-                    <span>Post number:</span>
+                    <div>
+                        <span>Post number: </span>
+                        <span class="form-error-msg hidden">* Invalid Post Number</span>
+                    </div>
+
                     <input id="inputPostNum" class="user-input required" type="number">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
                 <label class="form-input-bar">
-                    <span>City:</span>
+                    <div>
+                        <span>City: </span>
+                        <span class="form-error-msg ">* Invalid City Name</span>
+                    </div>
                     <input id="inputCity" class="user-input required" type="text">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
                 <label class="form-input-bar">
-                    <span>Phone nr:</span>
+                    <div>
+                        <span>Phone nr: </span>
+                        <span class="form-error-msg hidden">* Invalid Phone Number</span>
+                    </div>
+
                     <input id="inputPhone" class="user-input required" type="tel">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
                 <label class="form-input-bar">
-                    <span>Email:</span>
+                    <div>
+                        <span>Email: </span>
+                        <span class="form-error-msg hidden">* Invalid Email</span>
+                    </div>
                     <input id="inputEmail" class="user-input required" type="email">
-                    <div class="form-error-msg hidden">error</div>
+
                 </label>
 
-                <h4>Method of Payment:</h4>
+                <h4>Method of Payment: </h4>
                 <label id="paymentInvoiceContainer">
                     <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
                     <span>Invoice</span>
@@ -184,32 +209,51 @@
 
                 <div id="paymentInvoiceActive" class="hidden">
                     <label class="form-input-bar">
-                        <span>Personal number:</span>
+                        <div>
+                            <span>Personal number: </span>
+                            <span class="form-error-msg hidden">* Invalid Personal Number</span>
+                        </div>
                         <input id="inputPersonalNum" class="user-input invoiceInput" type="number">
-                        <div class="form-error-msg hidden">error</div>
+
                     </label>
                 </div>
                 <div class="hidden" id="paymentCardActive">
                     <div class=" card-payment-container">
                         <label class="form-input-bar">
-                            <span>Card number:</span>
+                            <div>
+                                <span>Card number: </span>
+                                <span class="form-error-msg hidden">* Invalid Card Number</span>
+                            </div>
+
                             <input class="user-input cardInput" type="number" id="inputCardNum">
-                            <div class="form-error-msg hidden">error</div>
+
                         </label>
                         <label class="form-input-bar">
-                            <span>MM:</span>
+                            <div>
+                                <span>MM: </span>
+                                <span class="form-error-msg hidden">* Invalid Month</span>
+                            </div>
+
                             <input class="user-input cardInput" type="number" id="inputMM">
-                            <div class="form-error-msg hidden">error</div>
+
                         </label>
                         <label class="form-input-bar">
-                            <span>YY:</span>
+                            <div>
+                                <span>YY: </span>
+                                <span class="form-error-msg hidden">* Invalid Year</span>
+                            </div>
+
                             <input class="user-input cardInput" type="number" id="inputYY">
-                            <div class="form-error-msg hidden">error</div>
+
                         </label>
                         <label class="form-input-bar">
-                            <span>CVC:</span>
+                            <div>
+                                <span>CVC: </span>
+                                <span class="form-error-msg hidden">Invalid CVC Code</span>
+                            </div>
+
                             <input class="user-input cardInput" type="number" id="inputCVC">
-                            <div class="form-error-msg hidden">error</div>
+
                         </label>
                     </div>
                 </div>
