@@ -1,6 +1,7 @@
 import gnomesDatabase from './database.mjs';
 import formEventListener from './formValidation.mjs';
 import formTimer from './formTimer.mjs';
+import unitDiscount10Plus from './priceModifiers/unitDiscount10plus.mjs';
 import displayConfirmationSection from './displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
@@ -51,13 +52,33 @@ const invoiceInput = document.querySelector('.invoiceInput');
 
 let date = new Date();
 
+//this is the total sum of the gnomes in the shopping cart
 let gnomeSumTotal = 0;
+//total price after adding discounts to gnomeSumTotal
 let totalPrice = 0;
+//Cost of shipping
 let shippingCost = 25;
+//final price after adding shipping cost to totalPrice. This will be set to 0 if a special coupon is used.
+let finalPrice = 0;
 
 let visibleSection = shopSection;
+
+//adding a "lucia gnome" if it's 13th of december
+function addLuciaGnome() {
+  date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth();
+
+  if (month === 12 && day === 13) {
+    gnomes[4].amount = 1;
+  }
+}
+
+addLuciaGnome();
+
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
+  generateDateVariables();
   visibleSection = shopSection;
   shopSection.classList.remove('hidden');
   gnomeListContainer.innerHTML = '';
@@ -194,16 +215,6 @@ generateDateVariables();
 
 // Functions for large orders etc:
 
-function unitDiscount10Plus() {
-  for (let i = 0; i < gnomes.length; i++) {
-    if (gnomes[i].amount >= 10) {
-      gnomes[i].price = gnomes[i].basePrice * 0.9;
-    } else if (gnomes[i].amount < 10) {
-      gnomes[i].price = gnomes[i].basePrice;
-    }
-  }
-}
-
 function moreThan15GnomesTotal() {
   if (itemsCounter >= 15) {
     shippingCost = 0;
@@ -307,6 +318,7 @@ function goCheckoutListener() {
 
 //Function for opening the shopping cart section
 function openCartSection() {
+  generateDateVariables();
   shoppingCartSection.classList.remove('hidden');
   visibleSection.classList.add('hidden');
   updateNavShoppingCart();
@@ -498,14 +510,14 @@ function sortGnomes(e) {
 function plusAmountList(e) {
   const index = e.target.id.replace('btnListPlus', '');
   gnomes[index].amount++;
-  unitDiscount10Plus();
+  unitDiscount10Plus(gnomes);
   gnomeListContainerGenerator();
 }
 function minusAmountList(e) {
   const index = e.target.id.replace('btnListMinus', '');
   if (gnomes[index].amount > 0) {
     gnomes[index].amount--;
-    unitDiscount10Plus();
+    unitDiscount10Plus(gnomes);
     gnomeListContainerGenerator();
   }
 }
@@ -643,7 +655,7 @@ function addMinusBtn(i, activeSection) {
 
 function plusAmountDetails(i, activeSection) {
   gnomes[i].amount++;
-  unitDiscount10Plus();
+  unitDiscount10Plus(gnomes);
 
   // Re-rendendering the Shop List section
   activeSection(i);
@@ -651,7 +663,7 @@ function plusAmountDetails(i, activeSection) {
 function minusAmountDetails(i, activeSection) {
   if (gnomes[i].amount > 0) {
     gnomes[i].amount--;
-    unitDiscount10Plus();
+    unitDiscount10Plus(gnomes);
 
     // Re-rendendering the Shop List section
     activeSection(i);
