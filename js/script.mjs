@@ -22,6 +22,7 @@ const cartSumTotalContainer = document.querySelector('#cartSumTotalContainer');
 const shoppingCartGnomes = document.querySelector('#shoppingCartGnomes');
 const closeCartSectionBtn = document.querySelector('#closeCartSectionBtn');
 const gnomeDetailsSection = document.querySelector('#gnomeDetailsSection');
+const confirmationSection = document.querySelector('#confirmationSection');
 
 //querySelectors for the Shop filter section and filters
 const shopFilterContainer = document.querySelector('#shopFilterContainer');
@@ -60,6 +61,9 @@ function gnomeListContainerGenerator() {
   visibleSection = shopSection;
   shopSection.classList.remove('hidden');
   gnomeListContainer.innerHTML = '';
+  if (!confirmationSection.classList.contains('hidden')) {
+    confirmationSection.classList.add('hidden');
+  }
   for (let i = 0; i < gnomes.length; i++) {
     //if statement to make sure only items that passed the filter check are displayed. All items pass at page load
     if (gnomes[i].filterCategory === true && gnomes[i].filterPrice === true) {
@@ -133,6 +137,9 @@ function removeItemCartListener() {
 function toggleCartSection() {
   if (shoppingCartSection.classList.contains('hidden')) {
     openCartSection();
+    if (!confirmationSection.classList.contains('hidden')) {
+      confirmationSection.classList.add('hidden');
+    }
   } else {
     closeCartSection();
   }
@@ -234,9 +241,11 @@ function updatedSubmitOrderBtnListener(e) {
       totalPriceConfirmed,
       shippingCostConfirmed
     );
-    totalPrice = 0;
-    shippingCost = 25;
     gnomes = [...gnomesDatabase];
+    totalPrice = 0;
+    itemsCounter = 0;
+    shippingCost = 25;
+    gnomeSumTotal = 0;
 
     updateNavShoppingCart();
     visibleSection = shopSection;
@@ -358,6 +367,7 @@ function openCartSection() {
       cartMinusBtnListener();
       removeItemCartListener();
     } else {
+      cartSumTotalContainer.innerHTML = ``;
       shoppingCartGnomes.innerHTML = `
       <h3>The gnomes have not yet found their way to your currently empty cart</h3>`;
     }
