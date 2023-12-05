@@ -1,8 +1,8 @@
 import gnomesDatabase from './database.mjs';
-import formEventListener from './formValidation.mjs';
-import formTimer from './formTimer.mjs';
+import formEventListener from './formSection/formValidation.mjs';
+import formTimer from './formSection/formTimer.mjs';
 import unitDiscount10Plus from './priceModifiers/unitDiscount10plus.mjs';
-import displayConfirmationSection from './displayConfirmationSection.mjs';
+import displayConfirmationSection from './confirmationSection/displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
 // let gnomes = [...gnomesDatabase];

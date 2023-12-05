@@ -1,12 +1,16 @@
+import { deliveryTime, deliveryTimer } from './deliveryTimers.mjs';
+
 const confirmationSection = document.querySelector('#confirmationSection');
 
 function displayConfirmationSection(gnomes, totalPrice, shippingCost) {
+  deliveryTimer();
+  console.log(deliveryTime);
   confirmationSection.classList.remove('hidden');
   confirmationSection.innerHTML = `
     <h2>Order successful!</h2>
     <div class="delivery-header">
-        <h3>Estimated delivery:</h3>
-        <p>Over 9000 minutes!</p>
+        <h3>Estimated delivery time:</h3>
+        <p>${deliveryTime} minutes.</p>
     </div>
     <h3>Ordered Items:</h3>
     <div class="ordered-items-list" id="orderedItemsList">
