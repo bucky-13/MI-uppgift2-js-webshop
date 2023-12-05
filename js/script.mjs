@@ -53,7 +53,7 @@ const paymentCard = document.querySelector('#paymentCard');
 const paymentInvoiceActive = document.querySelector('#paymentInvoiceActive');
 const paymentCardActive = document.querySelector('#paymentCardActive');
 const submitOrderBtn = document.querySelector('#submitOrderBtn');
-const formErrorMsg = document.querySelectorAll('.form-error-msg');
+const resetFormAndOrder = document.querySelector('#resetFormAndOrder');
 const cardInput = document.querySelectorAll('.cardInput');
 const invoiceInput = document.querySelector('.invoiceInput');
 
@@ -295,6 +295,18 @@ function invoiceChecker() {
   }
 }
 
+function resetOrder() {
+  gnomes = [...gnomesDatabase];
+  totalPrice = 0;
+  itemsCounter = 0;
+  shippingCost = 25;
+  gnomeSumTotal = 0;
+
+  updateNavShoppingCart();
+  orderFormSection.classList.add('hidden');
+  gnomeListContainerGenerator();
+}
+
 function openCheckoutSection() {
   visibleSection = orderFormSection;
   invoiceChecker();
@@ -325,6 +337,7 @@ function toggleInvoiceDetails() {
 
 //Event listeners for the Order Form Section
 
+resetFormAndOrder.addEventListener('click', resetOrder);
 paymentCard.addEventListener('change', toggleCardDetails);
 paymentInvoice.addEventListener('change', toggleInvoiceDetails);
 

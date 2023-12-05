@@ -14,7 +14,7 @@
 
 add tablet and desktop versions of the site in css
 
-add a manual color theme toggler
+~~add a manual color theme toggler - skip this one~~
 
 check replacing png icons with svg icons
 
