@@ -34,7 +34,7 @@ function displayConfirmationSection(gnomes, totalPrice, shippingCost) {
                     }" height="150" width="150" alt="${gnomes[i].img0.alt}">
                     <h3>${gnomes[i].name}</h3>
                     <p>Amount:</p>
-                    <p>Price piece:</p>
+                    <p>Unit Price:</p>
                     <p>Price total:</p>
                     <p>${gnomes[i].amount} st</p>
                     <p class="price-display">${gnomes[i].price} kr</p>

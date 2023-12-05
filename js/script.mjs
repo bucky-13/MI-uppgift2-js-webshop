@@ -385,7 +385,7 @@ function openCartSection() {
               <button class="btn-circle btn-small btnRemoveItem" id="btnRemoveItem${i}">X</button>
 
               <h4>Amount:</h4>
-              <h4 >Unit price:</h4>
+              <h4>Unit price:</h4>
               <h4>Subtotal:</h4>
               <div class="gnome-cart-buttons-container">
                   <button class="btn-circle btn-small btnCartMinus" id="btnCartMinus${i}">-</button>
@@ -596,12 +596,12 @@ function generateGnomeListContainer(i) {
   }</h4>
 
     <div class="amount-to-order">
-        <p class="price-display">${gnomes[i].price} kr / st</p>
+        <p class="price-display">Price: ${gnomes[i].price} kr</p>
         <button class="btn-circle btn-small minusBtnList" id="btnListMinus${i}">-</button>
         <button class="btn-circle btn-small plusBtnList" id="btnListPlus${i}">+</button>
-        <p id="amountList${i}">${gnomes[i].amount} st</p>
+        <p id="amountList${i}">Qty: ${gnomes[i].amount}</p>
     </div>
-    <p class="price-display">${gnomes[i].amount * gnomes[i].price} kr</p>
+    <p class="price-display">Total: ${gnomes[i].amount * gnomes[i].price} kr</p>
         <figure class="star-rating">
             <img src="images/icons/star-filled.png" width="24px">
             ${gnomes[i].rating}
@@ -721,7 +721,7 @@ function openGnomeDetailsPage(i) {
                 </figure>
             </div>
             <h2>${gnomes[i].name}</h2>
-            <p class="item-price price-display">${gnomes[i].price} kr/st</p>
+            <p class="item-price price-display">Price: ${gnomes[i].price} kr</p>
             <div class="gnome-buttons-container">
                 <button class="btn-circle btn-large" id="btnDetailsMinus${i}">-</button>
                 <h4>${gnomes[i].amount}</h4>
