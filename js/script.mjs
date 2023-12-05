@@ -91,6 +91,7 @@ function gnomeListContainerGenerator() {
   if (!confirmationSection.classList.contains('hidden')) {
     confirmationSection.classList.add('hidden');
   }
+
   for (let i = 0; i < gnomes.length; i++) {
     //if statement to make sure only items that passed the filter check are displayed. All items pass at page load
     if (gnomes[i].filterCategory === true && gnomes[i].filterPrice === true) {
@@ -490,8 +491,10 @@ function addGnomeDetailsListener() {
     document.querySelectorAll('.gnomeDetailsLinkList')
   );
 
-  for (let i = 0; i < gnomeDetailsLinkList.length; i++) {
-    gnomeDetailsLinkList[i].addEventListener('click', () => {
+  for (let j = 0; j < gnomeDetailsLinkList.length; j++) {
+    gnomeDetailsLinkList[j].addEventListener('click', () => {
+      let i = gnomeDetailsLinkList[j].id.replace('gnomeDetailsLink', '');
+
       openGnomeDetailsPage(i);
     });
   }
@@ -596,7 +599,6 @@ function updatePriceSliderFilter() {
 
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
-  //TODO: Fix the star rating to display star images, and no text inside a figure tag
   starRatings(gnomes[i].rating);
   gnomeListContainer.innerHTML += `
 <div class="gnome-list-item">
@@ -712,6 +714,7 @@ function minusAmountDetails(i, activeSection) {
 
 //Function to open the pages for Individual Gnomes
 function openGnomeDetailsPage(i) {
+  console.log(i);
   visibleSection = gnomeDetailsSection;
   shopSection.classList.add('hidden');
   gnomeDetailsSection.classList.remove('hidden');
