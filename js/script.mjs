@@ -13,7 +13,6 @@ import {
 import displayConfirmationSection from './confirmationSection/displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
-// let gnomes = [...gnomesDatabase];
 let gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
 let itemsCounter = 0;
 
@@ -521,7 +520,8 @@ function gnomePriceSliderListeners() {
 /* Might be worth  using a duplicate 2nd array for gnomes that adds all gnome value changes so the original array isn't changed. But that will include changes to amount, img for details page etc, so maaaybe later. Not really needed for this page, but useful to consider for future projects. For now, use a 2nd array when filtering at least. */
 
 function sortGnomes(e) {
-  sortValue = e.target.value;
+  let sortValue = e.target.value;
+
   if (sortValue === 'a-z') {
     gnomes.sort((prod1, prod2) => {
       return prod1.name === prod2.name ? 0 : prod1.name < prod2.name ? -1 : 1;
@@ -535,7 +535,7 @@ function sortGnomes(e) {
   } else if (sortValue === 'price-descending') {
     gnomes.sort((prod1, prod2) => prod2.price - prod1.price);
   } else if (sortValue === 'star-rating') {
-    gnomes.sort((prod1, prod2) => prod1.rating - prod2.rating);
+    gnomes.sort((prod1, prod2) => prod2.rating - prod1.rating);
   }
   gnomeListContainerGenerator();
 }
