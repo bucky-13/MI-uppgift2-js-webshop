@@ -6,6 +6,7 @@ const inputs = [
   document.querySelector('#inputCity'),
   document.querySelector('#inputPhone'),
   document.querySelector('#inputEmail'),
+  document.querySelector('#paymentMethod'),
   document.querySelector('#inputPersonalNum'),
   document.querySelector('#inputCardNum'),
   document.querySelector('#inputMM'),
@@ -13,6 +14,26 @@ const inputs = [
   document.querySelector('#inputCVC'),
   document.querySelector('#inputAgreePersonalInfo'),
 ];
+
+const errorSpans = document.querySelectorAll('.form-error-msg');
+for (let i = 0; i < errorSpans.length; i++) {}
+// console.log(errorSpans.length);
+let formFields = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+];
+let isFormCorrect = false;
 
 const paymentCard = document.querySelector('#paymentCard');
 const paymentInvoice = document.querySelector('#paymentInvoice');
@@ -50,97 +71,82 @@ function isCardNumValid() {
   return cardNumRegEx.exec(inputCardNum.value);
 }
 
-//Validation function, to be updated to provide visual feedback, console logs are placeholders for that. Consider changing it to only trigger on submit instead to avoid visual feedback being annoying while filling in the form. Or add visual feedback only once submitting with another function. could add class "error" on submit that gets removed if a field passes in this checker.
+//Validation function that runs when submit button is clicked. First it checks if each checked field is true or false, and sends the result into the formFields array which is used to add or remove error messages. lastly it checks the entire formFields, if all checks are true, then it changes isFormCorrect to be True, which will be the confirmation that the form is correct.
 function formValidation() {
-  submitOrderBtn.setAttribute('disabled', '');
-
   //Standard inputs which are always required.
-  if (!isNameValid(inputFirstName)) {
-    console.log('first name');
-    return;
-  }
-  if (!isNameValid(inputLastName)) {
-    console.log('last name');
-    return;
-  }
-  if (!isNameValid(inputAddress)) {
-    console.log('address');
-    return;
-  }
-  if (inputPostNum.value.length !== 5) {
-    console.log('post no');
-    return;
-  }
-  if (!isNameValid(inputCity)) {
-    console.log('city');
-    return;
-  }
-  if (!isPhoneValid()) {
-    console.log('phone');
-    return;
-  }
-  if (!isEmailValid()) {
-    console.log('email');
-    return;
-  }
-  if (!inputAgreePersonalInfo.checked) {
-    return;
-  }
+  formFields[0] = isNameValid(inputFirstName) ? true : false;
+  formFields[1] = isNameValid(inputLastName) ? true : false;
+  formFields[2] = isNameValid(inputAddress) ? true : false;
+  formFields[3] = inputPostNum.value.length === 5 ? true : false;
+  formFields[4] = isNameValid(inputCity) ? true : false;
+  formFields[5] = isPhoneValid() ? true : false;
+  formFields[6] = isEmailValid() ? true : false;
 
   //Checks if invoice or card radio buttons are selected. Then adds more validations needed depending on which radio is selected.
   if (!paymentCard.checked && !paymentInvoice.checked) {
-    return;
+    formFields[7] = false;
   } else if (paymentInvoice.checked) {
-    if (!isPersonalNumValid()) {
-      console.log('add personal number');
-      return;
-    }
+    formFields[7] = true;
+    formFields[9] = true;
+    formFields[10] = true;
+    formFields[11] = true;
+    formFields[12] = true;
+    formFields[8] = isPersonalNumValid() ? true : false;
   } else if (paymentCard.checked) {
+    formFields[7] = true;
+    formFields[8] = true;
     //variables to control year and month.
     let yyFromInput = Number(inputYY.value);
     const date = new Date();
     const currentYear = Number(String(date.getFullYear()).substring(2));
     const currentMonth = Number(String(date.getMonth() + 1));
     console.log(currentMonth);
-    //This one is a checker in case the card expires in the current year, in which case it triggers if the month input from user is less than or equal to the current month. Can be imprived since it doesn't cover edge cases like orders on last day of a month, but maybe later.
-    if (currentYear === yyFromInput && inputMM.value <= currentMonth) {
-      console.log('card expired');
-      return;
-    }
+
     if (inputMM.value.length !== 2 || inputMM.value > 12 || inputMM.value < 1) {
-      console.log('add card month');
-      return;
+      formFields[10] = false;
+      console.log(formFields[10] + ' is false');
+    } else {
+      formFields[10] = true;
+      console.log(formFields[10] + ' is true');
     }
 
     if (yyFromInput > currentYear + 5 || yyFromInput < currentYear) {
-      console.log('add card year');
-      return;
+      formFields[11] = false;
+    } else {
+      formFields[11] = true;
     }
-    if (inputCVC.value.length !== 3) {
-      console.log('add cvc number');
-      return;
+    //This one checks if the card expires in the current year, in which case it triggers if the month input from user is less than or equal to the current month. Can be imprived since it doesn't cover edge cases like orders on last day of a month or month of a year, but maybe later.
+    if (currentYear === yyFromInput && inputMM.value <= currentMonth) {
+      formFields[10] = false;
+      formFields[11] = false;
     }
+    formFields[12] = inputCVC.value.length === 3 ? true : false;
+    formFields[9] = isCardNumValid() ? true : false;
+  }
+  //Checks if the Agree sharing personal information is checked
+  formFields[13] = inputAgreePersonalInfo.checked ? true : false;
+  if (!inputAgreePersonalInfo.checked) {
+  }
 
-    if (!isCardNumValid()) {
-      console.log(inputMM.value.length);
-      console.log('add card number');
-      return;
+  //Adds or removes error messages for each field depending on whether they are correct or not
+  for (let i = 0; i < formFields.length; i++) {
+    if (formFields[i] === false) {
+      errorSpans[i].classList.remove('hidden');
+    } else {
+      errorSpans[i].classList.add('hidden');
     }
   }
 
-  //Activating the Submit button if ALL the required checks are passed.
-  submitOrderBtn.removeAttribute('disabled');
-  let confirmBtnActive = document.querySelector('#submitOrderBtn');
-  console.log(confirmBtnActive.hasAttribute('disabled'));
-  console.log('success');
+  //Runs through the entire formFields array, if anything is false it stops makes sure isFormCorrect is false
+  //If the entire formFields array is true then it sets isFormCorrect to true
+  for (let i = 0; i < formFields.length; i++) {
+    if (formFields[i] === false) {
+      isFormCorrect = false;
+      return;
+    } else {
+      isFormCorrect = true;
+    }
+  }
 }
 
-//Event listener that is exported and that triggers the main function in this file.
-function formEventListener() {
-  inputs.forEach((input) => {
-    input.addEventListener('focusout', formValidation);
-    input.addEventListener('change', formValidation);
-  });
-}
-
-export default formEventListener;
+export { formValidation, isFormCorrect };

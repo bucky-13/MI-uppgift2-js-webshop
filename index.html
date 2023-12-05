@@ -208,7 +208,10 @@
 
                 </label>
 
-                <h4>* Method of Payment: </h4>
+                <div>
+                    <h4 id="paymentMethod">* Method of Payment: </h4>
+                    <span class="form-error-msg hidden">* Must select payment method</span>
+                </div>
                 <label id="paymentInvoiceContainer">
                     <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
                     <span>Invoice</span>
@@ -261,7 +264,7 @@
                         <label class="form-input-bar">
                             <div>
                                 <span>* CVC: </span>
-                                <span class="form-error-msg hidden">Invalid CVC Code</span>
+                                <span class="form-error-msg hidden">* Invalid CVC Code</span>
                             </div>
 
                             <input class="user-input cardInput" type="number" id="inputCVC">
@@ -274,7 +277,9 @@
                     <label>
                         <input type="checkbox" id="inputAgreePersonalInfo" class="user-input required">
                         <span>* I agree to share personal information</span>
-                        <div class="form-error-msg hidden">error</div>
+                        <span class="form-error-msg hidden">* You must agree to this </span>
+
+
                     </label>
                     <label>
                         <input type="checkbox" id="agreeNewsletter" class="user-input" checked>
@@ -283,8 +288,7 @@
                 </div>
                 <div class="form-buttons-container">
                     <input type="reset" value="Reset Form" class="btn-rectangle btn-red">
-                    <input type="submit" value="Place Order" class="btn-rectangle btn-green" id="submitOrderBtn"
-                        disabled>
+                    <input type="submit" value="Place Order" class="btn-rectangle btn-green" id="submitOrderBtn">
 
                 </div>
             </form>

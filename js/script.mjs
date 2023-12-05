@@ -1,5 +1,8 @@
 import gnomesDatabase from './database.mjs';
-import formEventListener from './formSection/formValidation.mjs';
+import {
+  formValidation,
+  isFormCorrect,
+} from './formSection/formValidation.mjs';
 import formTimer from './formSection/formTimer.mjs';
 import unitDiscount10Plus from './priceModifiers/unitDiscount10plus.mjs';
 import {
@@ -239,15 +242,11 @@ function moreThan15GnomesTotal() {
   }
 }
 
-//Event listener for active submit button on Order For Section
-//This is a kind of hacky solution but it does seem to work.
+//Function that triggers after the formValidation, if it passes the form validation then it opens the Order Confirmation Section, hides the form and resets the most of the site, mainly orders variables.
 
-submitOrderBtn.addEventListener('click', updatedSubmitOrderBtnListener);
-
-function updatedSubmitOrderBtnListener(e) {
+function submitCustomerInfoForm(e) {
   e.preventDefault();
-  let updatedSubmitOrderBtn = document.querySelector('#submitOrderBtn');
-  if (!updatedSubmitOrderBtn.hasAttribute('disabled')) {
+  if (isFormCorrect === true) {
     orderFormSection.classList.add('hidden');
     //adding all information needed to a new array for the confirmation page
 
@@ -275,11 +274,12 @@ function updatedSubmitOrderBtnListener(e) {
 
     updateNavShoppingCart();
     visibleSection = shopSection;
-  } else {
-    //Letting this one stay here, at least for now. If I implement the changes to only validate the form on submit this will be needed.
-    console.log('DISABLED');
   }
 }
+submitOrderBtn.addEventListener('click', function (e) {
+  formValidation();
+  submitCustomerInfoForm(e);
+});
 
 //********************Functions for the Order Form Section
 // Order Form and Checkout are the same thing, one of them should be renamed to avoid confusion.
@@ -298,7 +298,7 @@ function openCheckoutSection() {
   visibleSection = orderFormSection;
   invoiceChecker();
   formTimer();
-  formEventListener();
+
   shoppingCartSection.classList.add('hidden');
   orderFormSection.classList.remove('hidden');
 }
@@ -307,7 +307,7 @@ function toggleCardDetails() {
   paymentCardActive.classList.remove('hidden');
   paymentInvoiceActive.classList.add('hidden');
   invoiceInput.classList.remove('required');
-  formEventListener();
+
   for (let i = 0; i < cardInput.length; i++) {
     cardInput[i].classList.add('required');
   }
@@ -316,7 +316,7 @@ function toggleInvoiceDetails() {
   paymentInvoiceActive.classList.remove('hidden');
   paymentCardActive.classList.add('hidden');
   invoiceInput.classList.add('required');
-  formEventListener();
+
   for (let i = 0; i < cardInput.length; i++) {
     cardInput[i].classList.remove('required');
   }
