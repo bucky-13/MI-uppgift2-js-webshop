@@ -2,12 +2,15 @@ import gnomesDatabase from './database.mjs';
 import formEventListener from './formSection/formValidation.mjs';
 import formTimer from './formSection/formTimer.mjs';
 import unitDiscount10Plus from './priceModifiers/unitDiscount10plus.mjs';
+import {
+  checkDiscountCode,
+  discountCodeActive,
+} from './priceModifiers/discountCodes.mjs';
 import displayConfirmationSection from './confirmationSection/displayConfirmationSection.mjs';
 
 //gnomes array that updates amounts etc
 // let gnomes = [...gnomesDatabase];
 let gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
-let gnomishShoppingCart = [];
 let itemsCounter = 0;
 
 //Query Selectors for HTML nodes that are in index.html on page load
@@ -228,7 +231,7 @@ generateDateVariables();
 // Functions for large orders etc:
 
 function moreThan15GnomesTotal() {
-  if (itemsCounter >= 15) {
+  if (itemsCounter >= 15 || discountCodeActive === true) {
     shippingCost = 0;
   } else {
     let shippingCostExtra = totalPrice * 0.1;
@@ -318,6 +321,7 @@ function toggleInvoiceDetails() {
     cardInput[i].classList.remove('required');
   }
 }
+
 //Event listeners for the Order Form Section
 
 paymentCard.addEventListener('change', toggleCardDetails);
@@ -326,6 +330,14 @@ paymentInvoice.addEventListener('change', toggleInvoiceDetails);
 function goCheckoutListener() {
   const goCheckoutBtn = document.querySelector('#goToCheckout');
   goCheckoutBtn.addEventListener('click', openCheckoutSection);
+}
+
+function discountCodeListeners() {
+  const discountCodeBtn = document.querySelector('#discountCodeBtn');
+  discountCodeBtn.addEventListener('click', function () {
+    checkDiscountCode(gnomes);
+    openCartSection();
+  });
 }
 
 //Function for opening the shopping cart section
@@ -337,12 +349,14 @@ function openCartSection() {
   generateDateVariables();
   moreThan15GnomesTotal();
   if (!shoppingCartSection.classList.contains('hidden')) {
-    if (gnomeSumTotal > 0) {
+    if (itemsCounter > 0) {
       cartSumTotalContainer.innerHTML = `
         <p>Items total:</p>
         <p class="price-display">${gnomeSumTotal} kr</p>
-        <p>Use Code:</p>
-        <p>0 kr</p>
+        <p>Use Discount Code:</p>
+        <div><input id="discountCodeInput" type="text"><button id="discountCodeBtn">Confirm</button></div>
+        <p class="activeDiscountNodes hidden">Active Discount Codes:</p>
+        <div class="activeDiscountNodes hidden" id="activeDiscountCodes"></div>
         <p class="mondayDiscount hidden">Monday Discount: -10% on the entire order!</p>
         <p class="mondayDiscount hidden">-10%</p>
         <p>Shipping:</p>
@@ -357,6 +371,7 @@ function openCartSection() {
           `;
 
       shoppingCartGnomes.innerHTML = '';
+      discountCodeListeners();
       goCheckoutListener();
 
       for (let i = 0; i < gnomes.length; i++) {
@@ -431,17 +446,6 @@ function updateNavShoppingCart() {
     navCartCounter.classList.add('hidden');
   }
   navCartSum.textContent = gnomeSumTotal;
-  updateShoppingCartArray();
-}
-
-// Function to update gnomishShopping Cart array with all products that are currently ordered.
-
-function updateShoppingCartArray() {
-  gnomishShoppingCart = [];
-
-  if (itemsCounter > 0) {
-    gnomishShoppingCart = gnomes.filter((g) => g.amount > 0);
-  }
 }
 
 //*************END of all functions for MULTIPLE SECTIONS */
