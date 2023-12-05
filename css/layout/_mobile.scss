@@ -317,6 +317,12 @@ body {
         display: flex;
         flex-direction: column;
 
+        .post-port-container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+
         .too-slow-info {
           color: red;
         }

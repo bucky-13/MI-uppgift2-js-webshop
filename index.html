@@ -132,12 +132,13 @@
             <form id="customerInfoForm">
 
                 <h2>Customer Information:</h2>
+                <p>* = required field</p>
                 <div class="too-slow-info hidden" id="tooSlowInfo">
                     <h3>You've taken too much time to fill in the form, please be faster than 15 minutes next time.</h3>
                 </div>
                 <label class="form-input-bar">
                     <div>
-                        <span>First Name: </span>
+                        <span>* First Name: </span>
                         <span class="form-error-msg hidden">* Invalid Name</span>
                     </div>
                     <input id="inputFirstName" class="user-input required" type="text">
@@ -145,7 +146,7 @@
                 </label>
                 <label class="form-input-bar">
                     <div>
-                        <span>Last Name: </span>
+                        <span>* Last Name: </span>
                         <span class="form-error-msg hidden">* Invalid Name</span>
                     </div>
 
@@ -154,25 +155,36 @@
                 </label>
                 <label class="form-input-bar">
                     <div>
-                        <span>Address: </span>
+                        <span>* Address: </span>
                         <span class="form-error-msg hidden">* Invalid Address</span>
                     </div>
 
                     <input id="inputAddress" class="user-input required" type="text">
 
                 </label>
+                <div class="post-port-container">
+                    <label class="form-input-bar">
+                        <div>
+                            <span>* Post number: </span>
+                            <span class="form-error-msg hidden">* Invalid Post Number</span>
+                        </div>
+
+                        <input id="inputPostNum" class="user-input required" type="number">
+
+                    </label>
+                    <label class="form-input-bar">
+                        <div>
+                            <span>Port Code: </span>
+                        </div>
+
+                        <input id="inputPortCode" class="user-input" type="number">
+
+                    </label>
+                </div>
+
                 <label class="form-input-bar">
                     <div>
-                        <span>Post number: </span>
-                        <span class="form-error-msg hidden">* Invalid Post Number</span>
-                    </div>
-
-                    <input id="inputPostNum" class="user-input required" type="number">
-
-                </label>
-                <label class="form-input-bar">
-                    <div>
-                        <span>City: </span>
+                        <span>* City: </span>
                         <span class="form-error-msg hidden">* Invalid City Name</span>
                     </div>
                     <input id="inputCity" class="user-input required" type="text">
@@ -180,7 +192,7 @@
                 </label>
                 <label class="form-input-bar">
                     <div>
-                        <span>Phone nr: </span>
+                        <span>* Phone nr: </span>
                         <span class="form-error-msg hidden">* Invalid Phone Number</span>
                     </div>
 
@@ -189,14 +201,14 @@
                 </label>
                 <label class="form-input-bar">
                     <div>
-                        <span>Email: </span>
+                        <span>* Email: </span>
                         <span class="form-error-msg hidden">* Invalid Email</span>
                     </div>
                     <input id="inputEmail" class="user-input required" type="email">
 
                 </label>
 
-                <h4>Method of Payment: </h4>
+                <h4>* Method of Payment: </h4>
                 <label id="paymentInvoiceContainer">
                     <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
                     <span>Invoice</span>
@@ -210,7 +222,7 @@
                 <div id="paymentInvoiceActive" class="hidden">
                     <label class="form-input-bar">
                         <div>
-                            <span>Personal number: </span>
+                            <span>* Personal number: </span>
                             <span class="form-error-msg hidden">* Invalid Personal Number</span>
                         </div>
                         <input id="inputPersonalNum" class="user-input invoiceInput" type="number">
@@ -221,7 +233,7 @@
                     <div class=" card-payment-container">
                         <label class="form-input-bar">
                             <div>
-                                <span>Card number: </span>
+                                <span>* Card number: </span>
                                 <span class="form-error-msg hidden">* Invalid Card Number</span>
                             </div>
 
@@ -230,7 +242,7 @@
                         </label>
                         <label class="form-input-bar">
                             <div>
-                                <span>MM: </span>
+                                <span>* MM: </span>
                                 <span class="form-error-msg hidden">* Invalid Month</span>
                             </div>
 
@@ -239,7 +251,7 @@
                         </label>
                         <label class="form-input-bar">
                             <div>
-                                <span>YY: </span>
+                                <span>* YY: </span>
                                 <span class="form-error-msg hidden">* Invalid Year</span>
                             </div>
 
@@ -248,7 +260,7 @@
                         </label>
                         <label class="form-input-bar">
                             <div>
-                                <span>CVC: </span>
+                                <span>* CVC: </span>
                                 <span class="form-error-msg hidden">Invalid CVC Code</span>
                             </div>
 
@@ -261,7 +273,7 @@
                 <div class="checkbox-container">
                     <label>
                         <input type="checkbox" id="inputAgreePersonalInfo" class="user-input required">
-                        <span>I agree to share personal information</span>
+                        <span>* I agree to share personal information</span>
                         <div class="form-error-msg hidden">error</div>
                     </label>
                     <label>
