@@ -593,9 +593,8 @@ function generateGnomeListContainer(i) {
     gnomes[i].img0.alt
   }">
     </figure>
-    <h4 class="gnomeDetailsLinkList" id="gnomeDetailsLink${i}">${
-    gnomes[i].name
-  }</h4>
+    <button class="invisible-btn gnomeDetailsLinkList" id="gnomeDetailsLink${i}">
+    <h4>${gnomes[i].name}</h4></button>    
 
     <div class="amount-to-order">
         <p class="price-display">Price: ${gnomes[i].price} kr</p>
