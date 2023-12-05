@@ -1,4 +1,5 @@
 import gnomesDatabase from './database.mjs';
+import { starRatings, stars } from './starRatings/starRatings.mjs';
 import {
   formValidation,
   isFormCorrect,
@@ -584,6 +585,7 @@ function updatePriceSliderFilter() {
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
   //TODO: Fix the star rating to display star images, and no text inside a figure tag
+  starRatings(gnomes[i].rating);
   gnomeListContainer.innerHTML += `
 <div class="gnome-list-item">
     <figure>
@@ -603,8 +605,13 @@ function generateGnomeListContainer(i) {
     </div>
     <p class="price-display">Total: ${gnomes[i].amount * gnomes[i].price} kr</p>
         <figure class="star-rating">
-            <img src="images/icons/star-filled.png" width="24px">
-            ${gnomes[i].rating}
+            <img src="${stars[0]}" width="24px">
+            <img src="${stars[1]}" width="24px">
+            <img src="${stars[2]}" width="24px">
+            <img src="${stars[3]}" width="24px">
+            <img src="${stars[4]}" width="24px">
+            
+            
         </figure>
 </div>`;
 

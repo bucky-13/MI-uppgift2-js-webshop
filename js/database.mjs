@@ -83,7 +83,7 @@ const gnomesDatabase = [
     basePrice: 130,
     price: 130,
     amount: 0,
-    rating: 4,
+    rating: 4.5,
     category: 'Naughty',
     img0: {
       url: 'images/gnomes/biker0.webp',
@@ -135,7 +135,7 @@ const gnomesDatabase = [
     basePrice: 80,
     price: 80,
     amount: 0,
-    rating: 3,
+    rating: 2.5,
     category: 'Naughty',
     img0: {
       url: 'images/gnomes/goaway0.webp',
@@ -187,7 +187,7 @@ const gnomesDatabase = [
     basePrice: 190,
     price: 190,
     amount: 0,
-    rating: 4,
+    rating: 3,
     category: 'Chill',
     img0: {
       url: 'images/gnomes/rocking-chair0.webp',
