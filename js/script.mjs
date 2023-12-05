@@ -267,7 +267,7 @@ function submitCustomerInfoForm(e) {
       totalPriceConfirmed,
       shippingCostConfirmed
     );
-    gnomes = [...gnomesDatabase];
+    gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
     totalPrice = 0;
     itemsCounter = 0;
     shippingCost = 25;
@@ -296,12 +296,11 @@ function invoiceChecker() {
 }
 
 function resetOrder() {
-  gnomes = [...gnomesDatabase];
+  gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
   totalPrice = 0;
   itemsCounter = 0;
   shippingCost = 25;
   gnomeSumTotal = 0;
-
   updateNavShoppingCart();
   orderFormSection.classList.add('hidden');
   gnomeListContainerGenerator();
