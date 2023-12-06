@@ -88,7 +88,6 @@ body {
     .shop-section {
       display: flex;
       flex-direction: column;
-      min-height: calc(100vh - 80px);
       header {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -206,10 +205,6 @@ body {
           h4 {
             margin: 0;
           }
-          // h4:hover {
-          //   color: $color-primary;
-          //   cursor: pointer;
-          // }
 
           .amount-to-order {
             display: grid;
@@ -232,7 +227,7 @@ body {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: calc(100vh - 80px);
+      margin-top: 1rem;
 
       .btn-close {
         // align-self: end;
@@ -301,7 +296,7 @@ body {
       }
       .shopping-cart-gnomes-container {
         margin-top: 1rem;
-        :nth-child(1) {
+        div:nth-child(1) {
           border-top: 1px solid $color-primary;
         }
       }
@@ -313,6 +308,9 @@ body {
         padding: 1rem 0;
         border-bottom: 1px solid $color-primary;
 
+        .cart-gnome-img {
+          display: none;
+        }
         .btnRemoveItem {
           justify-self: end;
           margin-right: 1rem;
@@ -338,23 +336,32 @@ body {
         margin-top: 1rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(9, 1.9rem);
+        grid-template-rows: 1.9rem 1.9rem 2.5em repeat(6, 1.9rem);
+
         align-items: center;
 
+        .discount-code-p {
+          grid-row: 2;
+        }
         .discount-code-input-container {
           grid-row: 2 / span 2;
+          grid-column: 2;
           display: grid;
           grid-template-columns: 1fr;
           grid-template-rows: 1fr 1fr;
           gap: 2px;
+          // margin: 12px 0;
+          input {
+            border-radius: 8px;
+            border: 1px solid black;
+          }
+          button {
+            width: 100px;
+          }
         }
 
         .discount-p {
           font-size: 0.9rem;
-        }
-
-        .discount-code-p {
-          grid-row: 2 / span 2;
         }
 
         .btn-rectangle-small {
@@ -376,7 +383,6 @@ body {
       }
     }
     .order-form-section {
-      min-height: calc(100vh - 80px);
       form {
         margin-top: 1rem;
         display: flex;
@@ -404,7 +410,7 @@ body {
         .form-input-bar {
           display: flex;
           flex-direction: column;
-          margin: 0.7rem 0;
+          margin: 0.5rem 0;
           gap: 0.5rem;
           input[type='text'],
           input[type='number'],
@@ -448,7 +454,7 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: calc(100vh - 80px);
+
       h2 {
         color: $color-primary;
         line-height: 0;

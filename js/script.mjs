@@ -373,6 +373,7 @@ function openCartSection() {
           <input id="discountCodeInput" type="text">
           <button id="discountCodeBtn" class="btn-green btn-rectangle-small">Confirm</button>
         </div>
+        <div></div>
         <p class="activeDiscountNodes discount-p ${
           discountCodeActive ? '' : 'hidden'
         }">Active Discounts:</p>
@@ -406,9 +407,9 @@ function openCartSection() {
         if (gnomes[i].amount > 0) {
           shoppingCartGnomes.innerHTML += `
             <div class="shopping-cart-gnome-grid">
-              <img src="${gnomes[i].img0.url}" width="160" height="200" alt="${
+              <img src="${gnomes[i].img0.url}" width="160" height="160" alt="${
             gnomes[i].img0.alt
-          }" class="hidden">
+          }" class="cart-gnome-img">
               <h3>${gnomes[i].name}</h3>
               <button class="btn-circle btn-small btnRemoveItem" id="btnRemoveItem${i}">X</button>
 

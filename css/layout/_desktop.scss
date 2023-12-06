@@ -2,12 +2,12 @@ body {
   main {
     .shop-section {
       .gnome-list-container {
-        flex-direction: row;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+        gap: 20px 40px;
 
         .gnome-list-item {
-          width: 45%;
+          width: 100%;
           grid-template-columns: 170px 1fr;
           grid-template-rows: 50px 90px 40px;
           border-right: 1px solid $color-primary;

@@ -208,21 +208,23 @@
 
                 </label>
 
-                <div>
+                <div class="payment-method-div">
                     <h4 id="paymentMethod">* Method of Payment: </h4>
                     <span class="form-error-msg hidden">* Must select payment method</span>
                 </div>
-                <label id="paymentInvoiceContainer">
-                    <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
-                    <span>Invoice</span>
-                </label>
+                <div>
+                    <label id="paymentInvoiceContainer">
+                        <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
+                        <span>Invoice</span>
+                    </label>
 
-                <label>
-                    <input class="user-input" id="paymentCard" type="radio" name="paymentMethod">
-                    <span>Card</span>
-                </label>
+                    <label>
+                        <input class="user-input" id="paymentCard" type="radio" name="paymentMethod">
+                        <span>Card</span>
+                    </label>
+                </div>
 
-                <div id="paymentInvoiceActive" class="hidden">
+                <div id="paymentInvoiceActive" class="invoice-payment-container hidden">
                     <label class="form-input-bar">
                         <div>
                             <span>* Personal number: </span>
