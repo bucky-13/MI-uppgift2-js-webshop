@@ -191,7 +191,6 @@ function mondayPrices(d, h) {
   if (d === 1 && h < 10) {
     totalPrice = Math.round(gnomeSumTotal * 0.9);
     const mDiscount = document.querySelectorAll('.mondayDiscount');
-    // console.log(mDiscount.target);
     for (let i = 0; i < mDiscount.length; i++) {
       mDiscount[i].classList.remove('hidden');
     }
@@ -569,7 +568,6 @@ function updateFilterRadios(e) {
   const selectedCategory = e.currentTarget.value;
 
   for (let i = 0; i < gnomes.length; i++) {
-    console.log(i);
     if (selectedCategory === 'all') {
       gnomes[i].filterCategory = true;
     } else {
@@ -615,8 +613,11 @@ function generateGnomeListContainer(i) {
         <button class="btn-circle btn-small minusBtnList" id="btnListMinus${i}">-</button>
         <button class="btn-circle btn-small plusBtnList" id="btnListPlus${i}">+</button>
         <p id="amountList${i}">Qty: ${gnomes[i].amount}</p>
+        <p class="price-display">Total: ${
+          gnomes[i].amount * gnomes[i].price
+        } kr</p>
     </div>
-    <p class="price-display">Total: ${gnomes[i].amount * gnomes[i].price} kr</p>
+    
         <figure class="star-rating">
             <img src="${stars[0]}" width="24px">
             <img src="${stars[1]}" width="24px">
@@ -741,12 +742,12 @@ function openGnomeDetailsPage(i) {
   }">
                 </figure>
             </div>
-            <h2>${gnomes[i].name}</h2>
+            <h2 class="gnome-item-h2">${gnomes[i].name}</h2>
             <p class="item-price price-display">Price: ${gnomes[i].price} kr</p>
             <div class="gnome-buttons-container">
-                <button class="btn-circle btn-large" id="btnDetailsMinus${i}">-</button>
-                <h4>${gnomes[i].amount}</h4>
-                <button class="btn-circle btn-large" id="btnDetailsPlus${i}">+</button>
+                <button class="btn-circle btn-small" id="btnDetailsMinus${i}">-</button>
+                <h3>${gnomes[i].amount}</h4>
+                <button class="btn-circle btn-small" id="btnDetailsPlus${i}">+</button>
             </div>
 
             <h3 class="price-display">Total: ${

@@ -5,13 +5,18 @@ body {
   padding: 0 1rem;
 
   h2 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
-
-  // .test {
-  //   background-color: red;
-  //   border: 1pc solid blue;
-  // }
+  h3 {
+    font-size: 1.2rem;
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
+  label,
+  p {
+    font-size: 1rem;
+  }
 
   .hidden,
   .gnome-details-section.hidden,
@@ -84,13 +89,19 @@ body {
       min-height: calc(100vh - 80px);
       header {
         display: grid;
-        grid-template-columns: 150px 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 50px 1fr;
+        gap: 12px 0px;
         align-items: center;
+        justify-items: center;
 
-        label,
-        p {
-          font-size: 1.3rem;
+        h2 {
+          grid-column: 1 / span 2;
+          line-height: 0;
+          margin-bottom: 0.5rem;
+          align-self: end;
         }
+
         .shop-select-container:hover {
           label {
             color: $color-primary;
@@ -102,6 +113,11 @@ body {
 
         select {
           padding: 0.3rem;
+        }
+        .filter-btn-container {
+          justify-self: start;
+          align-self: self-end;
+          margin-top: 16px;
         }
         .filter-btn {
           display: flex;
@@ -121,19 +137,30 @@ body {
         }
       }
       .shop-filter-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 150px;
+        border-bottom: 1px solid $color-primary;
+
+        gap: 10px;
         align-items: center;
-        margin-bottom: 3rem;
+        // margin-bottom: 3rem;
+
         .shop-filter-radio {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          align-items: center;
+          grid-template-rows: 60px 40px 40px;
+          // grid-template-rows: 1fr 1fr 1fr;
+          align-items: start;
 
           h3 {
             grid-column: 1 / span 2;
           }
+        }
+
+        .shop-filter-sliders {
+          display: grid;
+          grid-template-rows: 60px 40px 40px;
         }
       }
 
@@ -147,7 +174,7 @@ body {
         .gnome-list-item {
           display: grid;
           grid-template-columns: 130px 1fr;
-          grid-template-rows: 50px 50px 30px 30px;
+          grid-template-rows: 50px 80px 30px 30px;
           gap: 2px 10px;
           margin: 1rem 0;
           border-bottom: 1px solid $color-primary;
@@ -169,7 +196,6 @@ body {
             cursor: pointer;
           }
           h4 {
-            font-size: 1.2rem;
             margin: 0;
           }
           // h4:hover {
@@ -179,11 +205,11 @@ body {
 
           .amount-to-order {
             display: grid;
-            grid-template-rows: 1fr 1fr;
-            grid-template-columns: 100px 50px 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 45px 45px;
             align-items: center;
             button {
-              grid-row: span 2;
+              grid-row: span 3;
             }
           }
           p {
@@ -194,7 +220,6 @@ body {
     }
 
     .gnome-details-section {
-      // border: 1px solid red;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -207,27 +232,28 @@ body {
       }
 
       .gnome-display-img {
-        width: 300px;
-        height: 250px;
+        width: 250px;
+        height: 200px;
         object-fit: cover;
+        border-radius: 12px;
       }
       .img-thumb-container {
         display: flex;
         justify-content: space-evenly;
 
         img {
-          width: 80px;
-          height: 80px;
+          width: 60px;
+          height: 60px;
+          border-radius: 8px;
         }
       }
 
-      h2 {
-        font-size: 2rem;
+      .gnome-item-h2 {
+        font-size: 1.4rem;
         color: $color-primary;
         margin: 0;
       }
       .item-price {
-        font-size: 1.4rem;
         line-height: 0;
         padding-bottom: 0.7rem;
       }
@@ -236,28 +262,24 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        h4 {
-          margin: 0 1rem;
-          font-size: 2rem;
-          padding: 0.5rem 3rem;
+        h3 {
+          margin: 0 0.6rem;
+          padding: 0.3rem 1.5rem;
           border: 3px solid $color-black;
           border-radius: 24px;
         }
       }
 
-      h3 {
-        font-size: 2.3rem;
-        // line-height: 0;
-      }
+      // h3 {
+      //   // line-height: 0;
+      // }
     }
 
     .shopping-cart-section {
       margin-top: 2rem;
       display: flex;
       flex-direction: column;
-      h4 {
-        font-size: 1.4rem;
-      }
+
       .shopping-cart-heading {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -293,7 +315,6 @@ body {
         }
 
         h3 {
-          font-size: 1.6rem;
           grid-column: 1 / span 2;
           color: $color-primary;
         }
