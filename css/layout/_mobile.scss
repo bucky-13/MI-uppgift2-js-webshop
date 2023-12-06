@@ -25,7 +25,8 @@ body {
   .gnome-list-container.hidden,
   .shopping-cart-section.hidden,
   .shop-section.hidden,
-  .confirmation-section.hidden {
+  .confirmation-section.hidden,
+  .card-payment-container.hidden {
     display: none;
   }
 
@@ -302,7 +303,7 @@ body {
       .shopping-cart-gnome-grid {
         display: grid;
         grid-template-columns: 44% 28% 28%;
-        grid-template-rows: 4rem 3rem 4rem;
+        grid-template-rows: 3rem 2.5rem 3.5rem;
         align-items: center;
         padding: 1rem 0;
         border-bottom: 1px solid $color-primary;
@@ -314,7 +315,7 @@ body {
 
         h3 {
           grid-column: 1 / span 2;
-          // color: $color-primary;
+          color: $color-primary;
         }
         .gnome-cart-buttons-container {
           display: flex;
@@ -372,13 +373,20 @@ body {
     .order-form-section {
       min-height: calc(100vh - 80px);
       form {
+        margin-top: 1rem;
         display: flex;
         flex-direction: column;
 
+        h2 {
+          line-height: 0;
+        }
         .post-port-container {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: calc(50% - 10px) calc(50% - 10px);
           gap: 20px;
+          // input {
+          //   width: 70%;
+          // }
         }
 
         .form-error-msg {
@@ -401,27 +409,27 @@ body {
             border-radius: 10px;
           }
         }
-
-        .card-payment-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          grid-template-rows: 1fr 1fr;
-          gap: 0 20px;
-          :nth-child(1) {
-            grid-column: 1 / span 3;
-          }
-        }
-        .checkbox-container {
-          display: flex;
-          flex-direction: column;
-          margin: 2rem 0;
-        }
-
-        .form-buttons-container {
-          display: flex;
-          justify-content: space-around;
-        }
       }
+      .checkbox-container {
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 0;
+      }
+
+      .form-buttons-container {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  }
+  .card-payment-container {
+    // width: 100%;
+    display: grid;
+    grid-template-columns: calc(33% - 14px) calc(34% - 12px) calc(33% - 14px);
+    grid-template-rows: 1fr 1fr;
+    gap: 0 20px;
+    :nth-child(1) {
+      grid-column: 1 / span 3;
     }
 
     .confirmation-section {

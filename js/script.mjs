@@ -191,7 +191,7 @@ function closeCartSection() {
 // Functions for dates and prices:
 
 function mondayPrices(d, h) {
-  if (d === 3 && h < 18) {
+  if (d === 1 && h < 10) {
     totalPrice = Math.round(gnomeSumTotal * 0.9);
     monDiscountChecker = true;
     // const mDiscount = document.querySelectorAll('.mondayDiscount');
