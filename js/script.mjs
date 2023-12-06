@@ -617,9 +617,9 @@ function generateGnomeListContainer(i) {
   gnomeListContainer.innerHTML += `
 <div class="gnome-list-item">
     <figure>
-    <img src="${gnomes[i].img0.url}" width="120" height="160" alt="${
-    gnomes[i].img0.alt
-  }">
+    <img class="gnome-list-image" src="${
+      gnomes[i].img0.url
+    }" width="120" height="160" alt="${gnomes[i].img0.alt}">
     </figure>
     <button class="invisible-btn gnomeDetailsLinkList" id="gnomeDetailsLink${i}">
     <h4>${gnomes[i].name}</h4></button>    
