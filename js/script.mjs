@@ -731,7 +731,6 @@ function minusAmountDetails(i, activeSection) {
 
 //Function to open the pages for Individual Gnomes
 function openGnomeDetailsPage(i) {
-  console.log(i);
   visibleSection = gnomeDetailsSection;
   shopSection.classList.add('hidden');
   gnomeDetailsSection.classList.remove('hidden');

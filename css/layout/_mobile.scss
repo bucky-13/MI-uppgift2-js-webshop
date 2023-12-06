@@ -25,8 +25,7 @@ body {
   .gnome-list-container.hidden,
   .shopping-cart-section.hidden,
   .shop-section.hidden,
-  .confirmation-section.hidden,
-  .card-payment-container.hidden {
+  .confirmation-section.hidden {
     display: none;
   }
 
@@ -420,16 +419,22 @@ body {
         display: flex;
         justify-content: space-around;
       }
+      .card-payment-container {
+        // width: 100%;
+        display: grid;
+        grid-template-columns: calc(33% - 14px) calc(34% - 12px) calc(
+            33% - 14px
+          );
+        grid-template-rows: 1fr 1fr;
+        gap: 0 20px;
+        :nth-child(1) {
+          grid-column: 1 / span 3;
+        }
+      }
     }
-  }
-  .card-payment-container {
-    // width: 100%;
-    display: grid;
-    grid-template-columns: calc(33% - 14px) calc(34% - 12px) calc(33% - 14px);
-    grid-template-rows: 1fr 1fr;
-    gap: 0 20px;
-    :nth-child(1) {
-      grid-column: 1 / span 3;
+
+    .card-payment-container.hidden {
+      display: none;
     }
 
     .confirmation-section {
@@ -440,12 +445,18 @@ body {
       min-height: calc(100vh - 80px);
       h2 {
         color: $color-primary;
+        line-height: 0;
       }
       .delivery-header {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 1rem;
+        h3,
+        p {
+          margin: 0.3rem;
+        }
       }
       .ordered-items-list {
         border-top: 1px solid $color-primary;
@@ -453,31 +464,34 @@ body {
         .ordered-item {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          grid-template-rows: repeat(3, 40px);
+          grid-template-rows: 50px 50px 20px;
           gap: 15px;
           border-bottom: 1px solid $color-primary;
 
           padding: 1rem 0;
           img {
             grid-row: 1 / span 3;
+            border-radius: 8px;
+            object-fit: cover;
           }
           h3 {
             grid-column: 2 / span 3;
+            margin: 0;
           }
           p {
-            line-height: 0;
+            margin: 0;
           }
         }
       }
       .confirmation-sum {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(3, 40px);
+        grid-template-rows: repeat(3, 30px);
         gap: 15px;
         width: 100%;
 
         p:nth-child(odd) {
-          grid-column: 2 / span 1;
+          grid-column: 1 / span 2;
         }
         p:nth-child(even) {
           grid-column: 4 / span 1;
