@@ -9,6 +9,7 @@ import unitDiscount10Plus from './priceModifiers/unitDiscount10plus.mjs';
 import {
   checkDiscountCode,
   discountCodeActive,
+  discountCodeText,
 } from './priceModifiers/discountCodes.mjs';
 import displayConfirmationSection from './confirmationSection/displayConfirmationSection.mjs';
 
@@ -66,6 +67,8 @@ let totalPrice = 0;
 let shippingCost = 25;
 //final price after adding shipping cost to totalPrice. This will be set to 0 if a special coupon is used.
 let finalPrice = 0;
+
+let monDiscountChecker = false;
 
 let visibleSection = shopSection;
 
@@ -188,12 +191,13 @@ function closeCartSection() {
 // Functions for dates and prices:
 
 function mondayPrices(d, h) {
-  if (d === 1 && h < 10) {
+  if (d === 3 && h < 18) {
     totalPrice = Math.round(gnomeSumTotal * 0.9);
-    const mDiscount = document.querySelectorAll('.mondayDiscount');
-    for (let i = 0; i < mDiscount.length; i++) {
-      mDiscount[i].classList.remove('hidden');
-    }
+    monDiscountChecker = true;
+    // const mDiscount = document.querySelectorAll('.mondayDiscount');
+    // for (let i = 0; i < mDiscount.length; i++) {
+    //   mDiscount[i].classList.remove('hidden');
+    // }
   } else {
     totalPrice = gnomeSumTotal;
   }
@@ -354,7 +358,6 @@ function discountCodeListeners() {
 
 //Function for opening the shopping cart section
 function openCartSection() {
-  generateDateVariables();
   shoppingCartSection.classList.remove('hidden');
   visibleSection.classList.add('hidden');
   updateNavShoppingCart();
@@ -365,12 +368,25 @@ function openCartSection() {
       cartSumTotalContainer.innerHTML = `
         <p>Items total:</p>
         <p class="price-display">${gnomeSumTotal} kr</p>
-        <p>Use Discount Code:</p>
-        <div><input id="discountCodeInput" type="text"><button id="discountCodeBtn">Confirm</button></div>
-        <p class="activeDiscountNodes hidden">Active Discount Codes:</p>
-        <div class="activeDiscountNodes hidden" id="activeDiscountCodes"></div>
-        <p class="mondayDiscount hidden">Monday Discount: -10% on the entire order!</p>
-        <p class="mondayDiscount hidden">-10%</p>
+        <p class="discount-code-p">Discount Code:</p>
+        <div class="discount-code-input-container">
+          <input id="discountCodeInput" type="text">
+          <button id="discountCodeBtn" class="btn-green btn-rectangle-small">Confirm</button>
+        </div>
+        <p class="activeDiscountNodes discount-p ${
+          discountCodeActive ? '' : 'hidden'
+        }">Active Discounts:</p>
+        <div class="activeDiscountNodes ${
+          discountCodeActive ? '' : 'hidden'
+        }" id="activeDiscountCodes">
+          <p class="discount-p">${discountCodeText}</p>
+        </div>
+        <p class="mondayDiscount ${
+          monDiscountChecker ? '' : 'hidden'
+        } ">Monday Discount:</p>
+        <p class="mondayDiscount ${
+          monDiscountChecker ? '' : 'hidden'
+        }">-10% on the entire order!</p>
         <p>Shipping:</p>
         <p class="price-display">${shippingCost} kr</p>
         <h4>Total Sum</h4>
