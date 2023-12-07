@@ -16,4 +16,12 @@ The site allows you to view and select which garden gnomes to buy, you can also 
 
 ### Lighthouse report:
 
-<img width=200px src="/images/screenshots/lighthouse-report.jpg">
+<img width=300px src="/images/screenshots/lighthouse-report.jpg">
+
+### HTML Validation
+
+<img width=300px src="/images/screenshots/html validation.jpg">
+
+### CSS Validation
+
+<img width=300px src="/images/screenshots/css-validation.jpg">
