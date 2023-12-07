@@ -1,8 +1,6 @@
 # Gottfrids Garden Gnomes
 
-## Link to the website:
-
-[Click me!](https://medieinstitutet.github.io/fed23d-js-grundkurs-webshop-bucky-13/)
+### Link to the website: [Click me!](https://medieinstitutet.github.io/fed23d-js-grundkurs-webshop-bucky-13/)
 
 ## Description:
 
@@ -12,4 +10,6 @@ The site allows you to view and select which garden gnomes to buy, you can also 
 
 ### Tech Stack
 
-Javascript, CSS (Sass) & HTML.
+<img width=50px src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png">&nbsp;
+<img width=50px src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png">&nbsp;
+<img width=50px src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png">&nbsp;
