@@ -292,9 +292,11 @@ function invoiceChecker() {
   if (totalPrice > 800) {
     paymentInvoiceContainer.classList.add('hidden');
     paymentCard.checked = true;
+    paymentCardActive.classList.remove('hidden');
   } else {
     paymentInvoiceContainer.classList.remove('hidden');
     paymentCard.checked = false;
+    paymentCardActive.classList.add('hidden');
   }
 }
 
@@ -321,20 +323,10 @@ function openCheckoutSection() {
 function toggleCardDetails() {
   paymentCardActive.classList.remove('hidden');
   paymentInvoiceActive.classList.add('hidden');
-  invoiceInput.classList.remove('required');
-
-  for (let i = 0; i < cardInput.length; i++) {
-    cardInput[i].classList.add('required');
-  }
 }
 function toggleInvoiceDetails() {
   paymentInvoiceActive.classList.remove('hidden');
   paymentCardActive.classList.add('hidden');
-  invoiceInput.classList.add('required');
-
-  for (let i = 0; i < cardInput.length; i++) {
-    cardInput[i].classList.remove('required');
-  }
 }
 
 //Event listeners for the Order Form Section

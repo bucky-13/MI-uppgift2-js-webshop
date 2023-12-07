@@ -100,14 +100,12 @@ function formValidation() {
     const date = new Date();
     const currentYear = Number(String(date.getFullYear()).substring(2));
     const currentMonth = Number(String(date.getMonth() + 1));
-    console.log(currentMonth);
+    c;
 
     if (inputMM.value.length !== 2 || inputMM.value > 12 || inputMM.value < 1) {
       formFields[10] = false;
-      console.log(formFields[10] + ' is false');
     } else {
       formFields[10] = true;
-      console.log(formFields[10] + ' is true');
     }
 
     if (yyFromInput > currentYear + 5 || yyFromInput < currentYear) {
