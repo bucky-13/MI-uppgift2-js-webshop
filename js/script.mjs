@@ -641,12 +641,10 @@ function generateGnomeListContainer(i) {
           loading="lazy"
         />
       </figure>
-      <button
-        class="invisible-btn gnomeDetailsLinkList"
-        id="gnomeDetailsLink${i}"
-      >
-        <h4>${gnomes[i].name}</h4>
-      </button>
+
+      <h4 class="gnomeDetailsLinkList" id="gnomeDetailsLink${i}" tabindex="0">
+        ${gnomes[i].name}
+      </h4>
 
       <div class="amount-to-order">
         <p class="price-display">Price: ${gnomes[i].price} kr</p>
@@ -663,11 +661,11 @@ function generateGnomeListContainer(i) {
       </div>
 
       <figure class="star-rating">
-        <img src="${stars[0]}" width="24" heigth="24" alt="a star icon" />
-        <img src="${stars[1]}" width="24" heigth="24" alt="a star icon" />
-        <img src="${stars[2]}" width="24" heigth="24" alt="a star icon" />
-        <img src="${stars[3]}" width="24" heigth="24" alt="a star icon" />
-        <img src="${stars[4]}" width="24" heigth="24" alt="a star icon" />
+        <img src="${stars[0]}" width="24" height="24" alt="a star icon" />
+        <img src="${stars[1]}" width="24" height="24" alt="a star icon" />
+        <img src="${stars[2]}" width="24" height="24" alt="a star icon" />
+        <img src="${stars[3]}" width="24" height="24" alt="a star icon" />
+        <img src="${stars[4]}" width="24" height="24" alt="a star icon" />
         <span class="visually-hidden"
           >Star Rating: ${gnomes[i].starRatings} out of 5 stars</span
         >
@@ -777,12 +775,12 @@ function openGnomeDetailsPage(i) {
       <figure class="img-thumb-container">
         <img src="${
           gnomes[i].img1.url
-        }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnailalt="${
+        }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail" alt="${
       gnomes[i].img1.alt
     }">
         <img src="${
           gnomes[i].img2.url
-        }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbalt="${
+        }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail" alt="${
       gnomes[i].img2.alt
     }">
       </figure>
