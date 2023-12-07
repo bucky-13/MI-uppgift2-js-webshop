@@ -31,7 +31,9 @@ function displayConfirmationSection(gnomes, totalPrice, shippingCost) {
                    <div class="ordered-item">
                     <img src="${
                       gnomes[i].img0.url
-                    }" height="150" width="100" alt="${gnomes[i].img0.alt}">
+                    }" height="150" width="100" alt="${
+        gnomes[i].img0.alt
+      }" loading="lazy">
                     <h3>${gnomes[i].name}</h3>
                     <p>Amount:</p>
                     <p>Unit Price:</p>

@@ -401,7 +401,7 @@ function openCartSection() {
             <div class="shopping-cart-gnome-grid">
               <img src="${gnomes[i].img0.url}" width="160" height="160" alt="${
             gnomes[i].img0.alt
-          }" class="cart-gnome-img">
+          }" class="cart-gnome-img" loading="lazy">
               <h3>${gnomes[i].name}</h3>
               <button class="btn-circle btn-small btnRemoveItem" id="btnRemoveItem${i}">X</button>
 
@@ -612,7 +612,7 @@ function generateGnomeListContainer(i) {
     <figure>
     <img class="gnome-list-image" src="${
       gnomes[i].img0.url
-    }" width="120" height="160" alt="${gnomes[i].img0.alt}">
+    }" width="120" height="160" alt="${gnomes[i].img0.alt}" loading="lazy">
     </figure>
     <button class="invisible-btn gnomeDetailsLinkList" id="gnomeDetailsLink${i}">
     <h4>${gnomes[i].name}</h4></button>    
