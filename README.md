@@ -1,42 +1,9 @@
-#TODO:
+#Gottfrids Garden Gnomes
 
-~~add filters to Shop list~~
+##Description:
+Medieinstitutet Assignment for beginner Javascript course. The task was to create a one page webside for a webstore using HTML, Sass & Javascript.
 
-~~add sorting to Shop list~~
+The site allows you to view and select which garden gnomes to buy, you can also go through a form that is validated to "send" the order. The form doesn't send the data anywhere since this it's not an actual store. Since the focus was on learning Javascript, I kept the CSS layout simple to put my focus on Javascript.
 
-~~ Create indivdual Gnome item pages ~~
-
-~~add shopping cart page~~
-
-~~add form functionality~~
-
-~~check some "swenglish" translations~~
-
-add tablet and desktop versions of the site in css
-
-~~add a manual color theme toggler - skip this one~~
-
-check replacing png icons with svg icons
-
-~~fix the star ratings~~
-
-maybe add a hamburger/nav menu since it feels empty without one
-
-check accessibility
-~~browsing with tab~~
-
-add meta tags and all that stuff
-
-add moar comments to avoid confusion
-
-do a proper readme file
-
-refactor some clunky functions
-
-listen to nice music (important)
-
-update the TODO list...
-
-~~Om kunden har beställt för totalt mer än 800 kr ska det inte gå att välja faktura som betalsätt. - Add this when doing functionality for the checkout section~~
-
-~~add visual feedback to the form when there are invalid fields~~
+###Tech Stack
+Javascript, CSS (Sass) & HTML.
