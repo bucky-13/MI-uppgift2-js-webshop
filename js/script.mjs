@@ -628,12 +628,14 @@ function generateGnomeListContainer(i) {
     </div>
     
         <figure class="star-rating">
-            <img src="${stars[0]}" width="24px">
-            <img src="${stars[1]}" width="24px">
-            <img src="${stars[2]}" width="24px">
-            <img src="${stars[3]}" width="24px">
-            <img src="${stars[4]}" width="24px">
-            
+            <img src="${stars[0]}" width="24" heigth="24" alt="a star icon">
+            <img src="${stars[1]}" width="24" heigth="24" alt="a star icon">
+            <img src="${stars[2]}" width="24" heigth="24" alt="a star icon">
+            <img src="${stars[3]}" width="24" heigth="24" alt="a star icon">
+            <img src="${stars[4]}" width="24" heigth="24" alt="a star icon">
+            <span class="visually-hidden">Star Rating: ${
+              gnomes[i].starRatings
+            } out of 5 stars</span>
             
         </figure>
 </div>`;

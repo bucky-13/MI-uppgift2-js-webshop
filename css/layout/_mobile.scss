@@ -21,6 +21,13 @@ body {
     font-size: 1rem;
   }
 
+  .visually-hidden {
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
   .hidden,
   .gnome-details-section.hidden,
   .gnome-list-container.hidden,
