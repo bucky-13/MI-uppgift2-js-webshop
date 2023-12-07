@@ -738,7 +738,7 @@ function openGnomeDetailsPage(i) {
   gnomeDetailsSection.classList.add('page-active');
   gnomeDetailsSection.innerHTML = `
               <button class="btn-large btn-circle btn-close" id="closePageBtn">X</button>
-            <div>
+            <div class="gnome-display-imgs-container">
                 <figure>
                     <img src="${
                       gnomes[i].imgLarge.url
@@ -748,7 +748,7 @@ function openGnomeDetailsPage(i) {
                 <figure class="img-thumb-container">
                     <img src="${
                       gnomes[i].img1.url
-                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail" alt="${
+                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail"    alt="${
     gnomes[i].img1.alt
   }">
                     <img src="${

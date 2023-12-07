@@ -1,6 +1,7 @@
 body {
   main {
     .shop-section {
+      max-width: 1260px;
       .gnome-list-container {
         display: grid;
         grid-template-columns: calc(50% - 20px) calc(50% - 20px);

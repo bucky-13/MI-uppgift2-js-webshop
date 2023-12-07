@@ -20,9 +20,27 @@ body {
       }
     }
 
+    .gnome-details-section {
+      padding-top: 2rem;
+      .gnome-display-imgs-container {
+        display: grid;
+        grid-template-columns: 65% 70px;
+        justify-content: center;
+        justify-items: center;
+        padding-bottom: 1rem;
+        .gnome-display-img {
+          width: 100%;
+          max-width: 600px;
+        }
+        .img-thumb-container {
+          flex-direction: column;
+        }
+      }
+    }
+
     .shopping-cart-section {
       .shopping-cart-gnome-grid {
-        grid-template-columns: 170px repeat(3, 1fr);
+        grid-template-columns: 180px 1.3fr 1fr 1fr;
         grid-template-rows: 3rem 2.5rem 3.5rem;
 
         .cart-gnome-img {
