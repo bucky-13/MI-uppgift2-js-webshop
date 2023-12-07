@@ -1,3 +1,4 @@
+// IMPORTS from other mjs files
 import gnomesDatabase from './database.mjs';
 import { starRatings, stars } from './starRatings/starRatings.mjs';
 import {
@@ -13,12 +14,7 @@ import {
 } from './priceModifiers/discountCodes.mjs';
 import displayConfirmationSection from './confirmationSection/displayConfirmationSection.mjs';
 
-//gnomes array that updates amounts etc
-let gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
-let itemsCounter = 0;
-
 //Query Selectors for HTML nodes that are in index.html on page load
-
 const gnomeListContainer = document.querySelector('#gnomeListContainer');
 const shopSection = document.querySelector('#shopSection');
 const gottfridLogo = document.querySelector('#gottfridLogo');
@@ -44,7 +40,6 @@ const maxPriceDisplay = document.querySelector('#maxPriceDisplay');
 
 // Query Selectors for the Order Form Section
 const orderFormSection = document.querySelector('#orderFormSection');
-
 const paymentInvoice = document.querySelector('#paymentInvoice');
 const paymentInvoiceContainer = document.querySelector(
   '#paymentInvoiceContainer'
@@ -54,25 +49,27 @@ const paymentInvoiceActive = document.querySelector('#paymentInvoiceActive');
 const paymentCardActive = document.querySelector('#paymentCardActive');
 const submitOrderBtn = document.querySelector('#submitOrderBtn');
 const resetFormAndOrder = document.querySelector('#resetFormAndOrder');
-const cardInput = document.querySelectorAll('.cardInput');
-const invoiceInput = document.querySelector('.invoiceInput');
 
+// Variables that are used globally to keep track of things.
+
+//array for gnome products, creating a new array so the "database" one doesn't get modified
+let gnomes = JSON.parse(JSON.stringify(gnomesDatabase));
+//total amount of items in current order (if 2 of one item, it gets +2)
+let itemsCounter = 0;
+// date variable used for date filters later on
 let date = new Date();
-
 //this is the total sum of the gnomes in the shopping cart
 let gnomeSumTotal = 0;
 //total price after adding discounts to gnomeSumTotal
 let totalPrice = 0;
 //Cost of shipping
 let shippingCost = 25;
-//final price after adding shipping cost to totalPrice. This will be set to 0 if a special coupon is used.
-let finalPrice = 0;
-
+// checker to see the date is a monday before 10
 let monDiscountChecker = false;
-
+//keeps track of which section was most recently used, mainly used when toggling the shopping cart
 let visibleSection = shopSection;
 
-//adding a "lucia gnome" if it's 13th of december
+//adding a "lucia gnome" if it's 13th of december (for now it's the Gandlaf Gnome because white robe)
 function addLuciaGnome() {
   date = new Date();
   let day = date.getDate();
@@ -82,8 +79,6 @@ function addLuciaGnome() {
     gnomes[4].amount = 1;
   }
 }
-
-addLuciaGnome();
 
 //Generate Gnome List on page load
 function gnomeListContainerGenerator() {
@@ -104,13 +99,14 @@ function gnomeListContainerGenerator() {
   }
 }
 
+//Functions that are called on Page load/reload
+addLuciaGnome();
 gnomeListContainerGenerator();
 
 //*************START of all functions for MULTIPLE SECTIONS */
 
 //Event listener for the shopping cart icon:
 navCartIcons.addEventListener('click', toggleCartSection);
-
 closeCartSectionBtn.addEventListener('click', closeCartSection);
 
 function cartPlusBtnListener() {
@@ -194,10 +190,6 @@ function mondayPrices(d, h) {
   if (d === 1 && h < 10) {
     totalPrice = Math.round(gnomeSumTotal * 0.9);
     monDiscountChecker = true;
-    // const mDiscount = document.querySelectorAll('.mondayDiscount');
-    // for (let i = 0; i < mDiscount.length; i++) {
-    //   mDiscount[i].classList.remove('hidden');
-    // }
   } else {
     totalPrice = gnomeSumTotal;
   }
@@ -357,39 +349,50 @@ function openCartSection() {
   moreThan15GnomesTotal();
   if (!shoppingCartSection.classList.contains('hidden')) {
     if (itemsCounter > 0) {
-      cartSumTotalContainer.innerHTML = `
-        <p>Items total:</p>
-        <p class="price-display">${gnomeSumTotal} kr</p>
-        <p class="discount-code-p">Discount Code:</p>
-        <div class="discount-code-input-container">
-          <input id="discountCodeInput" type="text">
-          <button id="discountCodeBtn" class="btn-green btn-rectangle-small">Confirm</button>
-        </div>
-        <div></div>
-        <p class="activeDiscountNodes discount-p ${
-          discountCodeActive ? '' : 'hidden'
-        }">Active Discounts:</p>
-        <div class="activeDiscountNodes ${
-          discountCodeActive ? '' : 'hidden'
-        }" id="activeDiscountCodes">
-          <p class="discount-p">${discountCodeText}</p>
-        </div>
-        <p class="mondayDiscount ${
-          monDiscountChecker ? '' : 'hidden'
-        } ">Monday Discount:</p>
-        <p class="mondayDiscount ${
-          monDiscountChecker ? '' : 'hidden'
-        }">-10% on the entire order!</p>
-        <p>Shipping:</p>
-        <p class="price-display">${shippingCost} kr</p>
-        <h4>Total Sum</h4>
-        <p id="CartSumTotalDisplay" class="price-display">${
-          totalPrice + shippingCost
-        } kr</p>
-        <div class="go-checkout-btn-container">
-          <button class="btn-rectangle btn-green" id="goToCheckout">Go to Checkout</button>
-         </div>
-          `;
+      cartSumTotalContainer.innerHTML =
+        /* HTML */
+        `
+          <p>Items total:</p>
+          <p class="price-display">${gnomeSumTotal} kr</p>
+          <p class="discount-code-p">Discount Code:</p>
+          <div class="discount-code-input-container">
+            <input id="discountCodeInput" type="text" />
+            <button id="discountCodeBtn" class="btn-green btn-rectangle-small">
+              Confirm
+            </button>
+          </div>
+          <div></div>
+          <p
+            class="activeDiscountNodes discount-p ${discountCodeActive
+              ? ''
+              : 'hidden'}"
+          >
+            Active Discounts:
+          </p>
+          <div
+            class="activeDiscountNodes ${discountCodeActive ? '' : 'hidden'}"
+            id="activeDiscountCodes"
+          >
+            <p class="discount-p">${discountCodeText}</p>
+          </div>
+          <p class="mondayDiscount ${monDiscountChecker ? '' : 'hidden'} ">
+            Monday Discount:
+          </p>
+          <p class="mondayDiscount ${monDiscountChecker ? '' : 'hidden'}">
+            -10% on the entire order!
+          </p>
+          <p>Shipping:</p>
+          <p class="price-display">${shippingCost} kr</p>
+          <h4>Total Sum</h4>
+          <p id="CartSumTotalDisplay" class="price-display">
+            ${totalPrice + shippingCost} kr
+          </p>
+          <div class="go-checkout-btn-container">
+            <button class="btn-rectangle btn-green" id="goToCheckout">
+              Go to Checkout
+            </button>
+          </div>
+        `;
 
       shoppingCartGnomes.innerHTML = '';
       discountCodeListeners();
@@ -397,36 +400,58 @@ function openCartSection() {
 
       for (let i = 0; i < gnomes.length; i++) {
         if (gnomes[i].amount > 0) {
-          shoppingCartGnomes.innerHTML += `
-            <div class="shopping-cart-gnome-grid">
-              <img src="${gnomes[i].img0.url}" width="160" height="160" alt="${
-            gnomes[i].img0.alt
-          }" class="cart-gnome-img" loading="lazy">
-              <h3>${gnomes[i].name}</h3>
-              <button class="btn-circle btn-small btnRemoveItem" id="btnRemoveItem${i}">X</button>
+          shoppingCartGnomes.innerHTML +=
+            /* HTML */
+            `
+              <div class="shopping-cart-gnome-grid">
+                <img
+                  src="${gnomes[i].img0.url}"
+                  width="160"
+                  height="160"
+                  alt="${gnomes[i].img0.alt}"
+                  class="cart-gnome-img"
+                  loading="lazy"
+                />
+                <h3>${gnomes[i].name}</h3>
+                <button
+                  class="btn-circle btn-small btnRemoveItem"
+                  id="btnRemoveItem${i}"
+                >
+                  X
+                </button>
 
-              <h4>Amount:</h4>
-              <h4>Unit price:</h4>
-              <h4>Subtotal:</h4>
-              <div class="gnome-cart-buttons-container">
-                  <button class="btn-circle btn-small btnCartMinus" id="btnCartMinus${i}">-</button>
+                <h4>Amount:</h4>
+                <h4>Unit price:</h4>
+                <h4>Subtotal:</h4>
+                <div class="gnome-cart-buttons-container">
+                  <button
+                    class="btn-circle btn-small btnCartMinus"
+                    id="btnCartMinus${i}"
+                  >
+                    -
+                  </button>
                   <h4>${gnomes[i].amount}</h4>
-                  <button class="btn-circle btn-small btnCartPlus" id="btnCartPlus${i}">+</button>
+                  <button
+                    class="btn-circle btn-small btnCartPlus"
+                    id="btnCartPlus${i}"
+                  >
+                    +
+                  </button>
+                </div>
+                <div>
+                  <p id="oldCartUnitPrice" class="hidden">500kr</p>
+                  <p id="cartUnitPrice" class="price-display">
+                    ${gnomes[i].price} kr
+                  </p>
+                </div>
+                <div>
+                  <p id="oldCartUnitSum" class="hidden">800kr</p>
+                  <p id="cartUnitSum" class="price-display">
+                    ${gnomes[i].price * gnomes[i].amount} kr
+                  </p>
+                </div>
               </div>
-              <div>
-                <p id="oldCartUnitPrice" class="hidden">500kr</p>
-                <p id="cartUnitPrice" class="price-display">${
-                  gnomes[i].price
-                } kr</p>
-              </div>
-              <div>
-                <p id="oldCartUnitSum" class="hidden">800kr</p>
-                <p id="cartUnitSum" class="price-display">${
-                  gnomes[i].price * gnomes[i].amount
-                } kr</p>
-              </div>
-          </div>
-        `;
+            `;
         }
       }
       cartPlusBtnListener();
@@ -449,7 +474,6 @@ function closePage(section) {
 }
 
 //Function to update the Shopping Cart in the Nav
-
 function updateNavShoppingCart() {
   itemsCounter = 0;
   gnomeSumTotal = 0;
@@ -468,7 +492,6 @@ function updateNavShoppingCart() {
   }
   navCartSum.textContent = gnomeSumTotal;
 }
-
 //*************END of all functions for MULTIPLE SECTIONS */
 
 //*************START of all functions for GNOME LIST SECTION */
@@ -523,8 +546,6 @@ for (let i = 0; i < categoryFilterRadios.length; i++) {
 function gnomePriceSliderListeners() {
   maxPriceSlider.addEventListener('input', updatePriceSliderFilter);
 }
-
-//FUNCTIONS for GNOME LIST SECTION
 
 //Filter functions for the gnomes List
 
@@ -607,38 +628,51 @@ function updatePriceSliderFilter() {
 //Function for generating HTML in Gnome List
 function generateGnomeListContainer(i) {
   starRatings(gnomes[i].rating);
-  gnomeListContainer.innerHTML += `
-<div class="gnome-list-item">
-    <figure>
-    <img class="gnome-list-image" src="${
-      gnomes[i].img0.url
-    }" width="120" height="160" alt="${gnomes[i].img0.alt}" loading="lazy">
-    </figure>
-    <button class="invisible-btn gnomeDetailsLinkList" id="gnomeDetailsLink${i}">
-    <h4>${gnomes[i].name}</h4></button>    
+  gnomeListContainer.innerHTML +=
+    /* HTML */
+    ` <div class="gnome-list-item">
+      <figure>
+        <img
+          class="gnome-list-image"
+          src="${gnomes[i].img0.url}"
+          width="120"
+          height="160"
+          alt="${gnomes[i].img0.alt}"
+          loading="lazy"
+        />
+      </figure>
+      <button
+        class="invisible-btn gnomeDetailsLinkList"
+        id="gnomeDetailsLink${i}"
+      >
+        <h4>${gnomes[i].name}</h4>
+      </button>
 
-    <div class="amount-to-order">
+      <div class="amount-to-order">
         <p class="price-display">Price: ${gnomes[i].price} kr</p>
-        <button class="btn-circle btn-small minusBtnList" id="btnListMinus${i}">-</button>
-        <button class="btn-circle btn-small plusBtnList" id="btnListPlus${i}">+</button>
+        <button class="btn-circle btn-small minusBtnList" id="btnListMinus${i}">
+          -
+        </button>
+        <button class="btn-circle btn-small plusBtnList" id="btnListPlus${i}">
+          +
+        </button>
         <p id="amountList${i}">Qty: ${gnomes[i].amount}</p>
-        <p class="price-display">Total: ${
-          gnomes[i].amount * gnomes[i].price
-        } kr</p>
-    </div>
-    
-        <figure class="star-rating">
-            <img src="${stars[0]}" width="24" heigth="24" alt="a star icon">
-            <img src="${stars[1]}" width="24" heigth="24" alt="a star icon">
-            <img src="${stars[2]}" width="24" heigth="24" alt="a star icon">
-            <img src="${stars[3]}" width="24" heigth="24" alt="a star icon">
-            <img src="${stars[4]}" width="24" heigth="24" alt="a star icon">
-            <span class="visually-hidden">Star Rating: ${
-              gnomes[i].starRatings
-            } out of 5 stars</span>
-            
-        </figure>
-</div>`;
+        <p class="price-display">
+          Total: ${gnomes[i].amount * gnomes[i].price} kr
+        </p>
+      </div>
+
+      <figure class="star-rating">
+        <img src="${stars[0]}" width="24" heigth="24" alt="a star icon" />
+        <img src="${stars[1]}" width="24" heigth="24" alt="a star icon" />
+        <img src="${stars[2]}" width="24" heigth="24" alt="a star icon" />
+        <img src="${stars[3]}" width="24" heigth="24" alt="a star icon" />
+        <img src="${stars[4]}" width="24" heigth="24" alt="a star icon" />
+        <span class="visually-hidden"
+          >Star Rating: ${gnomes[i].starRatings} out of 5 stars</span
+        >
+      </figure>
+    </div>`;
 
   //adds evenListeners for buttons, shopping cart & opening the gnome Details section.
   addPlusBtnListener();
@@ -686,7 +720,6 @@ function viewThumbnail(e) {
   } else if (imgIndex === 2) {
     gnomeNameIndex.imgLarge = gnomeNameIndex.img2;
   }
-
   openGnomeDetailsPage(i);
 }
 
@@ -730,43 +763,44 @@ function openGnomeDetailsPage(i) {
   shopSection.classList.add('hidden');
   gnomeDetailsSection.classList.remove('hidden');
   gnomeDetailsSection.classList.add('page-active');
-  gnomeDetailsSection.innerHTML = `
-              <button class="btn-large btn-circle btn-close" id="closePageBtn">X</button>
-            <div class="gnome-display-imgs-container">
-                <figure>
-                    <img src="${
-                      gnomes[i].imgLarge.url
-                    }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
-                        width="500" alt="${gnomes[i].imgLarge.alt}">
-                </figure>
-                <figure class="img-thumb-container">
-                    <img src="${
-                      gnomes[i].img1.url
-                    }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnail"    alt="${
-    gnomes[i].img1.alt
-  }">
-                    <img src="${
-                      gnomes[i].img2.url
-                    }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbnail" alt="${
-    gnomes[i].img2.alt
-  }">
-                </figure>
-            </div>
-            <h2 class="gnome-item-h2">${gnomes[i].name}</h2>
-            <p class="item-price price-display">Price: ${gnomes[i].price} kr</p>
-            <div class="gnome-buttons-container">
-                <button class="btn-circle btn-small" id="btnDetailsMinus${i}">-</button>
-                <h3>${gnomes[i].amount}</h4>
-                <button class="btn-circle btn-small" id="btnDetailsPlus${i}">+</button>
-            </div>
-
-            <h3 class="price-display">Total: ${
-              gnomes[i].amount * gnomes[i].price
-            } kr</h3>
+  gnomeDetailsSection.innerHTML =
+    /* HTML */
+    `
+    <button class="btn-large btn-circle btn-close" id="closePageBtn">X</button>
+    <div class="gnome-display-imgs-container">
+      <figure>
+        <img src="${
+          gnomes[i].imgLarge.url
+        }" id="gnomeDisplayImg" class="gnome-display-img" height="500"
+          width="500" alt="${gnomes[i].imgLarge.alt}">
+      </figure>
+      <figure class="img-thumb-container">
+        <img src="${
+          gnomes[i].img1.url
+        }" width="200" height="200" id="thumbnail-${i}-1" class="imgDetailsThumbnailalt="${
+      gnomes[i].img1.alt
+    }">
+        <img src="${
+          gnomes[i].img2.url
+        }" width="200" height="200" id="thumbnail-${i}-2" class="imgDetailsThumbalt="${
+      gnomes[i].img2.alt
+    }">
+      </figure>
+    </div>
+    <h2 class="gnome-item-h2">${gnomes[i].name}</h2>
+    <p class="item-price price-display">Price: ${gnomes[i].price} kr</p>
+    <div class="gnome-buttons-container">
+      <button class="btn-circle btn-small" id="btnDetailsMinus${i}">-</button>
+      <h3>${gnomes[i].amount}</h4>
+      <button class="btn-circle btn-small" id="btnDetailsPlus${i}">+</button>
+    </div>
+    <h3 class="price-display">Total: ${
+      gnomes[i].amount * gnomes[i].price
+    } kr</h3>
   `;
 
   //Arguments added so the plus/minus function can be reused for the shopping cart section later on and maybe merged with the main list plus/minus functions,
-  // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might simply this and just have separate plus/minus functions instead this if stuff gets too complicated later on
+  // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might redo this and just have separate plus/minus functions instead this if stuff gets too complicated later on
   addPlusBtn(i, openGnomeDetailsPage);
   addMinusBtn(i, openGnomeDetailsPage);
   updateNavShoppingCart();

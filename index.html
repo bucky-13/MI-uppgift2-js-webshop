@@ -20,34 +20,29 @@
 <body>
 
     <nav>
-        <button class="invisible-btn" id="gottfridLogo">
+        <div class="invisible-btn" id="gottfridLogo">
             <h1 class="gottfrid-logo">Gottfrids <span class="gnomes-span">Garden
                     Gnomes</span></h1>
-        </button>
+        </div>
 
         <div class="nav-cart-content-container">
             <button id="navCartIcons" class="nav-cart-btn invisible-btn" aria-label="Shopping Cart Button">
                 <img class="nav-cart" src="images/icons/Shopping-cart.svg" width="50" height="50"
                     alt="shopping cart icon">
-                <div id="navCartCounter" class="cart-counter hidden" aria-label="Amount of items in shopping cart">0
-                </div>
+                <span id="navCartCounter" class="cart-counter hidden" aria-label="Amount of items in shopping cart">0
+                </span>
             </button>
             <p class="nav-cart-price"><span id="navCartSum">0</span> kr</p>
-            <!-- <div class="nav-cart-container hidden"> -->
+        </div>
 
-        </div>
-        </div>
         <!-- Placeholder for a possible Hamburger Menu -->
         <div></div>
-
-
     </nav>
     <main>
 
         <section class="shop-section" id="shopSection">
             <header>
                 <h2>Shop</h2>
-
                 <div class="shop-select-container">
                     <label for="gnomeSortSelect">Sort by:</label>
                     <select name="sort" id="gnomeSortSelect">
@@ -63,7 +58,7 @@
                 </div>
                 <div class="filter-btn-container">
                     <button class="invisible-btn filter-btn" id="toggleFilterBtn">
-                        <p>Filter</p>
+                        <span>Filter</span>
                         <svg class="filter-btn-svg" width="40" height="40" viewBox="0 0 48 48" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -99,20 +94,15 @@
                 </div>
                 <div id="shopFilterSliders" class="shop-filter-sliders">
                     <h3>Price:</h3>
-
-                    <label for="maxPrice">Maximum Price:</label>
-
+                    <label for="maxPriceSlider">Maximum Price:</label>
                     <input type="range" id="maxPriceSlider" name="maxPrice" min="0" max="400" value="400">
-
-
                     <div>
                         <span id="maxPriceDisplay">400</span> kr
                     </div>
                 </div>
-
             </div>
-            <div class="gnome-list-container" id="gnomeListContainer">
 
+            <div class="gnome-list-container" id="gnomeListContainer">
             </div>
         </section>
 
@@ -145,75 +135,46 @@
                     <h3>You've taken too much time to fill in the form, please be faster than 15 minutes next time.</h3>
                 </div>
                 <label class="form-input-bar">
-                    <div>
-                        <span>* First Name: </span>
-                        <span class="form-error-msg hidden">* Invalid Name</span>
-                    </div>
+                    <span>* First Name: </span>
+                    <span class="form-error-msg hidden">* Invalid Name</span>
                     <input id="inputFirstName" class="user-input" type="text">
-
                 </label>
                 <label class="form-input-bar">
-                    <div>
-                        <span>* Last Name: </span>
-                        <span class="form-error-msg hidden">* Invalid Name</span>
-                    </div>
-
+                    <span>* Last Name: </span>
+                    <span class="form-error-msg hidden">* Invalid Name</span>
                     <input id="inputLastName" class="user-input" type="text">
-
                 </label>
                 <label class="form-input-bar">
-                    <div>
-                        <span>* Address: </span>
-                        <span class="form-error-msg hidden">* Invalid Address</span>
-                    </div>
-
+                    <span>* Address: </span>
+                    <span class="form-error-msg hidden">* Invalid Address</span>
                     <input id="inputAddress" class="user-input" type="text">
-
                 </label>
                 <div class="post-port-container">
                     <label class="form-input-bar">
-                        <div>
-                            <span>* Post number: </span>
-                            <span class="form-error-msg hidden">* Invalid Post Number</span>
-                        </div>
-
+                        <span>* Post number: </span>
+                        <span class="form-error-msg hidden">* Invalid Post Number</span>
                         <input id="inputPostNum" class="user-input" type="number">
-
                     </label>
                     <label class="form-input-bar">
-                        <div>
-                            <span>Port Code: </span>
-                        </div>
-
+                        <span>Port Code: </span>
                         <input id="inputPortCode" class="user-input" type="number">
-
                     </label>
                 </div>
 
                 <label class="form-input-bar">
-                    <div>
-                        <span>* City: </span>
-                        <span class="form-error-msg hidden">* Invalid City Name</span>
-                    </div>
+                    <span>* City: </span>
+                    <span class="form-error-msg hidden">* Invalid City Name</span>
                     <input id="inputCity" class="user-input" type="text">
-
                 </label>
                 <label class="form-input-bar">
-                    <div>
-                        <span>* Phone nr: </span>
-                        <span class="form-error-msg hidden">* Invalid Phone Number</span>
-                    </div>
-
+                    <span>* Phone nr: </span>
+                    <span class="form-error-msg hidden">* Invalid Phone Number</span>
                     <input id="inputPhone" class="user-input" type="tel">
-
                 </label>
                 <label class="form-input-bar">
-                    <div>
-                        <span>* Email: </span>
-                        <span class="form-error-msg hidden">* Invalid Email</span>
-                    </div>
+                    <span>* Email: </span>
+                    <span class="form-error-msg hidden">* Invalid Email</span>
                     <input id="inputEmail" class="user-input" type="email">
-
                 </label>
 
                 <div class="payment-method-div">
@@ -225,7 +186,6 @@
                         <input class="user-input" type="radio" id="paymentInvoice" name="paymentMethod">
                         <span>Invoice</span>
                     </label>
-
                     <label>
                         <input class="user-input" id="paymentCard" type="radio" name="paymentMethod">
                         <span>Card</span>
@@ -234,53 +194,32 @@
 
                 <div id="paymentInvoiceActive" class="invoice-payment-container hidden">
                     <label class="form-input-bar">
-                        <div>
-                            <span>* Personal number: </span>
-                            <span class="form-error-msg hidden">* Invalid Personal Number</span>
-                        </div>
+                        <span>* Personal number: </span>
+                        <span class="form-error-msg hidden">* Invalid Personal Number</span>
                         <input id="inputPersonalNum" class="user-input invoiceInput" type="number">
-
                     </label>
                 </div>
                 <div class="card-payment-container hidden" id="paymentCardActive">
-
                     <label class="form-input-bar">
-                        <div>
-                            <span>* Card number: </span>
-                            <span class="form-error-msg hidden">* Invalid Card Number</span>
-                        </div>
-
+                        <span>* Card number: </span>
+                        <span class="form-error-msg hidden">* Invalid Card Number</span>
                         <input class="user-input cardInput" type="number" id="inputCardNum">
-
                     </label>
                     <label class="form-input-bar">
-                        <div>
-                            <span>* MM: </span>
-                            <span class="form-error-msg hidden">* Invalid Month</span>
-                        </div>
-
+                        <span>* MM: </span>
+                        <span class="form-error-msg hidden">* Invalid Month</span>
                         <input class="user-input cardInput" type="number" id="inputMM">
-
                     </label>
                     <label class="form-input-bar">
-                        <div>
-                            <span>* YY: </span>
-                            <span class="form-error-msg hidden">* Invalid Year</span>
-                        </div>
-
+                        <span>* YY: </span>
+                        <span class="form-error-msg hidden">* Invalid Year</span>
                         <input class="user-input cardInput" type="number" id="inputYY">
-
                     </label>
                     <label class="form-input-bar">
-                        <div>
-                            <span>* CVC: </span>
-                            <span class="form-error-msg hidden">* Invalid CVC Code</span>
-                        </div>
-
+                        <span>* CVC: </span>
+                        <span class="form-error-msg hidden">* Invalid CVC Code</span>
                         <input class="user-input cardInput" type="number" id="inputCVC">
-
                     </label>
-
                 </div>
 
                 <div class="checkbox-container">
@@ -288,8 +227,6 @@
                         <input type="checkbox" id="inputAgreePersonalInfo" class="user-input required">
                         <span>* I agree to share personal information</span>
                         <span class="form-error-msg hidden">* You must agree to this </span>
-
-
                     </label>
                     <label>
                         <input type="checkbox" id="agreeNewsletter" class="user-input" checked>
@@ -299,13 +236,11 @@
                 <div class="form-buttons-container">
                     <input type="reset" value="Reset Form" class="btn-rectangle btn-red" id="resetFormAndOrder">
                     <input type="submit" value="Place Order" class="btn-rectangle btn-green" id="submitOrderBtn">
-
                 </div>
             </form>
         </section>
 
         <section id="confirmationSection" class="confirmation-section hidden">
-
         </section>
 
     </main>
