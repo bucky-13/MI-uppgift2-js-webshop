@@ -5,8 +5,9 @@ body {
   nav {
     background-color: $color-black;
     .nav-cart {
-      fill: $color-light;
-      filter: brightness(100);
+      path {
+        fill: $color-light;
+      }
     }
   }
 }

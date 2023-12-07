@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
     <nav>
         <div class="invisible-btn" id="gottfridLogo" tabindex="0">
             <h1 class="gottfrid-logo">Gottfrids <span class="gnomes-span">Garden
@@ -27,8 +26,20 @@
 
         <div class="nav-cart-content-container">
             <button id="navCartIcons" class="nav-cart-btn invisible-btn" aria-label="Shopping Cart Button">
-                <img class="nav-cart" src="images/icons/Shopping-cart.svg" width="50" height="50"
-                    alt="shopping cart icon">
+                <!-- <img class="nav-cart" src="images/icons/Shopping-cart.svg" width="50" height="50"
+                    alt="shopping cart icon"> -->
+                <svg class="nav-cart" alt="shopping cart icon" width="50" height="50" viewBox="0 0 50 50" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M39.8911 10.9375H11.1148L8.65614 6.5304C8.38016 6.03573 7.85808 5.72916 7.29163 5.72916H4.16663C3.30368 5.72916 2.60413 6.42871 2.60413 7.29166C2.60413 8.1546 3.30368 8.85416 4.16663 8.85416H6.37412L8.80057 13.2034L14.3966 25.5852L14.4023 25.5978L14.8952 26.6884L9.27676 32.6813C8.87278 33.1122 8.74632 33.7341 8.94993 34.2886C9.15354 34.8431 9.6524 35.2353 10.2392 35.3024L15.3604 35.8877C21.7659 36.6197 28.2341 36.6197 34.6396 35.8877L39.7608 35.3024C40.6181 35.2044 41.2337 34.4299 41.1357 33.5726C41.0377 32.7152 40.2633 32.0996 39.4059 32.1976L34.2848 32.7829C28.115 33.488 21.885 33.488 15.7152 32.7829L13.6829 32.5506L17.8066 28.152C17.8465 28.1094 17.8835 28.0653 17.9177 28.0197L19.4861 28.2237C21.6838 28.5097 23.9054 28.5658 26.1148 28.391C31.2679 27.9835 36.0437 25.5314 39.378 21.5814L40.5823 20.1547C40.6228 20.1068 40.6603 20.0565 40.6947 20.004L42.9392 16.5835C44.5302 14.159 42.791 10.9375 39.8911 10.9375ZM18.0339 24.8834C17.6893 24.8386 17.3921 24.6197 17.247 24.3042L17.2442 24.2981L12.6182 14.0625H39.8911C40.3053 14.0625 40.5538 14.5227 40.3265 14.8691L38.1336 18.2109L36.9901 19.5657C34.1941 22.8779 30.1894 24.934 25.8684 25.2757C23.8755 25.4334 21.8717 25.3828 19.8893 25.1248L18.0339 24.8834Z"
+                        fill="black" />
+                    <path
+                        d="M13.5416 38.5417C11.8157 38.5417 10.4166 39.9408 10.4166 41.6667C10.4166 43.3925 11.8157 44.7917 13.5416 44.7917C15.2675 44.7917 16.6666 43.3925 16.6666 41.6667C16.6666 39.9408 15.2675 38.5417 13.5416 38.5417Z"
+                        fill="black" />
+                    <path
+                        d="M33.3333 41.6667C33.3333 39.9408 34.7324 38.5417 36.4583 38.5417C38.1842 38.5417 39.5833 39.9408 39.5833 41.6667C39.5833 43.3925 38.1842 44.7917 36.4583 44.7917C34.7324 44.7917 33.3333 43.3925 33.3333 41.6667Z"
+                        fill="black" />
+                </svg>
                 <span id="navCartCounter" class="cart-counter hidden" aria-label="Amount of items in shopping cart">0
                 </span>
             </button>
@@ -39,7 +50,6 @@
         <div></div>
     </nav>
     <main>
-
         <section class="shop-section" id="shopSection">
             <header>
                 <h2>Shop</h2>
@@ -51,9 +61,7 @@
                         <option value="z-a">Z-A</option>
                         <option value="price-ascending">Price Ascending</option>
                         <option value="price-descending">Price Descending</option>
-                        <option value="star-rating">
-                            Star Rating
-                        </option>
+                        <option value="star-rating">Star Rating</option>
                     </select>
                 </div>
                 <div class="filter-btn-container">

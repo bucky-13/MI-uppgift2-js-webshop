@@ -4,10 +4,11 @@ body {
 
   nav {
     background-color: $color-light;
-  }
-
-  .gnome-details-section {
-    background-color: $color-light;
+    .nav-cart:hover {
+      path {
+        fill: $color-primary;
+      }
+    }
   }
 }
 
