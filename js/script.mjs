@@ -4,6 +4,7 @@ import { starRatings, stars } from './starRatings/starRatings.mjs';
 import {
   formValidation,
   isFormCorrect,
+  formEventListener,
 } from './formSection/formValidation.mjs';
 import formTimer from './formSection/formTimer.mjs';
 import unitDiscount10Plus from './priceModifiers/unitDiscount10plus.mjs';
@@ -466,6 +467,7 @@ function openCartSection() {
       cartPlusBtnListener();
       cartMinusBtnListener();
       removeItemCartListener();
+      formEventListener();
     } else {
       cartSumTotalContainer.innerHTML = ``;
       shoppingCartGnomes.innerHTML = `

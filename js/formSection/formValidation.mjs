@@ -130,6 +130,8 @@ function formValidation() {
   for (let i = 0; i < formFields.length; i++) {
     if (formFields[i] === false) {
       errorSpans[i].classList.remove('hidden');
+      submitOrderBtn.disabled = true;
+      return;
     } else {
       errorSpans[i].classList.add('hidden');
     }
@@ -140,11 +142,21 @@ function formValidation() {
   for (let i = 0; i < formFields.length; i++) {
     if (formFields[i] === false) {
       isFormCorrect = false;
-      return;
     } else {
       isFormCorrect = true;
     }
   }
+  console.log(isFormCorrect);
+  if (isFormCorrect === true) {
+    submitOrderBtn.disabled = false;
+  }
 }
 
-export { formValidation, isFormCorrect };
+function formEventListener() {
+  inputs.forEach((input) => {
+    input.addEventListener('focusout', formValidation);
+    input.addEventListener('change', formValidation);
+  });
+}
+
+export { formValidation, isFormCorrect, formEventListener };
