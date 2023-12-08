@@ -642,9 +642,9 @@ function generateGnomeListContainer(i) {
         />
       </figure>
 
-      <h4 class="gnomeDetailsLinkList" id="gnomeDetailsLink${i}" tabindex="0">
-        ${gnomes[i].name}
-      </h4>
+      <a href="#" class="gnomeDetailsLinkList" id="gnomeDetailsLink${i}">
+        <h4>${gnomes[i].name}</h4>
+      </a>
 
       <div class="amount-to-order">
         <p class="price-display">Price: ${gnomes[i].price} kr</p>
