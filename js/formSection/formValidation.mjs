@@ -72,7 +72,8 @@ function isCardNumValid() {
 }
 
 //Validation function that runs when submit button is clicked. First it checks if each checked field is true or false, and sends the result into the formFields array which is used to add or remove error messages. lastly it checks the entire formFields, if all checks are true, then it changes isFormCorrect to be True, which will be the confirmation that the form is correct.
-function formValidation() {
+function formValidation(e) {
+  let inputsIndex = inputs.findIndex((i) => i.id === e.target.id);
   //Standard inputs which are always required.
   formFields[0] = isNameValid(inputFirstName) ? true : false;
   formFields[1] = isNameValid(inputLastName) ? true : false;
@@ -126,8 +127,10 @@ function formValidation() {
   if (!inputAgreePersonalInfo.checked) {
   }
 
+  console.log(inputsIndex);
+
   //Adds or removes error messages for each field depending on whether they are correct or not
-  for (let i = 0; i < formFields.length; i++) {
+  for (let i = 0; i <= inputsIndex; i++) {
     if (formFields[i] === false) {
       errorSpans[i].classList.remove('hidden');
       submitOrderBtn.disabled = true;
@@ -146,7 +149,6 @@ function formValidation() {
       isFormCorrect = true;
     }
   }
-  console.log(isFormCorrect);
   if (isFormCorrect === true) {
     submitOrderBtn.disabled = false;
   }
