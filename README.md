@@ -8,20 +8,36 @@ Medieinstitutet Assignment for beginner Javascript course. The task was to creat
 
 The site allows you to view and select which garden gnomes to buy, you can also go through a form that is validated to "send" the order. The form doesn't send the data anywhere since it's not an actual store. As the focus was on learning Javascript, I kept the CSS layout simple to put my focus on Javascript.
 
+#### List of all shop items in desktop:
+
+<img width=300px src="/images/screenshots/main-page-desktop.jpg">
+
+#### List of all shop items in mobile view:
+
+<img width=300px src="/images/screenshots/main-page-mobile.jpg">
+
+#### List of all shop items in desktop and dark mode:
+
+<img width=300px src="/images/screenshots/main-page-desktop-dark-mode.jpg">
+
+#### Viewing an individual item
+
+<img width=300px src="/images/screenshots/item-page-desktop.jpg">
+
+#### The shopping cart section
+
+<img width=300px src="/images/screenshots/shopping-cart-desktop.jpg">
+
+#### The customer form, which does include form validation
+
+<img width=300px src="/images/screenshots/form-desktop.jpg">
+
+#### The confrimation page of what was ordered
+
+<img width=300px src="/images/screenshots/confirmation-dekstop.jpg">
+
 ### Tech Stack
 
 <img width=50px src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png">&nbsp;
 <img width=50px src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png">&nbsp;
 <img width=50px src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png">&nbsp;
-
-### Lighthouse report:
-
-<img width=300px src="/images/screenshots/lighthouse-report.jpg">
-
-### HTML Validation
-
-<img width=300px src="/images/screenshots/html validation.jpg">
-
-### CSS Validation
-
-<img width=300px src="/images/screenshots/css-validation.jpg">
