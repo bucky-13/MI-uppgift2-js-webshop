@@ -17,7 +17,6 @@ const inputs = [
 
 const errorSpans = document.querySelectorAll('.form-error-msg');
 for (let i = 0; i < errorSpans.length; i++) {}
-// console.log(errorSpans.length);
 let formFields = [
   false,
   false,
@@ -126,8 +125,6 @@ function formValidation(e) {
   formFields[13] = inputAgreePersonalInfo.checked ? true : false;
   if (!inputAgreePersonalInfo.checked) {
   }
-
-  console.log(inputsIndex);
 
   //Adds or removes error messages for each field depending on whether they are correct or not
   for (let i = 0; i <= inputsIndex; i++) {
