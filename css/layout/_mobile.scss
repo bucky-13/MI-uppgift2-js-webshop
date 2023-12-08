@@ -1,3 +1,26 @@
+@keyframes pulse {
+  0% {
+    background-color: $color-primary;
+  }
+  50% {
+    background-color: $color-green-hover;
+  }
+  100% {
+    background-color: $color-primary;
+  }
+}
+@keyframes pulse2 {
+  0% {
+    background-color: $color-primary;
+  }
+  50% {
+    background-color: $color-green-hover;
+  }
+  100% {
+    background-color: $color-primary;
+  }
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -84,6 +107,14 @@ body {
       position: relative;
       cursor: pointer;
 
+      .cart-counter.animation1 {
+        background-color: $color-primary;
+        animation: pulse 2s ease;
+      }
+      .cart-counter.animation2 {
+        background-color: $color-primary;
+        animation: pulse2 2s ease;
+      }
       .cart-counter {
         background-color: $color-primary;
         position: absolute;
@@ -96,6 +127,7 @@ body {
         vertical-align: middle;
         border-radius: 50%;
         color: $color-light;
+        animation: pulse 2s ease;
       }
     }
   }
@@ -126,9 +158,11 @@ body {
         .shop-select-container:hover {
           label {
             color: $color-primary;
+            transition: color 0.5s ease;
           }
           select {
             border: 1px solid $color-primary;
+            transition: border 0.5s ease;
           }
         }
 
@@ -145,6 +179,7 @@ body {
         .filter-btn:hover {
           p {
             color: $color-primary;
+            transition: color 0.5s ease;
           }
           .filter-btn-svg {
             path {

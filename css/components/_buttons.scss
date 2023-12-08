@@ -48,6 +48,7 @@
 .btn-green:hover,
 .btn-green:focus {
   background-color: $color-green-hover;
+  transition: background-color 0.5s ease;
 }
 .btn-red {
   background-color: $color-red-main;
@@ -57,11 +58,13 @@
 .btn-red:hover,
 .btn-red:focus {
   background-color: $color-red-hover;
+  transition: background-color 0.5s ease;
 }
 
 .btn-circle:hover,
 .btn-circle:focus {
   background-color: $color-primary;
+  transition: background-color 0.5s ease;
 }
 
 .invisible-btn {

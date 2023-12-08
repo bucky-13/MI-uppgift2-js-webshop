@@ -69,6 +69,12 @@ let monDiscountChecker = false;
 //keeps track of which section was most recently used, mainly used when toggling the shopping cart
 let visibleSection = shopSection;
 
+//these 4 are variables to make sure the nav cart circle only animates at the right time
+let animationCounter = 0;
+let navCartActive = false;
+let itemViewActive = false;
+let itemListActive = false;
+
 //adding a "lucia gnome" if it's 13th of december (for now it's the Gandlaf Gnome because white robe)
 function addLuciaGnome() {
   date = new Date();
@@ -174,6 +180,7 @@ function toggleCartSection() {
 
 function closeCartSection() {
   shoppingCartSection.classList.add('hidden');
+  navCartActive = false;
   if (visibleSection === shopSection) {
     gnomeListContainerGenerator();
   } else if (visibleSection === orderFormSection) {
@@ -344,7 +351,9 @@ function discountCodeListeners() {
 function openCartSection() {
   shoppingCartSection.classList.remove('hidden');
   visibleSection.classList.add('hidden');
+  itemListActive = false;
   updateNavShoppingCart();
+  navCartActive = true;
   generateDateVariables();
   moreThan15GnomesTotal();
   if (!shoppingCartSection.classList.contains('hidden')) {
@@ -470,14 +479,39 @@ function closePage(section) {
   section.classList.remove('page-active');
   section.classList.add('hidden');
   shopSection.classList.remove('hidden');
+  if ((section = gnomeDetailsSection)) {
+    itemViewActive = false;
+  }
   gnomeListContainerGenerator();
+}
+
+//function to animate a color change on nav cart circle when amount is changed
+
+function animateColor() {
+  if (animationCounter > 10) {
+    animationCounter = 0;
+  }
+  if (animationCounter === 10 && itemListActive === true) {
+    navCartCounter.classList.toggle('animation1');
+    navCartCounter.classList.toggle('animation2');
+    animationCounter = 0;
+  }
+  if (navCartActive === true || itemViewActive === true) {
+    navCartCounter.classList.toggle('animation1');
+    navCartCounter.classList.toggle('animation2');
+    animationCounter = 0;
+  }
 }
 
 //Function to update the Shopping Cart in the Nav
 function updateNavShoppingCart() {
   itemsCounter = 0;
   gnomeSumTotal = 0;
+
   for (let i = 0; i < gnomes.length; i++) {
+    if (i === 9) {
+      animateColor();
+    }
     if (gnomes[i].amount > 0) {
       itemsCounter = itemsCounter + gnomes[i].amount;
     }
@@ -675,8 +709,12 @@ function generateGnomeListContainer(i) {
   //adds evenListeners for buttons, shopping cart & opening the gnome Details section.
   addPlusBtnListener();
   addMinusBtnListener();
+
   updateNavShoppingCart();
+  itemListActive = true;
+  animationCounter++;
   addGnomeDetailsListener(i);
+  itemListActive = true;
   gnomeSortListener();
   gnomeFilterListener();
   gnomePriceSliderListeners();
@@ -801,7 +839,9 @@ function openGnomeDetailsPage(i) {
   // i is the index for current article, openGnomeDetailsPage is the function that needs to be called to re-render the page. Might redo this and just have separate plus/minus functions instead this if stuff gets too complicated later on
   addPlusBtn(i, openGnomeDetailsPage);
   addMinusBtn(i, openGnomeDetailsPage);
+  itemListActive = false;
   updateNavShoppingCart();
+  itemViewActive = true;
   listenClosePage(gnomeDetailsSection);
   detailsThumbnailListener();
 }
