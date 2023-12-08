@@ -252,8 +252,8 @@ function submitCustomerInfoForm(e) {
   e.preventDefault();
   if (isFormCorrect === true) {
     orderFormSection.classList.add('hidden');
-    //adding all information needed to a new array for the confirmation page
 
+    //adding all information needed to a new array for the confirmation page
     const totalPriceConfirmed = totalPrice;
     const shippingCostConfirmed = shippingCost;
     let orderedGnomes = [];
@@ -264,7 +264,6 @@ function submitCustomerInfoForm(e) {
     }
 
     //emptying all information for the order that was just shipped
-
     displayConfirmationSection(
       orderedGnomes,
       totalPriceConfirmed,
