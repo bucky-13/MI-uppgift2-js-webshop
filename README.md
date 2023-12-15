@@ -1,6 +1,6 @@
 # Gottfrids Garden Gnomes
 
-### [Link to the website](https://medieinstitutet.github.io/fed23d-js-grundkurs-webshop-bucky-13/)
+### [Link to the website](https://bucky-13.github.io/MI-uppgift2-js-webshop/)
 
 ## Description:
 
